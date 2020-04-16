@@ -115,7 +115,7 @@ awful.util.terminal = terminal
 -- awful.util.tagnames = {  " ", " ", " ", " ", " ", " ", " ", " ", " ", " "  }
 --awful.util.tagnames = { "⠐", "⠡", "⠲", "⠵", "⠻", "⠿" }
 -- awful.util.tagnames = { "⌘", "♐", "⌥", "ℵ" }
-awful.util.tagnames = { " DEV ", " WWW ", " SYS ", " DOC ", " VBOX "}
+awful.util.tagnames = { " WWW ", " DEV ", " SYS ", " DOC ", " CHAT "}
 -- Use this : https://fontawesome.com/cheatsheet
 --awful.util.tagnames = { "", "", "", "", "" }
 awful.layout.suit.tile.left.mirror = true
@@ -306,11 +306,11 @@ awful.key({ modkey, altkey }, "f", function () awful.util.spawn( terminal.." -e 
 {description = "ranger" , group = "terminal apps" }),
 awful.key({ modkey, altkey }, "m", function () awful.util.spawn( terminal.." -e ncmpcpp" ) end,
 {description = "music(ncmpcpp)" , group = "terminal apps" }),
-awful.key({ modkey, altkey }, "/", function () awful.util.spawn( "mpc toggle" ) end,
+awful.key({ modkey1 }, "/", function () awful.util.spawn( "mpc toggle" ) end,
 {description = "toggle music" , group = "music" }),
-awful.key({ modkey, altkey }, ".", function () awful.util.spawn( "mpc next" ) end,
+awful.key({ modkey1 }, ".", function () awful.util.spawn( "mpc next" ) end,
 {description = "play next" , group = "music" }),
-awful.key({ modkey, altkey }, ",", function () awful.util.spawn( "mpc prev" ) end,
+awful.key({ modkey1 }, ",", function () awful.util.spawn( "mpc prev" ) end,
 {description = "play prev" , group = "music" }),
 
 -- awful.key({ modkey, altkey  }, "c", function () awful.util.spawn( terminal.." -e cmus" ) end,
