@@ -1,12 +1,8 @@
 --[[
-____ _____
-|  _ \_   _|  Derek Taylor (DistroTube)
-| | | || |    http://www.youtube.com/c/DistroTube
-| |_| || |    http://www.gitlab.com/dwt1/
-|____/ |_|
-
-My awesome window manager configuration. Provided here for those that want to examine or use
-my config in part or in whole. Take what works for you; leave the rest!
+#_ __ ___   ___  __| (_) ___   ___ _ __ ___
+| '_ ` _ \ / _ \/ _` | |/ _ \ / __| '__/ _ \
+| | | | | |  __/ (_| | | (_) | (__| | |  __/
+|_| |_| |_|\___|\__,_|_|\___/ \___|_|  \___|
 
 --]]
 
@@ -85,10 +81,18 @@ local themes = {
   "powerarrow-blue", -- 1
   "powerarrow",      -- 2
   "multicolor",      -- 3
+  "blackburn",
+  "copland",
+  "dremora",
+  "holo",
+  "powerarrow-dark",
+  "rainbow",
+  "steamburn",
+  "vertex",
 }
 
 -- choose your theme here
-local chosen_theme = themes[2]
+local chosen_theme = themes[8]
 
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
@@ -107,7 +111,7 @@ local filemanager       = "dolphin"
 local mailclient        = "geary"
 local mediaplayer       = "vlc"
 local scrlocker         = "slimlock"
-local terminal          = "alacritty"
+local terminal          = "st"
 local virtualmachine    = "virtualbox"
 
 -- awesome variables
@@ -115,7 +119,7 @@ awful.util.terminal = terminal
 -- awful.util.tagnames = {  " ", " ", " ", " ", " ", " ", " ", " ", " ", " "  }
 --awful.util.tagnames = { "⠐", "⠡", "⠲", "⠵", "⠻", "⠿" }
 -- awful.util.tagnames = { "⌘", "♐", "⌥", "ℵ" }
-awful.util.tagnames = { " WWW ", " DEV ", " SYS ", " DOC ", " CHAT "}
+awful.util.tagnames = { " WWW ", " DEV ", " SYS ", " ANME ", " CHAT "}
 -- Use this : https://fontawesome.com/cheatsheet
 --awful.util.tagnames = { "", "", "", "", "" }
 awful.layout.suit.tile.left.mirror = true
@@ -542,12 +546,12 @@ awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() en
 {description = "dropdown application", group = "super"}),
 
 -- Widgets popups
-awful.key({ altkey, }, "c", function () lain.widget.cal().show(3) end,
-{description = "show calendar", group = "widgets"}),
+-- awful.key({ altkey, }, "c", function () lain.widget.cal().show(3) end,
+-- {description = "show calendar", group = "widgets"}),
 -- awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
 --           {description = "show filesystem", group = "widgets"}),
-awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
-{description = "show weather", group = "widgets"}),
+-- awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
+-- {description = "show weather", group = "widgets"}),
 
 -- Brightness
 -- awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
@@ -568,21 +572,21 @@ function ()
   os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
   beautiful.volume.update()
 end),
--- awful.key({ }, "XF86AudioMute",
---     function ()
---         os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
---         beautiful.volume.update()
---     end),
-awful.key({ modkey1, "Shift" }, "m",
+awful.key({ modkey1 }, "m",
 function ()
-  os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
+  os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
   beautiful.volume.update()
 end),
-awful.key({ modkey1, "Shift" }, "0",
-function ()
-  os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
-  beautiful.volume.update()
-end),
+-- awful.key({ modkey1, "Shift" }, "m",
+-- function ()
+--   os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
+--   beautiful.volume.update()
+-- end),
+-- awful.key({ modkey1, "Shift" }, "0",
+-- function ()
+--   os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
+--   beautiful.volume.update()
+-- end),
 
 -- Copy primary to clipboard (terminals to gtk)
 awful.key({ modkey }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
@@ -919,6 +923,6 @@ layout = wibox.layout.align.horizontal
   -- }}}
 
   -- Autostart applications
-  awful.spawn.with_shell("~/.config/awesome/autostart.sh")
+  -- awful.spawn.with_shell("~/.config/awesome/autostart.sh")
   -- awful.spawn.with_shell("compton --config  $HOME/.config/compton/compton.conf")
 

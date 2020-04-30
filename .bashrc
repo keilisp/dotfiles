@@ -1,15 +1,12 @@
+#                    _ _
+# _ __ ___   ___  __| (_) ___   ___ _ __ ___
+#| '_ ` _ \ / _ \/ _` | |/ _ \ / __| '__/ _ \
+#| | | | | |  __/ (_| | | (_) | (__| | |  __/
+#|_| |_| |_|\___|\__,_|_|\___/ \___|_|  \___|
 #
-# ~/.bashrc
 #
 
 [[ $- != *i* ]] && return
-
-export EDITOR='nvim'
-export VISUAL='nvim'
-
-
-stty -ixon # Disable ctrl-s and ctrl-q
-shopt -s autocd #Allows to cd into directory merely by typing the directory name
 
 colors() {
   local fgc bgc vals seq0
@@ -84,29 +81,55 @@ match_lhs=""
 	  # PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
 	fi
 
+	# ALIASES
+	# vim
+	alias v="nvim"
 	alias vim="nvim"
-	alias autoremove='sudo pacman -Rcns $(pacman -Qdtq)'
-	# alias neofetch='neofetch --ascii_distro Arch'
-	alias neofetch='neofetch --ascii /home/mediocre/Pictures/neofetch.txt'
+	alias sv="sudo vim"
+
+	# pacman/yay
 	alias del='yay -R'
-	alias ls='ls --color=auto'
+	alias upd="yay -Syu"
+	alias i="yay -S"
+	alias autoremove='sudo pacman -Rcns $(pacman -Qdtq)'
+
+	# grub
+	alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+	alias grub-customizer="gksu grub-customizer"
+
+	# ls/exa
+	alias ls='exa -al --color=always --group-directories-first' # my preferred listing
+	alias la='exa -a --color=always --group-directories-first'  # all files and dirs
+	alias ll='exa -l --color=always --group-directories-first'  # long format
+	alias lt='exa -aT --color=always --group-directories-first' # tree listing
+
+	# grep
 	alias grep='grep --colour=auto'
 	alias egrep='egrep --colour=auto'
 	alias fgrep='fgrep --colour=auto'
-	alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-	alias grub-customizer="gksu grub-customizer"
-	alias mongod='mongod --port 27017 --auth --dbpath /home/mediocre/databases/mongodb/'
-	alias doom-refresh='~/.emacs.d/bin/doom refresh'
-	alias upd="yay -Syu"
-	alias i="yay -S"
-	alias v="vim"
-	alias sv="sudo vim"
+
+	# mongodb
+	alias mongod='mongod --port 27017 --auth --dbpath /home/mediocre/database/mongodb/'
+
+	# systemctl
 	alias SS="sudo systemctl"
+
+	# doom-emacs
+	alias doom-refresh='~/.emacs.d/bin/doom refresh'
+
+	# system stuff
+	alias cp="cp -i"                          # confirm before overwriting something
+	alias df='df -h'                          # human-readable sizes
+	alias free='free -m'                      # show sizes in MB
+	alias more=less
+
+	# utils
+	# alias neofetch='neofetch --ascii /home/mediocre/Pictures/ascii/kamimashta.txt'
 	alias ytv='youtube-dl -o "~/Videos/%(title)s.%(ext)s"' #Download video link
 	alias yta='youtube-dl -o "~/Music/%(title)s.%(ext)s"  --audio-format mp3' #Download only audio
+	# the terminal rickroll
+	alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
-	#Vim mode
-	# set -o vi
 
   else
 	if [[ ${EUID} == 0 ]] ; then
@@ -118,15 +141,6 @@ match_lhs=""
   fi
 
   unset use_color safe_term match_lhs sh
-
-  alias cp="cp -i"                          # confirm before overwriting something
-  alias df='df -h'                          # human-readable sizes
-  alias free='free -m'                      # show sizes in MB
-  alias np='nano -w PKGBUILD'
-  alias more=less
-  alias ll="ls -lah"
-  alias ls="exa -al --color=always --group-directories-first"
-
   xhost +local:root > /dev/null 2>&1
 
   complete -cf sudo
@@ -175,8 +189,26 @@ export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
 eval "$(thefuck --alias)"
 
-# PS1='[\W]\$: '
+# Disable ctrl-s and ctrl-q
+stty -ixon
+# Allows to cd into directory merely by typing the directory name
+shopt -s autocd
+
+# Vim mode
+# set -o vi
+
+# default apps
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+# OWN SCRIPTS
+export PATH=$PATH:/home/mediocre/scripts
+export PATH=$PATH:/home/mediocre/scripts/watchvids
+
+### BASH INSULTER ###
+if [ -f /etc/bash.command-not-found ]; then
+  . /etc/bash.command-not-found
+fi
 
 ### RANDOM COLOR SCRIPT ###
 /opt/shell-color-scripts/colorscript.sh random
-
