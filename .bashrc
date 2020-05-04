@@ -91,6 +91,7 @@ match_lhs=""
 	alias del='yay -R'
 	alias upd="yay -Syu"
 	alias i="yay -S"
+	alias srch="yay -Q | grep"
 	alias autoremove='sudo pacman -Rcns $(pacman -Qdtq)'
 
 	# grub

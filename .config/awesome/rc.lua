@@ -125,8 +125,10 @@ awful.util.tagnames = { " WWW ", " DEV ", " SYS ", " ANME ", " CHAT "}
 awful.layout.suit.tile.left.mirror = true
 awful.layout.layouts = {
   awful.layout.suit.tile,
-  awful.layout.suit.tile.bottom,
+  lain.layout.centerwork,
   awful.layout.suit.floating,
+  lain.layout.centerwork.horizontal,
+  awful.layout.suit.tile.bottom,
   awful.layout.suit.spiral.dwindle,
   awful.layout.suit.magnifier,
   --awful.layout.suit.max.fullscreen,
@@ -142,8 +144,6 @@ awful.layout.layouts = {
   --awful.layout.suit.corner.se,
   --lain.layout.cascade,
   --lain.layout.cascade.tile,
-  --lain.layout.centerwork,
-  --lain.layout.centerwork.horizontal,
   --lain.layout.termfair,
   --lain.layout.termfair.center,
 }
@@ -923,6 +923,6 @@ layout = wibox.layout.align.horizontal
   -- }}}
 
   -- Autostart applications
-  -- awful.spawn.with_shell("~/.config/awesome/autostart.sh")
-  -- awful.spawn.with_shell("compton --config  $HOME/.config/compton/compton.conf")
+  awful.spawn.with_shell("~/.config/awesome/autostart.sh")
+  awful.spawn.with_shell("compton --config  $HOME/.config/compton/compton.conf")
 

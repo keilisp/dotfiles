@@ -1,7 +1,7 @@
 # nitrogen --restore
-dwall -s=forest &
-compton &
-nm-applet &
-devmon &
-blueberry-tray &
+# dwall -s room
+# compton &
+# nm-applet &
+# devmon &
+# blueberry-tray &
 # volumeicon &

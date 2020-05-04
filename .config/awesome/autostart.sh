@@ -1,17 +1,18 @@
-#!/bin/bash
+#!/usr//bin/env bash
 
 function run {
-  if ! pgrep $1 ;
+  if ! pgrep -f $1 ;
   then
 	$@&
   fi
 }
-# run "./.screenlayout/monitorsetup.sh"
-# run "nitrogen --restore"
-# run "compton &"
-# run "xinput --set-prop 'SINOWEALTH Wired Gaming Mouse' 'libinput Accel Speed' -0.8"
-# run "setxkbmap -layout 'us, ru'"
-# run "setxkbmap -option grp:caps_toggle"
+dwall -s room &
+devmon &
+nm-applet &
+blueberry-tray &
+# nitrogen --restore
+# compton &
+# volumeicon &
 
 # run "opera"
 # run "xinput --set-prop 'SINOWEALTH Wired Gaming Mouse' 'libinput Accel Speed' -0.8"
