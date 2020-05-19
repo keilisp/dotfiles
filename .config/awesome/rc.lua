@@ -116,10 +116,10 @@ local virtualmachine    = "virtualbox"
 
 -- awesome variables
 awful.util.terminal = terminal
--- awful.util.tagnames = {  " ", " ", " ", " ", " ", " ", " ", " ", " ", " "  }
+-- awful.util.tagnames = {  "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "  }
 --awful.util.tagnames = { "⠐", "⠡", "⠲", "⠵", "⠻", "⠿" }
 -- awful.util.tagnames = { "⌘", "♐", "⌥", "ℵ" }
-awful.util.tagnames = { " WWW ", " DEV ", " SYS ", " ANME ", " CHAT "}
+awful.util.tagnames = { " WWW ", " DEV ",  " TGRAM ", " DIS ", " SYS ", " ANME ", " GAME ", " TRSH "}
 -- Use this : https://fontawesome.com/cheatsheet
 --awful.util.tagnames = { "", "", "", "", "" }
 awful.layout.suit.tile.left.mirror = true
@@ -304,9 +304,13 @@ awful.key({ modkey, altkey }, "t", function () awful.util.spawn( "telegram-deskt
 {description = "telegram" , group = "gui apps" }),
 awful.key({ modkey, altkey }, "b", function () awful.util.spawn( browser ) end,
 {description = "browser" , group = "gui apps" }),
+awful.key({ modkey, altkey }, "p", function () awful.util.spawn( "steam" ) end,
+{description = "steam" , group = "gui apps" }),
 awful.key({ modkey, altkey }, "e", function () awful.util.spawn( "emacs" ) end,
 {description = "emacs" , group = "gui apps" }),
-awful.key({ modkey, altkey }, "f", function () awful.util.spawn( terminal.." -e ranger" ) end,
+awful.key({ modkey, altkey }, "f", function () awful.util.spawn( "thunar" ) end,
+{description = "thunar" , group = "gui apps" }),
+awful.key({ modkey, altkey }, "r", function () awful.util.spawn( terminal.." -e ranger" ) end,
 {description = "ranger" , group = "terminal apps" }),
 awful.key({ modkey, altkey }, "m", function () awful.util.spawn( terminal.." -e ncmpcpp" ) end,
 {description = "music(ncmpcpp)" , group = "terminal apps" }),
@@ -518,6 +522,11 @@ awful.key({ altkey, "Shift"   }, "l",     function () awful.tag.incmwfact( 0.05)
 {description = "increase master width factor", group = "layout"}),
 awful.key({ altkey, "Shift"   }, "h",     function () awful.tag.incmwfact(-0.05)          end,
 {description = "decrease master width factor", group = "layout"}),
+awful.key({ altkey, "Shift"   }, "j",     function () awful.client.incwfact( 0.05)          end,
+{description = "increase master height factor", group = "layout"}),
+awful.key({ altkey, "Shift"   }, "k",     function () awful.client.incwfact( -0.05)          end,
+{description = "decrease master height factor", group = "layout"}),
+
 awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
 {description = "increase the number of master clients", group = "layout"}),
 awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
@@ -542,8 +551,8 @@ end,
 {description = "restore minimized", group = "client"}),
 
 -- Dropdown application
-awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end,
-{description = "dropdown application", group = "super"}),
+-- awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end,
+-- {description = "dropdown application", group = "super"}),
 
 -- Widgets popups
 -- awful.key({ altkey, }, "c", function () lain.widget.cal().show(3) end,
@@ -844,12 +853,14 @@ client.connect_signal("manage", function (c)
   -- Set the windows at the slave,
   -- i.e. put it at the end of others instead of setting it master.
   -- if not awesome.startup then awful.client.setslave(c) end
-
-  if awesome.startup and
-	not c.size_hints.user_position
-	and not c.size_hints.program_position then
-	-- Prevent clients from being unreachable after screen count changes.
-	awful.placement.no_offscreen(c)
+  -- if awesome.startup and
+  -- not c.size_hints.user_position
+  -- and not c.size_hints.program_position then
+  -- -- Prevent clients from being unreachable after screen count changes.
+  -- awful.placement.no_offscreen(c)
+  -- end
+  if not awesome.startup then
+	awful.client.setslave(c)
   end
 end)
 

@@ -6,12 +6,15 @@ function run {
 	$@&
   fi
 }
-dwall -s room &
+run "sh scripts/wallplaylist.sh"
+run "barrier"
+# barrier &
 devmon &
 nm-applet &
 blueberry-tray &
-# nitrogen --restore
 # compton &
+# dwall -s firewatch3 &
+# nitrogen --restore
 # volumeicon &
 
 # run "opera"

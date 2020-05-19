@@ -1,4 +1,3 @@
-
 "		 VIM configuration  - mediocre
 
 "    ██▒   █▓ ██▓ ███▄ ▄███▓ ██▀███   ▄████▄
@@ -10,7 +9,6 @@
 "      ░ ░░   ▒ ░░  ░      ░  ░▒ ░ ▒░  ░  ▒
 "        ░░   ▒ ░░      ░     ░░   ░ ░
 "         ░   ░         ░      ░     ░ ░
-
 
 set nocompatible
 
@@ -35,17 +33,16 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mattn/emmet-vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'christoomey/vim-system-copy'
-Plugin 'townk/vim-autoclose'
 Plugin 'kien/ctrlp.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'indentLine.vim'
-" Plugin 'ap/vim-css-color'
 Plugin 'lilydjwg/colorizer'
 Plugin 'powerman/vim-plugin-ruscmd'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'xuhdev/vim-latex-live-preview'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -147,8 +144,21 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
+" Map Tab for autocomplition
+inoremap <silent><expr> <TAB>
+	  \ pumvisible() ? "\<C-n>" :
+	  \ <SID>check_back_space() ? "\<TAB>" :
+	  \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 " Esc -> jj
 inoremap jj <Esc>
+inoremap оо <Esc>
 
 " Set mapleader to ','
 let mapleader=","
@@ -178,6 +188,8 @@ let g:ale_lint_on_text_changed = 0
 :autocmd InsertEnter,InsertLeave * set cul!
 " Autoformat on write
 au BufWrite * :Autoformat
+" F8 turning autoformat off on local file
+nnoremap <F8> :set eventignore=BufWrite<CR>
 
 " Save and Load Sessions
 map <F2> :mksession! ~/vim_session <cr>  " Quick write session with F2
@@ -224,14 +236,23 @@ map <Leader>tt :vnew term://bash<CR>
 hi Normal guibg=NONE ctermbg=NONE
 
 "AUTOCLOSING BRACKETS
-" inoremap " ""<left>
-" inoremap ' ''<left>
-" inoremap ( ()<left>
-" inoremap [ []<left>
-" inoremap { {}<left>
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
 " inoremap {;<CR> {<CR>};<ESC>O
 " inoremap { {<CR>}<up><end><CR>
 
 
 " Make it so that a curly brace automatically inserts an indented line
 inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
+
+" LaTeX preview setup
+let g:livepreview_previewer = 'zathura'
+
+" To prevent conceal in LaTeX files
+let g:tex_conceal = ''
+
+" To prevent conceal in any file
+" set conceallevel = 0

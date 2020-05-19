@@ -123,9 +123,10 @@ match_lhs=""
 	alias df='df -h'                          # human-readable sizes
 	alias free='free -m'                      # show sizes in MB
 	alias more=less
+	alias editawesome='nvim $HOME/.config/awesome/rc.lua'
 
 	# utils
-	# alias neofetch='neofetch --ascii /home/mediocre/Pictures/ascii/kamimashta.txt'
+	alias neofetch='neofetch --ascii /home/mediocre/Pictures/ascii/arch-test.txt'
 	alias ytv='youtube-dl -o "~/Videos/%(title)s.%(ext)s"' #Download video link
 	alias yta='youtube-dl -o "~/Music/%(title)s.%(ext)s"  --audio-format mp3' #Download only audio
 	# the terminal rickroll
@@ -205,6 +206,7 @@ export VISUAL='nvim'
 # OWN SCRIPTS
 export PATH=$PATH:/home/mediocre/scripts
 export PATH=$PATH:/home/mediocre/scripts/watchvids
+export PATH=$PATH:/home/mediocre/scripts/Wall-d
 
 ### BASH INSULTER ###
 if [ -f /etc/bash.command-not-found ]; then
@@ -213,3 +215,4 @@ fi
 
 ### RANDOM COLOR SCRIPT ###
 /opt/shell-color-scripts/colorscript.sh random
+
