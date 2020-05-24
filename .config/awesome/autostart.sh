@@ -6,7 +6,7 @@ function run {
 	$@&
   fi
 }
-run "sh scripts/wallplaylist.sh"
+# run "sh scripts/wallplaylist.sh"
 run "barrier"
 # barrier &
 devmon &

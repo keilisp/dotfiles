@@ -28,7 +28,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+;; (setq org-directory "~/org/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -54,5 +54,49 @@
 ;; jj --> esc
 (setq-default evil-escape-key-sequence "jj")
 
-;; Set projects file
-;; projectile-project-search-path '("~/code/")
+;; Relative line numbers
+(setq doom-line-numbers-style 'relative)
+
+;; Vim-like changing windows
+  (define-key global-map (kbd "C-h") #'evil-window-left)
+  (define-key global-map (kbd "C-j") #'evil-window-down)
+  (define-key global-map (kbd "C-k") #'evil-window-up)
+  (define-key global-map (kbd "C-l") #'evil-window-right)
+
+;; Separate clipboards
+;; (setq select-enable-clipboard nil)
+
+;; Projectile folders
+(setq projectile-project-search-path '("~/scripts/" "~/code/projects/"))
+
+;; Resizing windows
+(global-set-key (kbd "<C-down>") 'shrink-window)
+(global-set-key (kbd "<C-up>") 'enlarge-window)
+(global-set-key (kbd "<C-right>") 'shrink-window-horizontally)
+(global-set-key (kbd "<C-left>") 'enlarge-window-horizontally)
+
+;; Reverse mode
+(use-package! reverse-im
+  :init
+  ;; :ensure t
+  :custom
+  (reverse-im-input-methods '("russian-computer"))
+  :config
+  (reverse-im-mode t))
+
+;; Doom-modiline
+(use-package! doom-modeline
+  :init (doom-modeline-mode 1))
+
+;; Format on save
+(add-hook 'evil-save
+          (lambda()
+            (call-interactively #'format-all-buffer)))
+
+;; Make tab work properly
+;; (setq tab-always-indent 'complete)
+(setq tab-always-indent 'complete
+      indent-tabs-mode nil)
+;; Emmet setup
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.

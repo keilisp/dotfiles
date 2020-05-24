@@ -43,6 +43,7 @@ Plugin 'powerman/vim-plugin-ruscmd'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'xuhdev/vim-latex-live-preview'
+Plugin 'raimondi/delimitmate'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -71,6 +72,8 @@ set autoindent
 set smartindent
 set cindent
 set path+=**
+set foldmethod=indent
+set nofoldenable
 
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
@@ -236,11 +239,12 @@ map <Leader>tt :vnew term://bash<CR>
 hi Normal guibg=NONE ctermbg=NONE
 
 "AUTOCLOSING BRACKETS
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
+" inoremap " ""<left>
+" inoremap ' ''<left>
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+
 " inoremap {;<CR> {<CR>};<ESC>O
 " inoremap { {<CR>}<up><end><CR>
 

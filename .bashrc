@@ -207,6 +207,9 @@ export VISUAL='nvim'
 export PATH=$PATH:/home/mediocre/scripts
 export PATH=$PATH:/home/mediocre/scripts/watchvids
 export PATH=$PATH:/home/mediocre/scripts/Wall-d
+export PATH=$PATH:/home/mediocre/scripts/nodeRedditDownloader
+
+alias redditWall='node /home/mediocre/scripts/nodeRedditDownloader/wallpaperDownloader.js -s Animewallpaper -d -t day -p new -l 100 -mw 1920 -mh 1080'
 
 ### BASH INSULTER ###
 if [ -f /etc/bash.command-not-found ]; then

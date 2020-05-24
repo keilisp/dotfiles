@@ -314,11 +314,11 @@ awful.key({ modkey, altkey }, "r", function () awful.util.spawn( terminal.." -e 
 {description = "ranger" , group = "terminal apps" }),
 awful.key({ modkey, altkey }, "m", function () awful.util.spawn( terminal.." -e ncmpcpp" ) end,
 {description = "music(ncmpcpp)" , group = "terminal apps" }),
-awful.key({ modkey1 }, "/", function () awful.util.spawn( "mpc toggle" ) end,
+awful.key({ modkey1, altkey }, "/", function () awful.util.spawn( "mpc toggle" ) end,
 {description = "toggle music" , group = "music" }),
-awful.key({ modkey1 }, ".", function () awful.util.spawn( "mpc next" ) end,
+awful.key({ modkey1, altkey }, ".", function () awful.util.spawn( "mpc next" ) end,
 {description = "play next" , group = "music" }),
-awful.key({ modkey1 }, ",", function () awful.util.spawn( "mpc prev" ) end,
+awful.key({ modkey1, altkey }, ",", function () awful.util.spawn( "mpc prev" ) end,
 {description = "play prev" , group = "music" }),
 
 -- awful.key({ modkey, altkey  }, "c", function () awful.util.spawn( terminal.." -e cmus" ) end,
@@ -569,19 +569,19 @@ end,
 --           {description = "-10%", group = "hotkeys"}),
 
 -- ALSA volume control
-awful.key({ modkey1 }, "Up",
+awful.key({ modkey1, altkey }, "Up",
 --awful.key({ }, "XF86AudioRaiseVolume",
 function ()
   os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
   beautiful.volume.update()
 end),
-awful.key({ modkey1 }, "Down",
+awful.key({ modkey1, altkey }, "Down",
 --awful.key({ }, "XF86AudioLowerVolume",
 function ()
   os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
   beautiful.volume.update()
 end),
-awful.key({ modkey1 }, "m",
+awful.key({ modkey1, altkey }, "m",
 function ()
   os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
   beautiful.volume.update()
