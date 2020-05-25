@@ -54,8 +54,13 @@
 ;; jj --> esc
 (setq-default evil-escape-key-sequence "jj")
 
+;; SPC k to save buffer
+(define-key evil-motion-state-map " " nil)
+(define-key evil-motion-state-map (kbd "SPC k") 'save-buffer)
+
 ;; Relative line numbers
 (setq doom-line-numbers-style 'relative)
+
 
 ;; Vim-like changing windows
   (define-key global-map (kbd "C-h") #'evil-window-left)
@@ -100,3 +105,20 @@
 ;; Emmet setup
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+
+;; Org setup
+(after! org
+  (setq org-todo-keywords '((sequence "TODO(t)" "INPROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
+        org-todo-keyword-faces
+        '(("TODO" :foreground "#7c7c75" :weight normal :underline t)
+          ("WAITING" :foreground "#9f7efe" :weight normal :underline t)
+          ("INPROGRESS" :foreground "#0098dd" :weight normal :underline t)
+          ("DONE" :foreground "#50a14f" :weight normal :underline t)
+          ("CANCELLED" :foreground "#ff6480" :weight normal :underline t))
+        ))
+
+;; Priorities
+(use-package! org-fancy-priorities
+  :hook (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '("⚡", "⚡", "⚡")))
