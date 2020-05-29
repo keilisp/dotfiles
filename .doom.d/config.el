@@ -59,6 +59,7 @@
 (define-key evil-motion-state-map " " nil)
 (define-key evil-motion-state-map (kbd "SPC k") 'save-buffer)
 (define-key evil-motion-state-map (kbd "SPC \\") 'ibuffer)
+(define-key evil-motion-state-map (kbd "SPC [") 'company-files)
 
 ;; Relative line numbers
 (setq doom-line-numbers-style 'relative)
