@@ -90,18 +90,18 @@ local themes = {
     "powerarrow-blue", -- 1
     "powerarrow", -- 2
     "multicolor", -- 3
+    "powerarrow-dark",
     "blackburn",
     "copland",
     "dremora",
     "holo",
-    "powerarrow-dark",
     "rainbow",
     "steamburn",
     "vertex"
 }
 
 -- choose your theme here
-local chosen_theme = themes[8]
+local chosen_theme = themes[4]
 
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
@@ -124,23 +124,15 @@ local terminal = "st"
 local virtualmachine = "virtualbox"
 
 -- awesome variables
-awful.util.terminal = terminal
--- awful.util.tagnames = {  "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "  }
---awful.util.tagnames = { "⠐", "⠡", "⠲", "⠵", "⠻", "⠿" }
--- awful.util.tagnames = { "⌘", "♐", "⌥", "ℵ" }
-awful.util.tagnames = {" WWW ", " DEV ", " TGRAM ", " DIS ", " SYS ", " ANME ", " GAME ", " TRSH "}
--- Use this : https://fontawesome.com/cheatsheet
---awful.util.tagnames = { "", "", "", "", "" }
-awful.layout.suit.tile.left.mirror = true
 awful.layout.layouts = {
     awful.layout.suit.tile,
     lain.layout.centerwork,
     awful.layout.suit.floating,
     lain.layout.centerwork.horizontal,
-    awful.layout.suit.tile.bottom
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.max.fullscreen
     -- awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.magnifier,
-    --awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.top,
     --awful.layout.suit.fair,
@@ -156,6 +148,57 @@ awful.layout.layouts = {
     --lain.layout.termfair,
     --lain.layout.termfair.center,
 }
+
+awful.util.terminal = terminal
+-- awful.util.tagnames = {  "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "  }
+--awful.util.tagnames = { "⠐", "⠡", "⠲", "⠵", "⠻", "⠿" }
+-- awful.util.tagnames = { "⌘", "♐", "⌥", "ℵ" }
+-- awful.util.tagnames = {" WWW ", " DEV ", " TGRAM ", " DIS ", " SYS ", " ANME ", " GAME ", " TRSH "} -- Deprecated, use themes tagnames
+-- Use this : https://fontawesome.com/cheatsheet
+--awful.util.tagnames = { "", "", "", "", "" }
+-- lo = awful.layout.layouts
+my_tags = {
+    tags = {
+        {
+            names = {
+                " WEB ",
+                " DEV ",
+                " SYS ",
+                " ANME ",
+                " GAME ",
+                " TRSH "
+            },
+            layout = {
+                awful.layout.layouts[1],
+                awful.layout.layouts[1],
+                awful.layout.layouts[1],
+                awful.layout.layouts[2],
+                awful.layout.layouts[1],
+                awful.layout.layouts[3]
+            }
+        },
+        {
+            names = {
+                " WEB ",
+                " DEV ",
+                " TRGRAM ",
+                " DIS ",
+                " SYS ",
+                " TRSH "
+            },
+            layout = {
+                awful.layout.layouts[1],
+                awful.layout.layouts[2],
+                awful.layout.layouts[1],
+                awful.layout.layouts[1],
+                awful.layout.layouts[3],
+                awful.layout.layouts[1]
+            }
+        }
+    }
+}
+
+awful.layout.suit.tile.left.mirror = true
 awful.util.taglist_buttons =
     my_table.join(
     awful.button(
@@ -318,6 +361,8 @@ screen.connect_signal(
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(
     function(s)
+        screen_index = s.index
+        awful.tag(my_tags.tags[screen_index].names, s, my_tags.tags[screen_index].layout)
         beautiful.at_screen_connect(s)
     end
 )
@@ -820,24 +865,25 @@ globalkeys =
         {description = "dropdown application", group = "super"}
     ),
     -- Widgets popups
-    awful.key(
-        {altkey},
-        "c",
-        function()
-            lain.widget.cal().show(3)
-        end,
-        {description = "show calendar", group = "widgets"}
-    ),
-    awful.key(
-        {altkey},
-        "h",
-        function()
-            if beautiful.fs then
-                beautiful.fs.show(7)
-            end
-        end,
-        {description = "show filesystem", group = "widgets"}
-    ),
+    -- awful.key(
+    --     {altkey},
+    --     "c",
+    --     function()
+    --         lain.widget.cal().show(3)
+    --     end,
+    --     {description = "show calendar", group = "widgets"}
+    -- ),
+    -- awful.key(
+    --     {altkey},
+    --     "h",
+    --     function()
+    --         if beautiful.fs then
+    --             beautiful.fs.show(7)
+    --         end
+    --     end,
+    --     {description = "show filesystem", group = "widgets"}
+    -- ),
+
     -- Brightness
     -- awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
     --           {description = "+10%", group = "hotkeys"}),
@@ -1114,41 +1160,48 @@ awful.rules.rules = {
     -- Set applications to always map on the tag 1 on screen 1.
     -- find class or role via xprop command
 
-    {
-        rule = {class = "Opera"},
-        properties = {screen = 1, tag = awful.util.tagnames[1]}
-    },
+    -- {
+    --     rule = {class = "Opera"},
+    --     properties = {screen = 1, tag = my_tags.tags[1].names[1]}
+    -- },
     {
         rule = {class = editorgui},
-        properties = {screen = 1, tag = awful.util.tagnames[2]}
+        properties = {screen = 1, tag = my_tags.tags[1].names[2]}
     },
     {
         rule = {class = "TelegramDesktop"},
-        properties = {screen = 2, tag = awful.util.tagnames[3]}
+        properties = {screen = 2, tag = my_tags.tags[2].names[3]}
     },
     {
         rule = {class = "discord"},
-        properties = {screen = 2, tag = awful.util.tagnames[4]}
+        properties = {screen = 2, tag = my_tags.tags[2].names[4]}
     },
     {
-        rule = {class = "steam"},
-        properties = {screen = 2, tag = awful.util.tagnames[7]}
+        rule = {class = "Steam"},
+        properties = {screen = 1, tag = my_tags.tags[1].names[5]}
     },
     {
         rule = {class = "Barrier"},
-        properties = {screen = 2, tag = awful.util.tagnames[8]}
+        properties = {screen = 2, tag = my_tags.tags[2].names[6]}
+    },
+    {
+        rule = {class = "Barrier"},
+        properties = {screen = 2, tag = my_tags.tags[2].names[6]}
+    },
+    {
+        rule = {class = mediaplayer},
+        properties = {screen = 1, tag = my_tags.tags[1].names[4]}
     },
     -- Set applications to be maximized at startup.
     -- find class or role via xprop command
-
-    {
-        rule = {class = editorgui},
-        properties = {maximized = true}
-    },
-    {
-        rule = {class = "Opera"},
-        properties = {maximized = true}
-    },
+    -- {
+    --     rule = {class = editorgui},
+    --     properties = {maximized = true}
+    -- },
+    -- {
+    --     rule = {class = "Opera"},
+    --     properties = {maximized = true}
+    -- },
     {
         rule = {class = mediaplayer},
         properties = {maximized = true}

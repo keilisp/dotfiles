@@ -116,7 +116,7 @@ match_lhs=""
 	alias SS="sudo systemctl"
 
 	# doom-emacs
-	alias doom-refresh='~/.emacs.d/bin/doom refresh'
+	alias doom-refresh='~/.emacs.d/bin/doom sync'
 
 	# system stuff
 	alias cp="cp -i"                          # confirm before overwriting something
@@ -208,6 +208,7 @@ export PATH=$PATH:/home/mediocre/scripts
 export PATH=$PATH:/home/mediocre/scripts/watchvids
 export PATH=$PATH:/home/mediocre/scripts/Wall-d
 export PATH=$PATH:/home/mediocre/scripts/nodeRedditDownloader
+export PATH=$PATH:/home/mediocre/scripts/audiosplit
 
 alias redditWall='node /home/mediocre/scripts/nodeRedditDownloader/wallpaperDownloader.js -s Animewallpaper -d -t day -p new -l 100 -mw 1920 -mh 1080'
 

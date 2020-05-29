@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Druk Alexander"
-	  user-mail-address "druksasha@ukr.net")
+      user-mail-address "druksasha@ukr.net")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -58,16 +58,17 @@
 ;; SPC k to save buffer
 (define-key evil-motion-state-map " " nil)
 (define-key evil-motion-state-map (kbd "SPC k") 'save-buffer)
+(define-key evil-motion-state-map (kbd "SPC \\") 'ibuffer)
 
 ;; Relative line numbers
 (setq doom-line-numbers-style 'relative)
 
 
 ;; Vim-like changing windows
-  (define-key global-map (kbd "C-h") #'evil-window-left)
-  (define-key global-map (kbd "C-j") #'evil-window-down)
-  (define-key global-map (kbd "C-k") #'evil-window-up)
-  (define-key global-map (kbd "C-l") #'evil-window-right)
+(define-key global-map (kbd "C-h") #'evil-window-left)
+(define-key global-map (kbd "C-j") #'evil-window-down)
+(define-key global-map (kbd "C-k") #'evil-window-up)
+(define-key global-map (kbd "C-l") #'evil-window-right)
 
 ;; Separate clipboards
 ;; (setq select-enable-clipboard nil)
@@ -91,11 +92,11 @@
   (reverse-im-mode t))
 
 ;; Doom-modiline
-(use-package! doom-modeline
+(use-package doom-modeline
   :init (doom-modeline-mode 1))
 
 ;; Format on save
-(add-hook 'evil-save
+(add-hook 'before-save-hook
           (lambda()
             (call-interactively #'format-all-buffer)))
 
@@ -110,16 +111,70 @@
 ;; Org setup
 (after! org
   (setq org-todo-keywords '((sequence "TODO(t)" "INPROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
-        org-todo-keyword-faces
-        '(("TODO" :foreground "#7c7c75" :weight normal :underline t)
+			  org-todo-keyword-faces
+			  '(("TODO" :foreground "#7c7c75" :weight normal :underline t)
           ("WAITING" :foreground "#9f7efe" :weight normal :underline t)
           ("INPROGRESS" :foreground "#0098dd" :weight normal :underline t)
           ("DONE" :foreground "#50a14f" :weight normal :underline t)
           ("CANCELLED" :foreground "#ff6480" :weight normal :underline t))
-        ))
+			  ))
 
 ;; Priorities
 (use-package! org-fancy-priorities
   :hook (org-mode . org-fancy-priorities-mode)
   :config
   (setq org-fancy-priorities-list '("⚡", "⚡", "⚡")))
+
+;; Make use-package to always defer loading packages unless they are explicitly used
+;; (with-eval-after-load 'use-package
+;;   (setq use-package-always-defer t
+;;         use-package-verbose t
+;;         use-package-expand-minimally t
+;;         use-package-compute-statistics t
+;;         use-package-enable-imenu-support t))
+
+;; Auto-rename tag
+(use-package instant-rename-tag
+  :defer 3
+  :load-path (lambda () (expand-file-name "~/.doom.d/plugins/instant-rename-tag"))
+  :config
+  (map! :leader
+        (:prefix ("m" . "local leader")
+         :desc "Instantly rename opening/closing HTML tag" "o" #'instant-rename-tag)))
+
+
+;; Confirm kill proccess
+(use-package files
+  :defer t
+  :config
+  (setq confirm-kill-processes nil))
+
+;; Trean underscore as part of the word
+(add-hook 'after-change-major-mode-hook
+          (lambda ()
+            (modify-syntax-entry ?_ "w")))
+
+;; Paste menu
+(map! "M-v" #'counsel-yank-pop)
+
+;; Dashboard image
+(add-hook! '(+doom-dashboard-mode-hook)
+  (setq fancy-splash-image "~/Pictures/doom/kawai.png"))
+
+;; Doom modeline
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
+;; Speed type
+(use-package speed-type
+  :commands (speed-type-text))
+
+;; Flycheck
+(use-package flycheck
+  :defer t
+  :hook (prog-mode . flycheck-mode)
+  :custom
+  (flycheck-emacs-lisp-load-path 'inherit)
+  :config
+  (flycheck-add-mode 'javascript-standard 'js2-mode))

@@ -542,3 +542,11 @@ allow_for_physical_item_deletion = yes
 #
 #active_window_border = red
 #
+def_key "delete"
+delete_playlist_items
+
+def_key "delete"
+delete_browser_items
+
+def_key "delete"
+delete_stored_playlist

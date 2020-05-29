@@ -44,6 +44,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'raimondi/delimitmate'
+Plugin 'easymotion/vim-easymotion'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -164,7 +165,7 @@ inoremap jj <Esc>
 inoremap оо <Esc>
 
 " Set mapleader to ','
-let mapleader=","
+let mapleader=" "
 
 " CtrlP
 let g:ctrlp_map = '<leader>c'
@@ -260,3 +261,19 @@ let g:tex_conceal = ''
 
 " To prevent conceal in any file
 " set conceallevel = 0
+
+" EasyMotion
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-eine)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
