@@ -53,8 +53,10 @@
 ;; they are
 
 ;; jj --> esc
-(setq-default evil-escape-key-sequence "jj")
-
+;; (setq-default evil-escape-key-sequence "jj")
+(setq key-chord-two-keys-delay 0.8)
+(key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+(key-chord-mode 1)
 ;; SPC k to save buffer
 (define-key evil-motion-state-map " " nil)
 (define-key evil-motion-state-map (kbd "SPC k") 'save-buffer)
