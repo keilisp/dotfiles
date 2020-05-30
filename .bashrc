@@ -123,12 +123,15 @@ match_lhs=""
 	alias df='df -h'                          # human-readable sizes
 	alias free='free -m'                      # show sizes in MB
 	alias more=less
-	alias editawesome='nvim $HOME/.config/awesome/rc.lua'
+	alias cfa='nvim $HOME/.config/awesome/rc.lua'
+	alias cfv='nvim $HOME/.vimrc'
+	alias cfb='nvim $HOME/.bashrc'
+	alias se='nvim $(fzf)'
 
 	# utils
 	alias neofetch='neofetch --ascii /home/mediocre/Pictures/ascii/arch-test.txt'
 	alias ytv='youtube-dl -o "~/Videos/%(title)s.%(ext)s"' #Download video link
-	alias yta='youtube-dl -o "~/Music/%(title)s.%(ext)s"  --audio-format mp3' #Download only audio
+	alias yta='youtube-dl -o "~/Music/%(title)s.%(ext)s" -x --audio-format mp3' #Download only audio
 	# the terminal rickroll
 	alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
@@ -203,6 +206,9 @@ shopt -s autocd
 export EDITOR='nvim'
 export VISUAL='nvim'
 
+# OTHER
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+
 # OWN SCRIPTS
 export PATH=$PATH:/home/mediocre/scripts
 export PATH=$PATH:/home/mediocre/scripts/watchvids
@@ -210,7 +216,7 @@ export PATH=$PATH:/home/mediocre/scripts/Wall-d
 export PATH=$PATH:/home/mediocre/scripts/nodeRedditDownloader
 export PATH=$PATH:/home/mediocre/scripts/audiosplit
 
-alias redditWall='node /home/mediocre/scripts/nodeRedditDownloader/wallpaperDownloader.js -s Animewallpaper -d -t day -p new -l 100 -mw 1920 -mh 1080'
+alias redditWall='node /home/mediocre/scripts/nodeRedditDownloader/wallpaperDownloader -s Animewallpaper -d -t day -p new -l 100 -mw 1920 -mh 1080'
 
 ### BASH INSULTER ###
 if [ -f /etc/bash.command-not-found ]; then

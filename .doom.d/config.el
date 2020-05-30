@@ -29,7 +29,6 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-;; (setq org-directory "~/org/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -53,28 +52,26 @@
 ;; they are
 
 ;; jj --> esc
-;; (setq-default evil-escape-key-sequence "jj")
 (setq key-chord-two-keys-delay 0.8)
 (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
 (key-chord-mode 1)
-;; SPC k to save buffer
+
 (define-key evil-motion-state-map " " nil)
+;; SPC k to save buffer
 (define-key evil-motion-state-map (kbd "SPC k") 'save-buffer)
+;; SPC \ to call ibuffer
 (define-key evil-motion-state-map (kbd "SPC \\") 'ibuffer)
+;; SPC [ to call path-completion
 (define-key evil-motion-state-map (kbd "SPC [") 'company-files)
 
 ;; Relative line numbers
 (setq doom-line-numbers-style 'relative)
-
 
 ;; Vim-like changing windows
 (define-key global-map (kbd "C-h") #'evil-window-left)
 (define-key global-map (kbd "C-j") #'evil-window-down)
 (define-key global-map (kbd "C-k") #'evil-window-up)
 (define-key global-map (kbd "C-l") #'evil-window-right)
-
-;; Separate clipboards
-;; (setq select-enable-clipboard nil)
 
 ;; Projectile folders
 (setq projectile-project-search-path '("~/scripts/" "~/code/projects/"))
@@ -88,15 +85,10 @@
 ;; Reverse mode
 (use-package! reverse-im
   :init
-  ;; :ensure t
   :custom
   (reverse-im-input-methods '("russian-computer"))
   :config
   (reverse-im-mode t))
-
-;; Doom-modiline
-(use-package doom-modeline
-  :init (doom-modeline-mode 1))
 
 ;; Format on save
 (add-hook 'before-save-hook
@@ -107,11 +99,14 @@
 ;; (setq tab-always-indent 'complete)
 (setq tab-always-indent 'complete
       indent-tabs-mode nil)
+
 ;; Emmet setup
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
 ;; Org setup
+(setq org-directory "~/org")
+
 (after! org
   (setq org-todo-keywords '((sequence "TODO(t)" "INPROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
 			  org-todo-keyword-faces
@@ -152,10 +147,14 @@
   :config
   (setq confirm-kill-processes nil))
 
-;; Trean underscore as part of the word
+;; Treat underscore and hyphen as part of the word
 (add-hook 'after-change-major-mode-hook
           (lambda ()
             (modify-syntax-entry ?_ "w")))
+
+(add-hook 'after-change-major-mode-hook
+          (lambda ()
+            (modify-syntax-entry ?- "w")))
 
 ;; Paste menu
 (map! "M-v" #'counsel-yank-pop)
@@ -181,3 +180,9 @@
   (flycheck-emacs-lisp-load-path 'inherit)
   :config
   (flycheck-add-mode 'javascript-standard 'js2-mode))
+
+;; Higlight colors everywhere
+(define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
+  (lambda () (rainbow-mode 1)))
+
+(my-global-rainbow-mode 1)

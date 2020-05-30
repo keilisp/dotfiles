@@ -277,3 +277,9 @@ nmap <Leader>L <Plug>(easymotion-overwin-eine)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" Replace all --> S
+nnoremap S :%s//g<Left><Left>
+
+" Optimize file for audiosplit
+nnoremap F :% norm $Bd$0pa jj
