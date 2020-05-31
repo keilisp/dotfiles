@@ -1,4 +1,4 @@
 /home/mediocre/scripts/nodeRedditDownloader/wallpaperDownloader -s Animewallpaper -d -t day -p new -l 100 -mw 1920 -mh 1080 &
-/home/mediocre/scripts/wallplaylist &
 /home/mediocre/scripts/watchvids/watchvids &
 rslsync &
+/home/mediocre/scripts/wallplaylist &

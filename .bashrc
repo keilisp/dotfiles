@@ -110,7 +110,7 @@ match_lhs=""
 	alias fgrep='fgrep --colour=auto'
 
 	# mongodb
-	alias mongod='mongod --port 27017 --auth --dbpath /home/mediocre/database/mongodb/'
+	alias mongod='mongod --port 27017 --auth --dbpath $HOME/db/mongodb/'
 
 	# systemctl
 	alias SS="sudo systemctl"
@@ -129,9 +129,9 @@ match_lhs=""
 	alias se='nvim $(fzf)'
 
 	# utils
-	alias neofetch='neofetch --ascii /home/mediocre/Pictures/ascii/arch-test.txt'
-	alias ytv='youtube-dl -o "~/Videos/%(title)s.%(ext)s"' #Download video link
-	alias yta='youtube-dl -o "~/Music/%(title)s.%(ext)s" -x --audio-format mp3' #Download only audio
+	alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
+	alias ytv='youtube-dl -o "~/vids/%(title)s.%(ext)s"' #Download video link
+	alias yta='youtube-dl -o "~/musx/%(title)s.%(ext)s" -x --audio-format mp3' #Download only audio
 	# the terminal rickroll
 	alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
@@ -192,8 +192,6 @@ ex ()
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
-eval "$(thefuck --alias)"
-
 # Disable ctrl-s and ctrl-q
 stty -ixon
 # Allows to cd into directory merely by typing the directory name
@@ -210,13 +208,13 @@ export VISUAL='nvim'
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 # OWN SCRIPTS
-export PATH=$PATH:/home/mediocre/scripts
-export PATH=$PATH:/home/mediocre/scripts/watchvids
-export PATH=$PATH:/home/mediocre/scripts/Wall-d
-export PATH=$PATH:/home/mediocre/scripts/nodeRedditDownloader
-export PATH=$PATH:/home/mediocre/scripts/audiosplit
+export PATH=$PATH:$HOME/scripts
+export PATH=$PATH:$HOME/scripts/watchvids
+export PATH=$PATH:$HOME/scripts/Wall-d
+export PATH=$PATH:$HOME/scripts/nodeRedditDownloader
+export PATH=$PATH:$HOME/scripts/audiosplit
 
-alias redditWall='node /home/mediocre/scripts/nodeRedditDownloader/wallpaperDownloader -s Animewallpaper -d -t day -p new -l 100 -mw 1920 -mh 1080'
+alias redditWall='node $HOME/scripts/nodeRedditDownloader/wallpaperDownloader -s Animewallpaper -d -t day -p new -l 100 -mw 1920 -mh 1080'
 
 ### BASH INSULTER ###
 if [ -f /etc/bash.command-not-found ]; then

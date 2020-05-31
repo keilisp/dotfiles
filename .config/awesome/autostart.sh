@@ -6,8 +6,8 @@ function run {
 	$@&
   fi
 }
-run "barrier"
-run "emacs"
+# run "barrier"
+# run "emacs"
 run "discord"
 run "telegram-desktop"
 run "volumeicon"
