@@ -91,6 +91,7 @@ local themes = {
   "powerarrow", -- 2
   "multicolor", -- 3
   "powerarrow-dark",
+  "powerarrow-nord",
   "blackburn",
   "copland",
   "dremora",
@@ -101,7 +102,7 @@ local themes = {
 }
 
 -- choose your theme here
-local chosen_theme = themes[4]
+local chosen_theme = themes[5]
 
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
@@ -157,21 +158,70 @@ awful.util.terminal = terminal
 -- Use this : https://fontawesome.com/cheatsheet
 --awful.util.tagnames = { "", "", "", "", "" }
 -- lo = awful.layout.layouts
+-- my_tags = {
+--   tags = {
+--	{
+--	  names = {
+--		" WEB ",
+--		" DEV ",
+--		" SYS ",
+--		" DOX ",
+--		" PIX ",
+--		" VIDS ",
+--		" GAME ",
+--		" TRSH "
+--	  },
+--	  layout = {
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[3]
+--	  }
+--	},
+--	{
+--	  names = {
+--		" WEB ",
+--		" DEV ",
+--		" TRGRAM ",
+--		" DIS ",
+--		" SYS ",
+--		" TRSH "
+--	  },
+--	  layout = {
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[3],
+--		awful.layout.layouts[1]
+--	  }
+--	}
+--   }
+-- }
+
 my_tags = {
   tags = {
 	{
 	  names = {
-		" WEB ",
-		" DEV ",
-		" SYS ",
-		" ANME ",
-		" GAME ",
-		" TRSH "
+		"  ",
+		"  ",
+		"  ",
+		"  ",
+		"  ",
+		"  ",
+		"  ",
+		"  "
 	  },
 	  layout = {
 		awful.layout.layouts[1],
 		awful.layout.layouts[1],
 		awful.layout.layouts[1],
+		awful.layout.layouts[2],
+		awful.layout.layouts[2],
 		awful.layout.layouts[2],
 		awful.layout.layouts[1],
 		awful.layout.layouts[3]
@@ -179,12 +229,12 @@ my_tags = {
 	},
 	{
 	  names = {
-		" WEB ",
-		" DEV ",
-		" TRGRAM ",
-		" DIS ",
-		" SYS ",
-		" TRSH "
+		"  ",
+		"  ",
+		"  ",
+		"  ",
+		"  ",
+		"  "
 	  },
 	  layout = {
 		awful.layout.layouts[1],
@@ -395,7 +445,8 @@ awful.key(
 function()
   awful.spawn(
   string.format(
-  "dmenu_run -nb '#282828' -sf '#b8bb26' -sb '#504945' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=14'",
+  -- "dmenu_run -nb '#282828' -sf '#b8bb26' -sb '#504945' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'",
+  "dmenu_run -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'",
   beautiful.bg_normal,
   beautiful.fg_normal,
   beautiful.bg_focus,

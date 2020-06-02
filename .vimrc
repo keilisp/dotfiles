@@ -45,6 +45,7 @@ Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'raimondi/delimitmate'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'arcticicestudio/nord-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -115,9 +116,10 @@ filetype plugin on
 filetype indent on
 
 " Use the dark version of gruvbox
-set background=dark
-let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
+" set background=dark
+" let g:gruvbox_contrast_dark='hard'
+" colorscheme gruvbox
+colorscheme nord
 
 " Set font
 " set guifont=DejaVu\ Sans\ Mono\ 10
@@ -282,4 +284,4 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 nnoremap S :%s//g<Left><Left>
 
 " Optimize file for audiosplit
-nnoremap F :% norm $Bd$0pa jj
+nnoremap F :% norm $Bd$0Pa jj
