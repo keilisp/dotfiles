@@ -8,10 +8,9 @@ function run {
 }
 
 xset r rate 300 50
-run "/home/mediocre/scripts/wallplaylist"
-run "zathura $HOME/dox/books/fizyka_formula_zno.pdf"
-run "zathura $HOME/dox/books/Komandnaia_stroka_Linux.pdf"
-run "rslsync"
+run "$HOME/scripts/wallplaylist"
+run "zathura ~/dox/books/fizyka_formula_zno.pdf"
+run "zathura ~/dox/books/Komandnaia_stroka_Linux.pdf"
 run "discord"
 run "telegram-desktop"
 run "volumeicon"
@@ -19,6 +18,7 @@ run "nm-applet"
 run "devmon"
 run "blueberry-tray"
 
+# run "rslsync"
 # run "barrier"
 # run "emacs"
 

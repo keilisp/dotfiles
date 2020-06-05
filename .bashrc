@@ -134,8 +134,11 @@ match_lhs=""
 	alias yta='youtube-dl -o "~/musx/%(title)s.%(ext)s" -x --audio-format mp3' #Download only audio
 	# the terminal rickroll
 	alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
-	alias redditWall='node $HOME/scripts/nodeRedditDownloader/wallpaperDownloader -s Animewallpaper -d -t day -p new -l 100 -mw 1920 -mh 1080'
+	alias redditWall='node $HOME/scripts/nodeRedditDownloader/wallpaperDownloader -d -t day -p new -l 100 -mw 1920 -mh 1080 -s'
 
+	# books
+	alias rpf='zathura ~/dox/books/fizyka_formula_zno.pdf'
+	alias rlt='zathura ~/dox/books/Komandnaia_stroka_Linux.pdf'
 
   else
 	if [[ ${EUID} == 0 ]] ; then

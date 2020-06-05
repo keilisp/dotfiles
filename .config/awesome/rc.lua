@@ -5,8 +5,6 @@
 |_| |_| |_|\___|\__,_|_|\___/ \___|_|  \___|
 
 --]]
--- {{{  libraries
-local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
 local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
 
 --https://awesomewm.org/doc/api/documentation/05-awesomerc.md.html
@@ -114,7 +112,7 @@ local modkey1 = "Control"
 
 -- personal variables
 --change these variables if you want
-local browser = "opera"
+local browser = "firefox"
 local editor = os.getenv("EDITOR") or "vim"
 local editorgui = "Emacs"
 local filemanager = "thunar"
@@ -220,7 +218,7 @@ my_tags = {
 		awful.layout.layouts[1],
 		awful.layout.layouts[1],
 		awful.layout.layouts[1],
-		awful.layout.layouts[2],
+		awful.layout.layouts[1],
 		awful.layout.layouts[2],
 		awful.layout.layouts[2],
 		awful.layout.layouts[1],
@@ -480,6 +478,22 @@ function()
   awful.util.spawn("telegram-desktop")
 end,
 {description = "telegram", group = "gui apps"}
+),
+-- awful.key(
+-- {modkey, altkey},
+-- "j",
+-- function()
+--   awful.util.spawn("joplin-desktop")
+-- end,
+-- {description = "gui joplin", group = "gui apps"}
+-- ),
+awful.key(
+{modkey, altkey},
+"j",
+function()
+  awful.util.spawn("st -e joplin")
+end,
+{description = "terminal joplin", group = "terminal apps"}
 ),
 awful.key(
 {modkey, altkey},
@@ -1229,19 +1243,19 @@ awful.rules.rules = {
   },
   {
 	rule = {class = "Steam"},
-	properties = {screen = 1, tag = my_tags.tags[1].names[5]}
+	properties = {screen = 1, tag = my_tags.tags[1].names[7]}
   },
   {
 	rule = {class = "Barrier"},
-	properties = {screen = 2, tag = my_tags.tags[2].names[6]}
+	properties = {screen = 2, tag = my_tags.tags[2].names[8]}
   },
   {
-	rule = {class = "Barrier"},
-	properties = {screen = 2, tag = my_tags.tags[2].names[6]}
+	rule = {class = "Zathura"},
+	properties = {screen = 1, tag = my_tags.tags[1].names[4]}
   },
   {
 	rule = {class = mediaplayer},
-	properties = {screen = 1, tag = my_tags.tags[1].names[4]}
+	properties = {screen = 1, tag = my_tags.tags[1].names[5]}
   },
   -- Set applications to be maximized at startup.
   -- find class or role via xprop command
@@ -1291,7 +1305,8 @@ awful.rules.rules = {
 		"Wpa_gui",
 		"pinentry",
 		"veromix",
-		"xtightvncviewer"
+		"xtightvncviewer",
+		"Steam"
 	  },
 	  name = {
 		"Event Tester" -- xev.

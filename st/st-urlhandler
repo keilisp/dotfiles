@@ -10,6 +10,6 @@ urls="$(sed 's/.*│//g' | tr -d '\n' |
 
 [ -z "$urls" ] && exit
 
-chosen="$(echo "$urls" | dmenu -nb '#282828' -sf '#b8bb26' -sb '#504945' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=14' -i -p 'Follow which url?' -l 10)"
+chosen="$(echo "$urls" | dmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=14' -i -p 'Follow which url?' -l 10)"
 
 setsid xdg-open "$chosen" >/dev/null 2>&1 &

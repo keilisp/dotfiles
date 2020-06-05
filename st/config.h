@@ -114,28 +114,28 @@ float alpha = 1;
 /* GRUVBOX */
 /* Terminal colors (16 first used in escape sequence) */
 /* static const char *colorname[] = { */
-  /* "#282828", /\* hard contrast: #1d2021 / soft contrast: #32302f *\/ */
-  /* "#cc241d", */
-  /* "#98971a", */
-  /* "#d79921", */
-  /* "#458588", */
-  /* "#b16286", */
-  /* "#689d6a", */
-  /* "#a89984", */
-  /* "#928374", */
-  /* "#fb4934", */
-  /* "#b8bb26", */
-  /* "#fabd2f", */
-  /* "#83a598", */
-  /* "#d3869b", */
-  /* "#8ec07c", */
-  /* "#ebdbb2", */
-  /* [255] = 0, */
-  /* more colors can be added after 255 to use with DefaultXX */
-  /* "#add8e6", /\* 256 -> cursor *\/ */
-  /* "#555555", /\* 257 -> rev cursor*\/ */
-  /* "#282828", /\* 258 -> bg *\/ */
-  /* "#ebdbb2", /\* 259 -> fg *\/ */
+/* "#282828", /\* hard contrast: #1d2021 / soft contrast: #32302f *\/ */
+/* "#cc241d", */
+/* "#98971a", */
+/* "#d79921", */
+/* "#458588", */
+/* "#b16286", */
+/* "#689d6a", */
+/* "#a89984", */
+/* "#928374", */
+/* "#fb4934", */
+/* "#b8bb26", */
+/* "#fabd2f", */
+/* "#83a598", */
+/* "#d3869b", */
+/* "#8ec07c", */
+/* "#ebdbb2", */
+/* [255] = 0, */
+/* more colors can be added after 255 to use with DefaultXX */
+/* "#add8e6", /\* 256 -> cursor *\/ */
+/* "#555555", /\* 257 -> rev cursor*\/ */
+/* "#282828", /\* 258 -> bg *\/ */
+/* "#ebdbb2", /\* 259 -> fg *\/ */
 /* }; */
 
 
@@ -173,10 +173,10 @@ const char *colorname[] = {
 };
 
 /*
-* Default colors (colorname index)
-* foreground, background, cursor, reverse
-* cursor
-*/
+ * Default colors (colorname index)
+ * foreground, background, cursor, reverse
+ * cursor
+ */
 unsigned int defaultfg = 256; /* nord4 */
 unsigned int defaultbg = 257; /* nord0 */
 unsigned int defaultcs = 256; /* nord4 */
@@ -275,7 +275,7 @@ MouseKey mkeys[] = {
 static char *openurlcmd[] = { "/bin/sh", "-c", "st-urlhandler", "externalpipe", NULL };
 
 static char *copyurlcmd[] = { "/bin/sh", "-c",
-  "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ ! -z $tmp ] && echo $tmp | dmenu -nb '#282828' -sf '#b8bb26' -sb '#504945' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=14'-i -p 'Copy which url?' -l 10 | tr -d '\n' | xclip -selection clipboard",
+  "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ ! -z $tmp ] && echo $tmp | dmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=14'-i -p 'Copy which url?' -l 10 | tr -d '\n' | xclip -selection clipboard",
   "externalpipe", NULL };
 
 static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
