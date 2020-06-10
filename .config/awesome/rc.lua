@@ -218,7 +218,7 @@ my_tags = {
 		awful.layout.layouts[1],
 		awful.layout.layouts[1],
 		awful.layout.layouts[1],
-		awful.layout.layouts[1],
+		awful.layout.layouts[2],
 		awful.layout.layouts[2],
 		awful.layout.layouts[2],
 		awful.layout.layouts[1],
@@ -479,19 +479,19 @@ function()
 end,
 {description = "telegram", group = "gui apps"}
 ),
--- awful.key(
--- {modkey, altkey},
--- "j",
--- function()
---   awful.util.spawn("joplin-desktop")
--- end,
--- {description = "gui joplin", group = "gui apps"}
--- ),
+awful.key(
+{modkey, altkey},
+"u",
+function()
+  awful.util.spawn( terminal .. " -e yay -Syu")
+end,
+{description = "update packages", group = "terminal apps"}
+),
 awful.key(
 {modkey, altkey},
 "j",
 function()
-  awful.util.spawn("st -e joplin")
+  awful.util.spawn(terminal .. " -e joplin")
 end,
 {description = "terminal joplin", group = "terminal apps"}
 ),
@@ -1255,7 +1255,7 @@ awful.rules.rules = {
   },
   {
 	rule = {class = mediaplayer},
-	properties = {screen = 1, tag = my_tags.tags[1].names[5]}
+	properties = {screen = 1, tag = my_tags.tags[1].names[6]}
   },
   -- Set applications to be maximized at startup.
   -- find class or role via xprop command

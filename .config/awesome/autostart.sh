@@ -7,11 +7,10 @@ function run {
   fi
 }
 
-xset r rate 300 50
 run "$HOME/scripts/wallplaylist"
 run "zathura ~/dox/books/fizyka_formula_zno.pdf"
 run "zathura ~/dox/books/Komandnaia_stroka_Linux.pdf"
-run "discord"
+# run "discord"
 run "telegram-desktop"
 run "volumeicon"
 run "nm-applet"

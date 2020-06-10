@@ -76,9 +76,9 @@ match_lhs=""
 	if [[ ${EUID} == 0 ]] ; then
 	  PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
 	else
-	  # PS1='[\W]\$: '
-	  PS1=' \W\[\033[01;32m\] \$:\[\033[00m\] '
-	  # PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
+	  # PS1="\[\033[s\033[0;0H\033[0;41m\033[K\033[1;33m\t\033[0m\033[u\]<\u@\h \W>\$ "
+	  # PS1=' \A \W\[\033[01;32m\] \$:\[\033[00m\] '
+	  PS1=' \A \033[0;34m\]\W\[\033[01;32m\] \$\[\033[00m\]: '
 	fi
 
 	# ALIASES
@@ -212,6 +212,7 @@ export VISUAL='nvim'
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 # OWN SCRIPTS
+# export PATH=$PATH$( find $HOME/scripts/ -type d -printf ":%p" )
 export PATH=$PATH:$HOME/scripts
 export PATH=$PATH:$HOME/scripts/watchvids
 export PATH=$PATH:$HOME/scripts/Wall-d
