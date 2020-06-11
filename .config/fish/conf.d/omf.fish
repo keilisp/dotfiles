@@ -10,6 +10,11 @@ source $OMF_PATH/init.fish
 set EDITOR "nvim"
 set TERM "st"
 
+set -U fish_user_paths $HOME/scripts $fish_user_paths
+set -U fish_user_paths $HOME/scripts/watchvids $fish_user_paths
+set -U fish_user_paths $HOME/scripts/nodeRedditDownloader $fish_user_paths
+set -U fish_user_paths $HOME/scripts/audiosplit $fish_user_paths
+
 fish_vi_key_bindings
 
 ### RANDOM COLOR SCRIPT ###
@@ -67,6 +72,7 @@ abbr doom '~/.emacs.d/bin/doom sync'
 abbr cfa 'nvim $HOME/.config/awesome/rc.lua'
 abbr cfv 'nvim $HOME/.vimrc'
 abbr cfb 'nvim $HOME/.bashrc'
+abbr cff 'nvim $HOME/.config/fish/conf.d/omf.fish'
 abbr se 'fzf | xargs -r -I % $EDITOR %'
 
 # utils

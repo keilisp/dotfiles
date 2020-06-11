@@ -3,6 +3,7 @@
 SETUVAR __fish_initialized:3100
 SETUVAR _fish_abbr_cfa:nvim\x20\x24HOME/\x2econfig/awesome/rc\x2elua
 SETUVAR _fish_abbr_cfb:nvim\x20\x24HOME/\x2ebashrc
+SETUVAR _fish_abbr_cff:nvim\x20\x24HOME/\x2econfig/fish/conf\x2ed/omf\x2efish
 SETUVAR _fish_abbr_cfv:nvim\x20\x24HOME/\x2evimrc
 SETUVAR _fish_abbr_doom:\x7e/\x2eemacs\x2ed/bin/doom\x20sync
 SETUVAR _fish_abbr_mongod:mongod\x20\x2d\x2dport\x2027017\x20\x2d\x2dauth\x20\x2d\x2ddbpath\x20\x24HOME/db/mongodb/
@@ -43,6 +44,7 @@ SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
+SETUVAR fish_user_paths:/home/mediocre/scripts/audiosplit\x1e/home/mediocre/scripts/nodeRedditDownloader\x1e/home/mediocre/scripts/watchvids\x1e/home/mediocre/scripts\x1e/home/mediocre/scripts/audiosplit\x1e/home/mediocre/scripts/nodeRedditDownloader\x1e/home/mediocre/scripts/watchvids\x1e/home/mediocre/scripts\x1e/home/mediocre/scripts/audiosplit\x1e/home/mediocre/scripts/nodeRedditDownloader\x1e/home/mediocre/scripts/watchvids\x1e/home/mediocre/scripts
 SETUVAR pure_begin_prompt_with_current_directory:true
 SETUVAR pure_color_command_duration:pure_color_warning
 SETUVAR pure_color_current_directory:pure_color_primary

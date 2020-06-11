@@ -127,6 +127,7 @@ match_lhs=""
 	alias cfa='nvim $HOME/.config/awesome/rc.lua'
 	alias cfv='nvim $HOME/.vimrc'
 	alias cfb='nvim $HOME/.bashrc'
+	alias cff='nvim $HOME/.config/fish/conf.d/omf.fish'
 	alias se='fzf | xargs -r -I % $EDITOR %'
 
 	# utils
@@ -213,7 +214,6 @@ export VISUAL='nvim'
 # export PATH=$PATH$( find $HOME/scripts/ -type d -printf ":%p" )
 export PATH=$PATH:$HOME/scripts
 export PATH=$PATH:$HOME/scripts/watchvids
-export PATH=$PATH:$HOME/scripts/Wall-d
 export PATH=$PATH:$HOME/scripts/nodeRedditDownloader
 export PATH=$PATH:$HOME/scripts/audiosplit
 
