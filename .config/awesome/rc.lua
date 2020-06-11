@@ -113,7 +113,7 @@ local modkey1 = "Control"
 -- personal variables
 --change these variables if you want
 local browser = "firefox"
-local editor = os.getenv("EDITOR") or "vim"
+local editor = os.getenv("EDITOR") or "nvim"
 local editorgui = "Emacs"
 local filemanager = "thunar"
 local mailclient = "geary"
@@ -358,7 +358,7 @@ local myawesomemenu = {
 	end
   },
   {"manual", terminal .. " -e 'man awesome'"},
-  {"edit config", terminal .. " vim /home/dt/.config/awesome/rc.lua"},
+  {"edit config", terminal .. " vim /home/mediocre/.config/awesome/rc.lua"},
   {"arandr", "arandr"},
   {"restart", awesome.restart}
 }
@@ -570,7 +570,7 @@ end,
 -- screenshots
 awful.key(
 {modkey, altkey},
-"s",
+"p",
 function()
   awful.util.spawn("flameshot gui")
 end,
@@ -820,6 +820,14 @@ end,
 -- Standard program
 awful.key(
 {modkey},
+"Return",
+function()
+  awful.spawn(terminal .. " -e fish ")
+end,
+{description = "st with fish", group = "super"}
+),
+awful.key(
+{modkey, altkey},
 "Return",
 function()
   awful.spawn(terminal)

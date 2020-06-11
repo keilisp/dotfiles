@@ -61,6 +61,7 @@ theme.widget_net = theme.dir .. "/icons/net.png"
 theme.widget_hdd = theme.dir .. "/icons/hdd.png"
 theme.widget_music = theme.dir .. "/icons/note.png"
 theme.widget_music_on = theme.dir .. "/icons/note_on.png"
+theme.widget_keyboard = theme.dir .. "/icons/keyboardicon.png"
 theme.widget_vol = theme.dir .. "/icons/vol.png"
 theme.widget_vol_low = theme.dir .. "/icons/vol_low.png"
 theme.widget_vol_no = theme.dir .. "/icons/vol_no.png"
@@ -231,6 +232,7 @@ lain.widget.temp(
 
 -- Keyboard layout
 local keyboardlayout = awful.widget.keyboardlayout()
+local keyboardicon = wibox.widget.imagebox(theme.widget_keyboard)
 
 -- / fs
 local fsicon = wibox.widget.imagebox(theme.widget_hdd)
@@ -420,33 +422,23 @@ function theme.at_screen_connect(s)
 	  wibox.widget.systray(),
 	  spr,
 	  arrl_ld,
+	  wibox.container.background(keyboardicon, theme.bg_focus),
 	  wibox.container.background(keyboardlayout, theme.bg_focus),
 	  arrl_dl,
-	  -- wibox.container.background(mpdicon, theme.bg_focus),
-	  -- wibox.container.background(theme.mpd.widget, theme.bg_focus),
 	  mpdicon,
 	  theme.mpd.widget,
 	  arrl_ld,
 	  wibox.container.background(volicon, theme.bg_focus),
 	  wibox.container.background(theme.volume.widget, theme.bg_focus),
-	  -- arrl_ld,
-	  -- wibox.container.background(mailicon, theme.bg_focus),
-	  --wibox.container.background(theme.mail.widget, theme.bg_focus),
 	  arrl_dl,
 	  memicon,
 	  mem.widget,
 	  arrl_ld,
 	  wibox.container.background(cpuicon, theme.bg_focus),
 	  wibox.container.background(cpu.widget, theme.bg_focus),
-	  -- arrl_dl,
-	  -- tempicon,
-	  -- temp.widget,
 	  arrl_dl,
 	  wibox.container.background(fsicon),
 	  wibox.container.background(theme.fs.widget),
-	  -- arrl_dl,
-	  -- baticon,
-	  -- bat.widget,
 	  arrl_ld,
 	  wibox.container.background(neticon, theme.bg_focus),
 	  wibox.container.background(net.widget, theme.bg_focus),

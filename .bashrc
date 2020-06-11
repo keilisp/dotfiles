@@ -65,20 +65,19 @@ match_lhs=""
 
   if ${use_color} ; then
 	# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-	if type -P dircolors >/dev/null ; then
-	  if [[ -f ~/.dir_colors ]] ; then
-		eval $(dircolors -b ~/.dir_colors)
-	  elif [[ -f /etc/DIR_COLORS ]] ; then
-		eval $(dircolors -b /etc/DIR_COLORS)
-	  fi
+	if type -P dircolors >/dev/null ; then if [[ -f ~/.dir_colors ]] ; then eval $(dircolors -b ~/.dir_colors)
+	elif [[ -f /etc/DIR_COLORS ]] ; then
+	  eval $(dircolors -b /etc/DIR_COLORS)
+	fi
 	fi
 
 	if [[ ${EUID} == 0 ]] ; then
 	  PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
 	else
 	  # PS1="\[\033[s\033[0;0H\033[0;41m\033[K\033[1;33m\t\033[0m\033[u\]<\u@\h \W>\$ "
-	  # PS1=' \A \W\[\033[01;32m\] \$:\[\033[00m\] '
-	  PS1=' \A \033[0;34m\]\W\[\033[01;32m\] \$\[\033[00m\]: '
+	  # PS1=" \A \W\[\033[01;32m\] \$:\[\033[00m\] "
+	  PS1=" \A \[\033[0;34m\]\W\[\033[01;32m\] \$\[\033[0m\]: "
+
 	fi
 
 	# ALIASES
@@ -116,17 +115,19 @@ match_lhs=""
 	alias SS="sudo systemctl"
 
 	# doom-emacs
-	alias doom-refresh='~/.emacs.d/bin/doom sync'
+	alias doom='~/.emacs.d/bin/doom sync'
 
 	# system stuff
 	alias cp="cp -i"                          # confirm before overwriting something
 	alias df='df -h'                          # human-readable sizes
 	alias free='free -m'                      # show sizes in MB
+	alias ka='killall'
+	alias g='git'
 	alias more=less
 	alias cfa='nvim $HOME/.config/awesome/rc.lua'
 	alias cfv='nvim $HOME/.vimrc'
 	alias cfb='nvim $HOME/.bashrc'
-	alias se='nvim $(fzf)'
+	alias se='fzf | xargs -r -I % $EDITOR %'
 
 	# utils
 	alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
@@ -207,9 +208,6 @@ export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 # default apps
 export EDITOR='nvim'
 export VISUAL='nvim'
-
-# OTHER
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 # OWN SCRIPTS
 # export PATH=$PATH$( find $HOME/scripts/ -type d -printf ":%p" )
