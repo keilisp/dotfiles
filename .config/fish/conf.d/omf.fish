@@ -74,6 +74,8 @@ abbr cfv 'nvim $HOME/.vimrc'
 abbr cfb 'nvim $HOME/.bashrc'
 abbr cff 'nvim $HOME/.config/fish/conf.d/omf.fish'
 abbr se 'fzf | xargs -r -I % $EDITOR %'
+abbr pf 'systemctl poweroff'
+abbr rb 'systemctl reboot'
 
 # utils
 abbr neofetch 'neofetch --ascii $HOME/pix/ascii/arch-test.txt'
@@ -83,6 +85,7 @@ abbr redditWall 'node $HOME/scripts/nodeRedditDownloader/wallpaperDownloader -d 
 
 # books
 abbr rpf 'zathura ~/dox/books/fizyka_formula_zno.pdf'
-abbr rlt 'zathura ~/dox/books/Komandnaia_stroka_Linux.pdf' abbr rb 'zathura ~/dox/'
+abbr rlt 'zathura ~/dox/books/Komandnaia_stroka_Linux.pdf'
+# abbr rb 'zathura ~/dox/'
 
 

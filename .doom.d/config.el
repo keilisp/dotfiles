@@ -162,7 +162,7 @@
 
 ;; Dashboard image
 (add-hook! '(+doom-dashboard-mode-hook)
-  (setq fancy-splash-image "~/pix/doom/shinji.png"))
+  (setq fancy-splash-image "~/pix/doom/stallman.png"))
 
 ;; Doom modeline
 (use-package doom-modeline
