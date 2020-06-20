@@ -1,0 +1,2 @@
+sudo systemctl start sshd
+sudo sshfs -o allow_other tsunaide@192.168.1.107:/home/tsunaide/ /mnt/laptop/
