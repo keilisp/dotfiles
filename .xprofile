@@ -1,0 +1,1 @@
+/home/gideon/scripts/nodeRedditDownloader/wallpaperDownloader -s Animewallpaper -d -t day -p new -l 100 -mw 1920 -mh 1080 &

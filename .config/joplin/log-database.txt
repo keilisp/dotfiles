@@ -1,0 +1,755 @@
+2020-06-11 04:57:12: "Database was open successfully"
+2020-06-11 04:57:12: "Checking for database schema update..."
+2020-06-11 04:57:12: "Current database version", "0"
+2020-06-11 04:57:12: "Converting database to version 1"
+2020-06-11 04:57:12: "Converting database to version 2"
+2020-06-11 04:57:13: "Converting database to version 3"
+2020-06-11 04:57:13: "Converting database to version 4"
+2020-06-11 04:57:13: "Converting database to version 5"
+2020-06-11 04:57:13: "Converting database to version 6"
+2020-06-11 04:57:13: "Converting database to version 7"
+2020-06-11 04:57:13: "Converting database to version 8"
+2020-06-11 04:57:13: "Converting database to version 9"
+2020-06-11 04:57:13: "Converting database to version 10"
+2020-06-11 04:57:13: "Converting database to version 11"
+2020-06-11 04:57:13: "Converting database to version 12"
+2020-06-11 04:57:13: "Converting database to version 13"
+2020-06-11 04:57:13: "Converting database to version 14"
+2020-06-11 04:57:13: "Converting database to version 15"
+2020-06-11 04:57:13: "Converting database to version 16"
+2020-06-11 04:57:13: "Converting database to version 17"
+2020-06-11 04:57:13: "Converting database to version 18"
+2020-06-11 04:57:13: "Converting database to version 19"
+2020-06-11 04:57:13: "Converting database to version 20"
+2020-06-11 04:57:13: "Converting database to version 21"
+2020-06-11 04:57:13: "Converting database to version 22"
+2020-06-11 04:57:13: "Converting database to version 23"
+2020-06-11 04:57:13: "Converting database to version 24"
+2020-06-11 04:57:13: "Converting database to version 25"
+2020-06-11 04:57:13: "Converting database to version 26"
+2020-06-11 04:57:13: "Converting database to version 27"
+2020-06-11 04:57:13: "Converting database to version 28"
+2020-06-11 04:57:13: "Converting database to version 29"
+2020-06-11 04:57:13: "Initializing tables..."
+2020-06-11 04:57:14: "Saving settings..."
+2020-06-11 04:57:14: "Settings have been saved."
+2020-06-11 04:57:18: "Saving settings..."
+2020-06-11 04:57:18: "Settings have been saved."
+2020-06-11 04:57:24: "Saving settings..."
+2020-06-11 04:57:24: "Settings have been saved."
+2020-06-11 04:58:15: "Saving settings..."
+2020-06-11 04:58:15: "Settings have been saved."
+2020-06-11 04:58:40: "Saving settings..."
+2020-06-11 04:58:40: "Settings have been saved."
+2020-06-11 04:58:49: "Saving settings..."
+2020-06-11 04:58:49: "Settings have been saved."
+2020-06-11 04:58:52: "Saving settings..."
+2020-06-11 04:58:52: "Settings have been saved."
+2020-06-11 04:58:52: "Saving settings..."
+2020-06-11 04:58:52: "Settings have been saved."
+2020-06-11 05:01:34: "Saving settings..."
+2020-06-11 05:01:34: "Settings have been saved."
+2020-06-11 05:01:39: "Saving settings..."
+2020-06-11 05:01:39: "Settings have been saved."
+2020-06-11 05:01:43: "Saving settings..."
+2020-06-11 05:01:43: "Settings have been saved."
+2020-06-11 05:01:43: "Saving settings..."
+2020-06-11 05:01:44: "Settings have been saved."
+2020-06-11 05:01:44: "Saving settings..."
+2020-06-11 05:01:44: "Settings have been saved."
+2020-06-11 05:02:01: "Saving settings..."
+2020-06-11 05:02:01: "Settings have been saved."
+2020-06-11 05:02:04: "replaceResourceInternalToExternalLinks", "options:", "{"useAbsolutePaths":false}", "body:", "rewrite PS1
+
+add keyboard icon
+
+joplin
+
+emacs org file
+
+joplin conf
+[
+{ "keys": [":"], "type": "function", "command": "enter_command_line_mode" },
+{
+"keys": ["l", "RIGHT", "TAB"],
+"type": "function",
+"command": "focus_next"
+},
+{
+"keys": ["h", "LEFT", "SHIFT_TAB"],
+"type": "function",
+"command": "focus_previous"
+},
+{ "keys": ["k", "UP"], "type": "function", "command": "move_up" },
+{ "keys": ["j", "DOWN"], "type": "function", "command": "move_down" },
+{ "keys": ["PAGE_UP"], "type": "function", "command": "page_up" },
+{ "keys": ["PAGE_DOWN"], "type": "function", "command": "page_down" },
+{ "keys": ["ENTER"], "type": "function", "command": "activate" },
+{
+"keys": ["dd", "DELETE", "BACKSPACE"],
+"type": "function",
+"command": "delete"
+},
+{ "keys": [" "], "command": "todo toggle $n" },
+																		    { "keys": ["tt"], "type": "function", "command": "toggle_console" },
+																			  { "keys": ["tm"], "type": "function", "command": "toggle_metadata" },
+																			    {
+																				 	    "keys": ["/"],
+																						    "type": "prompt",
+																							    "command": "search \"\"",
+																								    "cursorPosition": -2
+																									    },
+																										  {
+																											    "keys": ["mn"],
+																												    "type": "prompt",
+																													    "command": "mknote \"\"",
+																														    "cursorPosition": -2
+																															    },
+																																  {
+																																	    "keys": ["mt"],
+																																		    "type": "prompt",
+																																			    "command": "mktodo \"\"",
+																																				    "cursorPosition": -2
+																																					    },
+																																						  {
+																																							    "keys": ["mb"],
+																																								    "type": "prompt",
+																																									    "command": "mkbook \"\"",
+																																										    "cursorPosition": -2
+																																											    },
+																																												  {
+																																													    "keys": ["yn"],
+																																														    "type": "prompt",
+																																															    "command": "cp $n \"\"",
+"cursorPosition": -2
+},
+{
+"keys": ["dn"],
+"type": "prompt",
+"command": "mv \$n \"\"",
+"cursorPosition": -2
+},
+{
+"keys": ["wq", "ZZ"],
+"type": "exec",
+"command": "exit"
+}
+]
+
+    																																																							  }
+    																																																	  }
+    																																											  }
+    																																					  }
+    																															  }
+    																									  }
+    																			}
+    												}
+    				  }
+
+}]
+"
+2020-06-11 05:02:04: "replaceResourceInternalToExternalLinks result", "rewrite PS1
+
+add keyboard icon
+
+joplin
+
+emacs org file
+
+joplin conf
+[
+{ "keys": [":"], "type": "function", "command": "enter_command_line_mode" },
+{
+"keys": ["l", "RIGHT", "TAB"],
+"type": "function",
+"command": "focus_next"
+},
+{
+"keys": ["h", "LEFT", "SHIFT_TAB"],
+"type": "function",
+"command": "focus_previous"
+},
+{ "keys": ["k", "UP"], "type": "function", "command": "move_up" },
+{ "keys": ["j", "DOWN"], "type": "function", "command": "move_down" },
+{ "keys": ["PAGE_UP"], "type": "function", "command": "page_up" },
+{ "keys": ["PAGE_DOWN"], "type": "function", "command": "page_down" },
+{ "keys": ["ENTER"], "type": "function", "command": "activate" },
+{
+"keys": ["dd", "DELETE", "BACKSPACE"],
+"type": "function",
+"command": "delete"
+},
+{ "keys": [" "], "command": "todo toggle $n" },
+																		    { "keys": ["tt"], "type": "function", "command": "toggle_console" },
+																			  { "keys": ["tm"], "type": "function", "command": "toggle_metadata" },
+																			    {
+																				 	    "keys": ["/"],
+																						    "type": "prompt",
+																							    "command": "search \"\"",
+																								    "cursorPosition": -2
+																									    },
+																										  {
+																											    "keys": ["mn"],
+																												    "type": "prompt",
+																													    "command": "mknote \"\"",
+																														    "cursorPosition": -2
+																															    },
+																																  {
+																																	    "keys": ["mt"],
+																																		    "type": "prompt",
+																																			    "command": "mktodo \"\"",
+																																				    "cursorPosition": -2
+																																					    },
+																																						  {
+																																							    "keys": ["mb"],
+																																								    "type": "prompt",
+																																									    "command": "mkbook \"\"",
+																																										    "cursorPosition": -2
+																																											    },
+																																												  {
+																																													    "keys": ["yn"],
+																																														    "type": "prompt",
+																																															    "command": "cp $n \"\"",
+"cursorPosition": -2
+},
+{
+"keys": ["dn"],
+"type": "prompt",
+"command": "mv \$n \"\"",
+"cursorPosition": -2
+},
+{
+"keys": ["wq", "ZZ"],
+"type": "exec",
+"command": "exit"
+}
+]
+
+    																																																							  }
+    																																																	  }
+    																																											  }
+    																																					  }
+    																															  }
+    																									  }
+    																			}
+    												}
+    				  }
+
+}]
+"
+2020-06-11 05:02:42: "Database was open successfully"
+2020-06-11 05:02:42: "Checking for database schema update..."
+2020-06-11 05:02:42: "Current database version", "29"
+2020-06-11 05:02:45: "Database was open successfully"
+2020-06-11 05:02:45: "Checking for database schema update..."
+2020-06-11 05:02:45: "Current database version", "29"
+2020-06-11 05:03:39: "Database was open successfully"
+2020-06-11 05:03:39: "Checking for database schema update..."
+2020-06-11 05:03:39: "Current database version", "29"
+2020-06-11 05:03:50: "Database was open successfully"
+2020-06-11 05:03:50: "Checking for database schema update..."
+2020-06-11 05:03:50: "Current database version", "29"
+2020-06-11 05:03:51: "Saving settings..."
+2020-06-11 05:03:51: "Settings have been saved."
+2020-06-11 05:03:55: "replaceResourceInternalToExternalLinks", "options:", "{"useAbsolutePaths":false}", "body:", "Arch installation
+
+## PS1=" \A \[\033[0;34m\]\W\[\033[01;32m\] \$\[\033[0m\]: "
+"
+2020-06-11 05:03:55: "replaceResourceInternalToExternalLinks result", "Arch installation
+
+## PS1=" \A \[\033[0;34m\]\W\[\033[01;32m\] \$\[\033[0m\]: "
+"
+2020-06-11 05:04:20: "Saving settings..."
+2020-06-11 05:04:20: "Settings have been saved."
+2020-06-11 05:04:25: "Saving settings..."
+2020-06-11 05:04:25: "Settings have been saved."
+2020-06-11 05:04:26: "replaceResourceInternalToExternalLinks", "options:", "{"useAbsolutePaths":false}", "body:", "rewrite PS1
+
+add keyboard icon
+
+joplin
+
+emacs org file
+
+joplin conf
+[
+{ "keys": [":"], "type": "function", "command": "enter_command_line_mode" },
+{
+"keys": ["l", "RIGHT", "TAB"],
+"type": "function",
+"command": "focus_next"
+},
+{
+"keys": ["h", "LEFT", "SHIFT_TAB"],
+"type": "function",
+"command": "focus_previous"
+},
+{ "keys": ["k", "UP"], "type": "function", "command": "move_up" },
+{ "keys": ["j", "DOWN"], "type": "function", "command": "move_down" },
+{ "keys": ["PAGE_UP"], "type": "function", "command": "page_up" },
+{ "keys": ["PAGE_DOWN"], "type": "function", "command": "page_down" },
+{ "keys": ["ENTER"], "type": "function", "command": "activate" },
+{
+"keys": ["dd", "DELETE", "BACKSPACE"],
+"type": "function",
+"command": "delete"
+},
+{ "keys": [" "], "command": "todo toggle $n" },
+																		    { "keys": ["tt"], "type": "function", "command": "toggle_console" },
+																			  { "keys": ["tm"], "type": "function", "command": "toggle_metadata" },
+																			    {
+																				 	    "keys": ["/"],
+																						    "type": "prompt",
+																							    "command": "search \"\"",
+																								    "cursorPosition": -2
+																									    },
+																										  {
+																											    "keys": ["mn"],
+																												    "type": "prompt",
+																													    "command": "mknote \"\"",
+																														    "cursorPosition": -2
+																															    },
+																																  {
+																																	    "keys": ["mt"],
+																																		    "type": "prompt",
+																																			    "command": "mktodo \"\"",
+																																				    "cursorPosition": -2
+																																					    },
+																																						  {
+																																							    "keys": ["mb"],
+																																								    "type": "prompt",
+																																									    "command": "mkbook \"\"",
+																																										    "cursorPosition": -2
+																																											    },
+																																												  {
+																																													    "keys": ["yn"],
+																																														    "type": "prompt",
+																																															    "command": "cp $n \"\"",
+"cursorPosition": -2
+},
+{
+"keys": ["dn"],
+"type": "prompt",
+"command": "mv \$n \"\"",
+"cursorPosition": -2
+},
+{
+"keys": ["wq", "ZZ"],
+"type": "exec",
+"command": "exit"
+}
+]
+
+    																																																							  }
+    																																																	  }
+    																																											  }
+    																																					  }
+    																															  }
+    																									  }
+    																			}
+    												}
+    				  }
+
+}]
+"
+2020-06-11 05:04:26: "replaceResourceInternalToExternalLinks result", "rewrite PS1
+
+add keyboard icon
+
+joplin
+
+emacs org file
+
+joplin conf
+[
+{ "keys": [":"], "type": "function", "command": "enter_command_line_mode" },
+{
+"keys": ["l", "RIGHT", "TAB"],
+"type": "function",
+"command": "focus_next"
+},
+{
+"keys": ["h", "LEFT", "SHIFT_TAB"],
+"type": "function",
+"command": "focus_previous"
+},
+{ "keys": ["k", "UP"], "type": "function", "command": "move_up" },
+{ "keys": ["j", "DOWN"], "type": "function", "command": "move_down" },
+{ "keys": ["PAGE_UP"], "type": "function", "command": "page_up" },
+{ "keys": ["PAGE_DOWN"], "type": "function", "command": "page_down" },
+{ "keys": ["ENTER"], "type": "function", "command": "activate" },
+{
+"keys": ["dd", "DELETE", "BACKSPACE"],
+"type": "function",
+"command": "delete"
+},
+{ "keys": [" "], "command": "todo toggle $n" },
+																		    { "keys": ["tt"], "type": "function", "command": "toggle_console" },
+																			  { "keys": ["tm"], "type": "function", "command": "toggle_metadata" },
+																			    {
+																				 	    "keys": ["/"],
+																						    "type": "prompt",
+																							    "command": "search \"\"",
+																								    "cursorPosition": -2
+																									    },
+																										  {
+																											    "keys": ["mn"],
+																												    "type": "prompt",
+																													    "command": "mknote \"\"",
+																														    "cursorPosition": -2
+																															    },
+																																  {
+																																	    "keys": ["mt"],
+																																		    "type": "prompt",
+																																			    "command": "mktodo \"\"",
+																																				    "cursorPosition": -2
+																																					    },
+																																						  {
+																																							    "keys": ["mb"],
+																																								    "type": "prompt",
+																																									    "command": "mkbook \"\"",
+																																										    "cursorPosition": -2
+																																											    },
+																																												  {
+																																													    "keys": ["yn"],
+																																														    "type": "prompt",
+																																															    "command": "cp $n \"\"",
+"cursorPosition": -2
+},
+{
+"keys": ["dn"],
+"type": "prompt",
+"command": "mv \$n \"\"",
+"cursorPosition": -2
+},
+{
+"keys": ["wq", "ZZ"],
+"type": "exec",
+"command": "exit"
+}
+]
+
+    																																																							  }
+    																																																	  }
+    																																											  }
+    																																					  }
+    																															  }
+    																									  }
+    																			}
+    												}
+    				  }
+
+}]
+"
+2020-06-11 05:04:31: "replaceResourceExternalToInternalLinks", "options:", "{"useAbsolutePaths":false}", "pathsToTry:", "["resources"]", "body:", "add keyboard icon
+
+joplin
+
+emacs org file
+
+joplin conf
+"
+2020-06-11 05:04:31: "replaceResourceExternalToInternalLinks result", "add keyboard icon
+
+joplin
+
+emacs org file
+
+joplin conf
+"
+2020-06-11 05:04:41: "Saving settings..."
+2020-06-11 05:04:41: "Settings have been saved."
+2020-06-11 05:04:41: "Saving settings..."
+2020-06-11 05:04:41: "Settings have been saved."
+2020-06-12 23:53:32: "Database was open successfully"
+2020-06-12 23:53:32: "Checking for database schema update..."
+2020-06-12 23:53:32: "Current database version", "29"
+2020-06-12 23:53:36: "Saving settings..."
+2020-06-12 23:53:36: "Settings have been saved."
+2020-06-12 23:53:37: "Saving settings..."
+2020-06-12 23:53:37: "Settings have been saved."
+2020-06-12 23:53:39: "Saving settings..."
+2020-06-12 23:53:39: "Settings have been saved."
+2020-06-12 23:53:40: "Saving settings..."
+2020-06-12 23:53:40: "Settings have been saved."
+2020-06-12 23:53:41: "Saving settings..."
+2020-06-12 23:53:41: "Settings have been saved."
+2020-06-12 23:53:43: "replaceResourceInternalToExternalLinks", "options:", "{"useAbsolutePaths":false}", "body:", "Mama - 1500uah"
+2020-06-12 23:53:43: "replaceResourceInternalToExternalLinks result", "Mama - 1500uah"
+2020-06-12 23:53:46: "replaceResourceExternalToInternalLinks", "options:", "{"useAbsolutePaths":false}", "pathsToTry:", "["resources"]", "body:", ""
+2020-06-12 23:53:46: "replaceResourceExternalToInternalLinks result", ""
+2020-06-12 23:53:52: "Saving settings..."
+2020-06-12 23:53:52: "Settings have been saved."
+2020-06-12 23:53:56: "Saving settings..."
+2020-06-12 23:53:56: "Settings have been saved."
+2020-06-12 23:53:56: "Saving settings..."
+2020-06-12 23:53:56: "Settings have been saved."
+2020-06-12 23:54:02: "Saving settings..."
+2020-06-12 23:54:02: "Settings have been saved."
+2020-06-12 23:59:00: "Saving settings..."
+2020-06-12 23:59:00: "Settings have been saved."
+2020-06-13 00:12:06: "Saving settings..."
+2020-06-13 00:12:06: "Settings have been saved."
+2020-06-13 00:12:40: "Saving settings..."
+2020-06-13 00:12:40: "Settings have been saved."
+2020-06-14 19:19:17: "Database was open successfully"
+2020-06-14 19:19:17: "Checking for database schema update..."
+2020-06-14 19:19:17: "Current database version", "29"
+2020-06-14 19:19:20: "Saving settings..."
+2020-06-14 19:19:20: "Settings have been saved."
+2020-06-14 19:20:43: "Saving settings..."
+2020-06-14 19:20:43: "Settings have been saved."
+2020-06-14 19:20:51: "Saving settings..."
+2020-06-14 19:20:51: "Settings have been saved."
+2020-06-14 19:21:00: "Saving settings..."
+2020-06-14 19:21:00: "Settings have been saved."
+2020-06-14 19:21:16: "Saving settings..."
+2020-06-14 19:21:16: "Settings have been saved."
+2020-06-14 19:21:17: "replaceResourceInternalToExternalLinks", "options:", "{"useAbsolutePaths":false}", "body:", "stole dt's wallpapers
+
+install gentoo on thinkpad
+"
+2020-06-14 19:21:17: "replaceResourceInternalToExternalLinks result", "stole dt's wallpapers
+
+install gentoo on thinkpad
+"
+2020-06-14 19:21:27: "replaceResourceExternalToInternalLinks", "options:", "{"useAbsolutePaths":false}", "pathsToTry:", "["resources"]", "body:", "
+install gentoo on thinkpad
+"
+2020-06-14 19:21:27: "replaceResourceExternalToInternalLinks result", "
+install gentoo on thinkpad
+"
+2020-06-14 19:21:30: "replaceResourceInternalToExternalLinks", "options:", "{"useAbsolutePaths":false}", "body:", "
+
+
+install gentoo on thinkpad
+"
+2020-06-14 19:21:30: "replaceResourceInternalToExternalLinks result", "
+
+
+install gentoo on thinkpad
+"
+2020-06-14 19:21:43: "replaceResourceExternalToInternalLinks", "options:", "{"useAbsolutePaths":false}", "pathsToTry:", "["resources"]", "body:", "
+install gentoo on thinkpad
+"
+2020-06-14 19:21:43: "replaceResourceExternalToInternalLinks result", "
+install gentoo on thinkpad
+"
+2020-06-14 19:21:43: "Saving settings..."
+2020-06-14 19:21:43: "Settings have been saved."
+2020-06-14 19:21:46: "replaceResourceInternalToExternalLinks", "options:", "{"useAbsolutePaths":false}", "body:", "
+
+
+install gentoo on thinkpad
+"
+2020-06-14 19:21:46: "replaceResourceInternalToExternalLinks result", "
+
+
+install gentoo on thinkpad
+"
+2020-06-14 19:21:59: "replaceResourceExternalToInternalLinks", "options:", "{"useAbsolutePaths":false}", "pathsToTry:", "["resources"]", "body:", "install gentoo on thinkpad
+"
+2020-06-14 19:21:59: "replaceResourceExternalToInternalLinks result", "install gentoo on thinkpad
+"
+2020-06-14 19:22:06: "Saving settings..."
+2020-06-14 19:22:06: "Settings have been saved."
+2020-06-14 19:22:07: "replaceResourceInternalToExternalLinks", "options:", "{"useAbsolutePaths":false}", "body:", "# Arch
+
+## AwesomeWM
+
+## Other
+
+- [ ] create dmenu script for oppening books
+
+- [ ] configure fish shell
+
+- [ ] write separate scripts for mountlaptop for wifi and eth
+
+- [ ] setup searx
+
+## VIM
+
+- [ ] TODO: crate lightweight vimrc (vim -u ~/.vimrc-light)
+"
+2020-06-14 19:22:07: "replaceResourceInternalToExternalLinks result", "# Arch
+
+## AwesomeWM
+
+## Other
+
+- [ ] create dmenu script for oppening books
+
+- [ ] configure fish shell
+
+- [ ] write separate scripts for mountlaptop for wifi and eth
+
+- [ ] setup searx
+
+## VIM
+
+- [ ] TODO: crate lightweight vimrc (vim -u ~/.vimrc-light)
+"
+2020-06-14 19:39:24: "replaceResourceExternalToInternalLinks", "options:", "{"useAbsolutePaths":false}", "pathsToTry:", "["resources"]", "body:", "## AwesomeWM
+
+- [ ] replace suspend option in modalkeybind
+- [ ] add calender, wttr to utils modalmap
+
+## Other
+
+- [ ] create dmenu script for oppening books
+
+- [ ] write separate scripts for mountlaptop for wifi and eth
+
+
+## VIM
+
+- [ ]  create lightweight vimrc (vim -u ~/.vimrc-light)
+"
+2020-06-14 19:39:24: "replaceResourceExternalToInternalLinks result", "## AwesomeWM
+
+- [ ] replace suspend option in modalkeybind
+- [ ] add calender, wttr to utils modalmap
+
+## Other
+
+- [ ] create dmenu script for oppening books
+
+- [ ] write separate scripts for mountlaptop for wifi and eth
+
+
+## VIM
+
+- [ ]  create lightweight vimrc (vim -u ~/.vimrc-light)
+"
+2020-06-14 19:39:24: "Saving settings..."
+2020-06-14 19:39:24: "Saving settings..."
+2020-06-14 19:39:24: "Settings have been saved."
+2020-06-14 19:39:24: "Settings have been saved."
+2020-06-14 19:39:28: "Saving settings..."
+2020-06-14 19:39:28: "Settings have been saved."
+2020-06-14 19:39:41: "replaceResourceInternalToExternalLinks", "options:", "{"useAbsolutePaths":false}", "body:", "rewrite PS1
+
+add keyboard icon
+
+joplin
+
+emacs org file
+
+joplin conf
+"
+2020-06-14 19:39:41: "replaceResourceInternalToExternalLinks result", "rewrite PS1
+
+add keyboard icon
+
+joplin
+
+emacs org file
+
+joplin conf
+"
+2020-06-14 19:46:03: "Database was open successfully"
+2020-06-14 19:46:03: "Checking for database schema update..."
+2020-06-14 19:46:03: "Current database version", "29"
+2020-06-14 19:46:05: "Saving settings..."
+2020-06-14 19:46:05: "Settings have been saved."
+2020-06-14 19:46:35: "replaceResourceExternalToInternalLinks", "options:", "{"useAbsolutePaths":false}", "pathsToTry:", "["resources"]", "body:", "(https://askubuntu.com/questions/91359/100-0-usage-by-audio-codec-hwc0d0-realtek)
+
+enable powertop tunings
+
+setup minimal browser
+"
+2020-06-14 19:46:35: "replaceResourceExternalToInternalLinks result", "(https://askubuntu.com/questions/91359/100-0-usage-by-audio-codec-hwc0d0-realtek)
+
+enable powertop tunings
+
+setup minimal browser
+"
+2020-06-14 19:46:43: "Saving settings..."
+2020-06-14 19:46:43: "Settings have been saved."
+2020-06-14 19:46:45: "Saving settings..."
+2020-06-14 19:46:45: "Settings have been saved."
+2020-06-14 19:47:13: "Saving settings..."
+2020-06-14 19:47:13: "Settings have been saved."
+2020-06-20 20:12:32: "Database was open successfully"
+2020-06-20 20:12:32: "Checking for database schema update..."
+2020-06-20 20:12:32: "Current database version", "29"
+2020-06-20 20:12:32: "Converting database to version 30"
+2020-06-20 20:12:32: "Initializing tables..."
+2020-06-20 20:12:32: "Saving settings..."
+2020-06-20 20:12:32: "Settings have been saved."
+2020-06-20 20:12:35: "Saving settings..."
+2020-06-20 20:12:35: "Settings have been saved."
+2020-06-20 20:12:36: "Saving settings..."
+2020-06-20 20:12:36: "Settings have been saved."
+2020-06-20 20:12:52: "Saving settings..."
+2020-06-20 20:12:52: "Settings have been saved."
+2020-06-20 20:12:55: "Saving settings..."
+2020-06-20 20:12:55: "Settings have been saved."
+2020-06-20 20:12:55: "Saving settings..."
+2020-06-20 20:12:55: "Settings have been saved."
+2020-06-20 20:12:57: "replaceResourceInternalToExternalLinks", "options:", "{"useAbsolutePaths":false}", "body:", "learn rust!
+
+move my texts from telegram to joplin
+
+try artix/bedrock
+
+setup own vps (email, search engine)
+
+setup firefox profiles
+
+setup vim profiles
+
+setup unclutter
+"
+2020-06-20 20:12:57: "replaceResourceInternalToExternalLinks result", "learn rust!
+
+move my texts from telegram to joplin
+
+try artix/bedrock
+
+setup own vps (email, search engine)
+
+setup firefox profiles
+
+setup vim profiles
+
+setup unclutter
+"
+2020-06-20 20:13:31: "replaceResourceExternalToInternalLinks", "options:", "{"useAbsolutePaths":false}", "pathsToTry:", "["resources"]", "body:", "move my texts from telegram to joplin
+
+try artix/bedrock
+
+setup own vps (email, search engine)
+
+  setup firefox profiles
+
+  setup vim profiles
+
+  setup unclutter
+
+  fully setup emacs
+
+  setup rss feed
+"
+2020-06-20 20:13:31: "replaceResourceExternalToInternalLinks result", "move my texts from telegram to joplin
+
+try artix/bedrock
+
+setup own vps (email, search engine)
+
+  setup firefox profiles
+
+  setup vim profiles
+
+  setup unclutter
+
+  fully setup emacs
+
+  setup rss feed
+"
+2020-06-20 20:13:31: "Saving settings..."
+2020-06-20 20:13:31: "Settings have been saved."
+2020-06-20 20:13:41: "Saving settings..."
+2020-06-20 20:13:41: "Settings have been saved."
+2020-06-20 20:13:45: "Saving settings..."
+2020-06-20 20:13:45: "Settings have been saved."

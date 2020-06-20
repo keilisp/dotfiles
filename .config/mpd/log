@@ -1,0 +1,240 @@
+Jun 12 23:57 : exception: RTIOThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Jun 12 23:57 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Jun 12 23:57 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Jun 12 23:57 : client: [0] opened from 127.0.0.1:47878
+Jun 12 23:57 : client: [0] closed
+Jun 12 23:57 : client: [1] opened from 127.0.0.1:47880
+Jun 12 23:57 : client: [1] closed
+Jun 12 23:57 : client: [2] opened from 127.0.0.1:47882
+Jun 12 23:57 : client: [2] closed
+Jun 12 23:57 : client: [3] opened from 127.0.0.1:47884
+Jun 12 23:57 : client: [3] closed
+Jun 12 23:57 : client: [4] opened from 127.0.0.1:47886
+Jun 12 23:57 : client: [4] closed
+Jun 12 23:57 : client: [5] opened from 127.0.0.1:47888
+Jun 12 23:57 : client: [5] closed
+Jun 12 23:57 : client: [6] opened from 127.0.0.1:47890
+Jun 12 23:57 : client: [6] closed
+Jun 12 23:57 : client: [7] opened from 127.0.0.1:47892
+Jun 12 23:57 : client: [7] closed
+Jun 12 23:57 : client: [8] opened from 127.0.0.1:47894
+Jun 12 23:57 : client: [8] closed
+Jun 12 23:57 : client: [9] opened from 127.0.0.1:47896
+Jun 12 23:57 : client: [9] closed
+Jun 12 23:58 : client: [10] opened from 127.0.0.1:47898
+Jun 12 23:58 : client: [10] closed
+Jun 12 23:58 : client: [11] opened from 127.0.0.1:47900
+Jun 12 23:58 : client: [11] closed
+Jun 12 23:58 : client: [12] opened from 127.0.0.1:47902
+Jun 12 23:58 : client: [12] closed
+Jun 12 23:58 : client: [13] opened from 127.0.0.1:47904
+Jun 12 23:58 : client: [13] closed
+Jun 12 23:58 : client: [14] opened from 127.0.0.1:47906
+Jun 12 23:58 : client: [14] closed
+Jun 12 23:58 : client: [15] opened from 127.0.0.1:47908
+Jun 12 23:58 : client: [15] closed
+Jun 12 23:58 : client: [16] opened from 127.0.0.1:47910
+Jun 12 23:58 : client: [16] closed
+Jun 12 23:58 : client: [17] opened from 127.0.0.1:47912
+Jun 12 23:58 : client: [17] closed
+Jun 12 23:58 : client: [18] opened from 127.0.0.1:47914
+Jun 12 23:58 : client: [18] closed
+Jun 12 23:58 : client: [19] opened from 127.0.0.1:47916
+Jun 12 23:58 : client: [19] closed
+Jun 12 23:58 : client: [20] opened from 127.0.0.1:47918
+Jun 12 23:58 : client: [20] closed
+Jun 12 23:58 : client: [21] opened from 127.0.0.1:47920
+Jun 12 23:58 : client: [21] closed
+Jun 12 23:58 : client: [22] opened from 127.0.0.1:47922
+Jun 12 23:58 : client: [22] closed
+Jun 12 23:58 : client: [23] opened from 127.0.0.1:47924
+Jun 12 23:58 : client: [23] closed
+Jun 12 23:58 : client: [24] opened from 127.0.0.1:47926
+Jun 12 23:58 : client: [24] closed
+Jun 12 23:58 : client: [25] opened from 127.0.0.1:47928
+Jun 12 23:58 : client: [25] closed
+Jun 12 23:58 : client: [26] opened from 127.0.0.1:47930
+Jun 12 23:58 : client: [26] closed
+Jun 12 23:58 : client: [27] opened from 127.0.0.1:47932
+Jun 12 23:58 : client: [27] closed
+Jun 12 23:58 : client: [28] opened from 127.0.0.1:47934
+Jun 12 23:58 : client: [28] closed
+Jun 12 23:58 : client: [29] opened from 127.0.0.1:47936
+Jun 12 23:58 : client: [29] closed
+Jun 12 23:58 : client: [30] opened from 127.0.0.1:47938
+Jun 12 23:58 : client: [30] closed
+Jun 12 23:58 : client: [31] opened from 127.0.0.1:47940
+Jun 12 23:58 : client: [31] closed
+Jun 12 23:58 : client: [32] opened from 127.0.0.1:47942
+Jun 12 23:58 : client: [32] closed
+Jun 12 23:58 : client: [33] opened from 127.0.0.1:47944
+Jun 12 23:58 : client: [33] closed
+Jun 12 23:58 : client: [34] opened from 127.0.0.1:47946
+Jun 12 23:58 : client: [34] closed
+Jun 12 23:58 : client: [35] opened from 127.0.0.1:47948
+Jun 12 23:58 : client: [35] closed
+Jun 12 23:58 : client: [36] opened from 127.0.0.1:47950
+Jun 12 23:58 : client: [36] closed
+Jun 12 23:58 : client: [37] opened from 127.0.0.1:47952
+Jun 12 23:58 : client: [37] closed
+Jun 12 23:58 : client: [38] opened from 127.0.0.1:47960
+Jun 12 23:58 : client: [38] closed
+Jun 12 23:58 : client: [39] opened from 127.0.0.1:47970
+Jun 12 23:58 : client: [39] closed
+Jun 12 23:59 : client: [40] opened from 127.0.0.1:47974
+Jun 12 23:59 : client: [40] closed
+Jun 12 23:59 : client: [41] opened from 127.0.0.1:47976
+Jun 12 23:59 : client: [41] closed
+Jun 12 23:59 : client: [42] opened from [::1]:48688
+Jun 12 23:59 : client: [42] closed
+Jun 12 23:59 : client: [43] opened from [::1]:48690
+Jun 12 23:59 : client: [43] closed
+Jun 12 23:59 : client: [44] opened from [::1]:48692
+Jun 12 23:59 : client: [44] closed
+Jun 12 23:59 : client: [45] opened from 127.0.0.1:47984
+Jun 12 23:59 : client: [45] closed
+Jun 12 23:59 : client: [46] opened from [::1]:48696
+Jun 12 23:59 : client: [46] closed
+Jun 12 23:59 : client: [47] opened from [::1]:48698
+Jun 12 23:59 : client: [47] closed
+Jun 12 23:59 : client: [48] opened from 127.0.0.1:47990
+Jun 12 23:59 : client: [48] closed
+Jun 12 23:59 : client: [49] opened from 127.0.0.1:47992
+Jun 12 23:59 : client: [49] closed
+Jun 12 23:59 : client: [50] opened from 127.0.0.1:47994
+Jun 12 23:59 : client: [50] closed
+Jun 12 23:59 : client: [51] opened from 127.0.0.1:47996
+Jun 12 23:59 : client: [51] closed
+Jun 12 23:59 : client: [52] opened from 127.0.0.1:47998
+Jun 12 23:59 : client: [52] closed
+Jun 12 23:59 : client: [53] opened from 127.0.0.1:48000
+Jun 12 23:59 : client: [53] closed
+Jun 12 23:59 : client: [54] opened from 127.0.0.1:48002
+Jun 12 23:59 : client: [54] closed
+Jun 12 23:59 : client: [55] opened from 127.0.0.1:48004
+Jun 12 23:59 : client: [55] closed
+Jun 12 23:59 : client: [56] opened from 127.0.0.1:48006
+Jun 12 23:59 : client: [56] closed
+Jun 12 23:59 : client: [57] opened from 127.0.0.1:48008
+Jun 12 23:59 : client: [57] closed
+Jun 12 23:59 : client: [58] opened from 127.0.0.1:48010
+Jun 12 23:59 : client: [58] closed
+Jun 12 23:59 : client: [59] opened from 127.0.0.1:48012
+Jun 12 23:59 : client: [59] closed
+Jun 12 23:59 : client: [60] opened from 127.0.0.1:48014
+Jun 12 23:59 : client: [60] closed
+Jun 12 23:59 : client: [61] opened from 127.0.0.1:48016
+Jun 12 23:59 : client: [61] closed
+Jun 12 23:59 : client: [62] opened from 127.0.0.1:48018
+Jun 12 23:59 : client: [62] closed
+Jun 12 23:59 : client: [63] opened from 127.0.0.1:48020
+Jun 12 23:59 : client: [63] closed
+Jun 12 23:59 : client: [64] opened from 127.0.0.1:48022
+Jun 12 23:59 : client: [64] closed
+Jun 12 23:59 : client: [65] opened from 127.0.0.1:48024
+Jun 12 23:59 : client: [65] closed
+Jun 12 23:59 : client: [66] opened from 127.0.0.1:48026
+Jun 12 23:59 : client: [66] closed
+Jun 12 23:59 : client: [67] opened from 127.0.0.1:48028
+Jun 12 23:59 : client: [67] closed
+Jun 12 23:59 : client: [68] opened from 127.0.0.1:48030
+Jun 12 23:59 : client: [68] closed
+Jun 12 23:59 : client: [69] opened from 127.0.0.1:48032
+Jun 12 23:59 : client: [69] closed
+Jun 12 23:59 : client: [70] opened from 127.0.0.1:48034
+Jun 12 23:59 : client: [70] closed
+Jun 12 23:59 : client: [71] opened from 127.0.0.1:48036
+Jun 12 23:59 : client: [71] closed
+Jun 12 23:59 : client: [72] opened from 127.0.0.1:48038
+Jun 12 23:59 : client: [72] closed
+Jun 12 23:59 : client: [73] opened from 127.0.0.1:48040
+Jun 12 23:59 : client: [73] closed
+Jun 13 00:00 : client: [74] opened from 127.0.0.1:48042
+Jun 13 00:00 : client: [74] closed
+Jun 13 00:00 : client: [75] opened from 127.0.0.1:48044
+Jun 13 00:00 : client: [75] closed
+Jun 13 00:00 : client: [76] opened from 127.0.0.1:48046
+Jun 13 00:00 : client: [76] closed
+Jun 13 00:00 : client: [77] opened from 127.0.0.1:48048
+Jun 13 00:00 : client: [77] closed
+Jun 13 00:00 : client: [78] opened from 127.0.0.1:48050
+Jun 13 00:00 : client: [78] closed
+Jun 13 00:00 : client: [79] opened from 127.0.0.1:48052
+Jun 13 00:00 : client: [79] closed
+Jun 13 00:00 : client: [80] opened from 127.0.0.1:48054
+Jun 13 00:00 : client: [80] closed
+Jun 13 00:00 : client: [81] opened from 127.0.0.1:48056
+Jun 13 00:00 : client: [81] closed
+Jun 13 00:00 : client: [82] opened from 127.0.0.1:48058
+Jun 13 00:00 : client: [82] closed
+Jun 13 00:00 : client: [83] opened from 127.0.0.1:48060
+Jun 13 00:00 : client: [83] closed
+Jun 13 00:00 : client: [84] opened from 127.0.0.1:48062
+Jun 13 00:00 : client: [84] closed
+Jun 13 00:00 : client: [85] opened from 127.0.0.1:48064
+Jun 13 00:00 : client: [85] closed
+Jun 13 00:00 : client: [86] opened from 127.0.0.1:48066
+Jun 13 00:00 : client: [86] closed
+Jun 13 00:00 : client: [87] opened from 127.0.0.1:48068
+Jun 13 00:00 : client: [87] closed
+Jun 13 00:00 : client: [88] opened from 127.0.0.1:48070
+Jun 13 00:00 : client: [88] closed
+Jun 13 00:00 : client: [89] opened from 127.0.0.1:48072
+Jun 13 00:00 : client: [89] closed
+Jun 13 00:00 : client: [90] opened from 127.0.0.1:48074
+Jun 13 00:00 : client: [90] closed
+Jun 13 00:00 : client: [91] opened from 127.0.0.1:48076
+Jun 13 00:00 : client: [91] closed
+Jun 13 00:00 : client: [92] opened from 127.0.0.1:48078
+Jun 13 00:00 : client: [92] closed
+Jun 13 00:00 : client: [93] opened from 127.0.0.1:48080
+Jun 13 00:00 : client: [93] closed
+Jun 13 00:00 : client: [94] opened from 127.0.0.1:48082
+Jun 13 00:00 : client: [94] closed
+Jun 13 00:00 : client: [95] opened from 127.0.0.1:48084
+Jun 13 00:00 : client: [95] closed
+Jun 13 00:00 : client: [96] opened from 127.0.0.1:48086
+Jun 13 00:00 : client: [96] closed
+Jun 13 00:00 : client: [97] opened from 127.0.0.1:48088
+Jun 13 00:00 : client: [97] closed
+Jun 13 00:00 : client: [98] opened from 127.0.0.1:48090
+Jun 13 00:00 : client: [98] closed
+Jun 13 00:00 : client: [99] opened from [::1]:48802
+Jun 13 00:00 : client: [100] opened from 127.0.0.1:48094
+Jun 13 00:00 : client: [100] closed
+Jun 13 00:00 : client: [101] opened from 127.0.0.1:48096
+Jun 13 00:00 : client: [101] closed
+Jun 13 00:00 : client: [102] opened from 127.0.0.1:48098
+Jun 13 00:00 : client: [102] closed
+Jun 13 00:00 : client: [103] opened from 127.0.0.1:48100
+Jun 13 00:00 : client: [103] closed
+Jun 13 00:01 : client: [104] opened from 127.0.0.1:48102
+Jun 13 00:01 : client: [104] closed
+Jun 13 00:01 : client: [105] opened from 127.0.0.1:48104
+Jun 13 00:01 : client: [105] closed
+Jun 13 00:01 : client: [106] opened from 127.0.0.1:48106
+Jun 13 00:01 : client: [106] closed
+Jun 13 00:01 : client: [107] opened from 127.0.0.1:48108
+Jun 13 00:01 : client: [107] closed
+Jun 13 00:01 : client: [108] opened from 127.0.0.1:48110
+Jun 13 00:01 : client: [108] closed
+Jun 13 00:01 : client: [109] opened from 127.0.0.1:48112
+Jun 13 00:01 : client: [109] closed
+Jun 13 00:01 : client: [110] opened from 127.0.0.1:48114
+Jun 13 00:01 : client: [110] closed
+Jun 13 00:01 : client: [99] closed
+Jun 13 00:01 : client: [111] opened from 127.0.0.1:48116
+Jun 13 00:01 : client: [111] closed
+Jun 13 00:01 : client: [112] opened from 127.0.0.1:48118
+Jun 13 00:01 : client: [112] closed
+Jun 13 00:01 : client: [113] opened from 127.0.0.1:48120
+Jun 13 00:01 : client: [113] closed
+Jun 13 00:01 : client: [114] opened from 127.0.0.1:48122
+Jun 13 00:01 : client: [114] closed
+Jun 13 00:01 : client: [115] opened from 127.0.0.1:48124
+Jun 13 00:01 : client: [115] closed
+Jun 13 00:01 : client: [116] opened from 127.0.0.1:48126
+Jun 13 00:01 : client: [116] closed
+Jun 13 00:01 : client: [117] opened from 127.0.0.1:48128
+Jun 13 00:01 : client: [117] closed
+Jun 13 00:01 : player: played "anime-ops/18-wotakoi-op-1.opus"
