@@ -405,6 +405,15 @@ local utilsmap = {
   { "c", function() awful.util.spawn(terminal .. " -e yay -Sc") end,        "clear packages cache" },
   { "separator", "Other" },
   { "p", function() awful.util.spawn("flameshot gui") end,        "screenshot" },
+  { "m", function() awful.util.spawn(terminal .. " -e unimatrix") end,        "matrix" },
+}
+
+local systemmap = {
+  { "p", function() awful.util.spawn("systemctl poweroff") end,        "power off" },
+  { "r", function() awful.util.spawn("systemctl reboot") end,        "reboot" },
+  { "s", function() awful.util.spawn("systemctl suspend") end,        "supend" },
+  { "separator", "Lock screen" },
+  { "l", function() awful.util.spawn("betterlockscreen -l") end,        "lock" },
 }
 
 local appsmap = {
@@ -425,7 +434,7 @@ local appsmap = {
 
 local volumemap = {
   { "separator", "ALSA" },
-  { "Up",
+  { "k",
   -- { "XF86AudioRaiseVolume",
   function()
 	os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
@@ -433,7 +442,7 @@ local volumemap = {
   end,
   "+vol"
 },
-{ "Down",
+{ "j",
 -- { "XF86AudioLowerVolume",
 function()
   os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
@@ -462,6 +471,9 @@ end,
   globalkeys =
   my_table.join(
   -- {{{ Personal keybindings
+
+  -- System map
+  awful.key({ modkey }, "q", function() modalbind.grab{keymap=systemmap, name="System", layout=0, stay_in_mode=false} end),
 
   -- MPD map
   awful.key({ modkey }, "/", function() modalbind.grab{keymap=mpdmap, name="MPD", layout=0, stay_in_mode=true} end),
@@ -938,8 +950,8 @@ end,
   {description = "toggle fullscreen", group = "client"}
   ),
   awful.key(
-  {modkey, "Shift"},
-  "c",
+  {modkey},
+  "x",
   function(c)
 	c:kill()
   end,
@@ -1146,6 +1158,10 @@ end,
 	  properties = {screen = 1, tag = my_tags.tags[1].names[7]}
 	},
 	{
+	  rule = {class = "Sxiv"},
+	  properties = {screen = 1, tag = my_tags.tags[1].names[5]}
+	},
+	{
 	  rule = {class = "Barrier"},
 	  properties = {screen = 2, tag = my_tags.tags[2].names[8]}
 	},
@@ -1195,12 +1211,14 @@ end,
 		  -- "Sxiv",
 		  "Unetbootin.elf",
 		  "Wpa_gui",
+		  -- "TelegramDesktop",
 		  "pinentry",
 		  "veromix",
 		  "xtightvncviewer",
 		  "Steam"
 		},
 		name = {
+		  "Media viewer",
 		  "Event Tester" -- xev.
 		},
 		role = {

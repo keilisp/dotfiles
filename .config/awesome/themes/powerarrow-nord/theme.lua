@@ -184,7 +184,7 @@ lain.widget.mpd(
 	  title = mpd_now.title .. " "
 	  mpdicon:set_image(theme.widget_music_on)
 	elseif mpd_now.state == "pause" then
-	  artist = " mpd "
+	  artist = " music "
 	  title = "paused "
 	else
 	  artist = ""

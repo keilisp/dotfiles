@@ -9,6 +9,9 @@ source $OMF_PATH/init.fish
 # Defalt apps
 set EDITOR "nvim"
 set TERM "st"
+set DISPLAY ":0"
+set FZF_DEFAULT_OPTS '--layout=reverse --height 40%'
+
 
 set -U fish_user_paths $HOME/scripts $fish_user_paths
 set -U fish_user_paths $HOME/scripts/watchvids $fish_user_paths
@@ -59,6 +62,7 @@ alias free='free -m'                      # show sizes in MB
 alias ka='killall'
 alias g='git'
 alias more=less
+alias neofetch 'neofetch --ascii $HOME/pix/ascii/arch-test.txt'
 
 
 ## ABBREVIATIONS ##
@@ -76,9 +80,9 @@ abbr cff 'nvim $HOME/.config/fish/conf.d/omf.fish'
 abbr se 'fzf | xargs -r -I % $EDITOR %'
 abbr pf 'systemctl poweroff'
 abbr rb 'systemctl reboot'
+abbr cheat 'curl cht.sh/'
 
 # utils
-abbr neofetch 'neofetch --ascii $HOME/pix/ascii/arch-test.txt'
 abbr ytv 'youtube-dl -o "~/vids/%(title)s.%(ext)s"' #Download video link
 abbr yta 'youtube-dl -o "~/musx/%(title)s.%(ext)s" -x --audio-format mp3' #Download only audio
 abbr redditWall 'node $HOME/scripts/nodeRedditDownloader/wallpaperDownloader -d -t day -p new -l 100 -mw 1920 -mh 1080 -s'

@@ -8,15 +8,15 @@ function run {
 }
 
 run "$HOME/scripts/wallplaylist"
-run "zathura ~/dox/books/fizyka_formula_zno.pdf"
-run "zathura ~/dox/books/Komandnaia_stroka_Linux.pdf"
-# run "discord"
+sxiv ~/pix/compendium/physics
 run "telegram-desktop"
-run "volumeicon"
 run "nm-applet"
 run "devmon"
 run "blueberry-tray"
 
+# run "volumeicon"
+# run "zathura ~/dox/books/Komandnaia_stroka_Linux.pdf"
+# run "discord"
 # run "rslsync"
 # run "barrier"
 # run "emacs"

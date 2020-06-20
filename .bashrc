@@ -212,12 +212,14 @@ shopt -s autocd
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
-# default apps
+# Env vars
 export EDITOR='nvim'
 export VISUAL='nvim'
+export FZF_DEFAULT_OPTS='--layout=reverse --height 40%'
 
 # OWN SCRIPTS
-# export PATH=$PATH$( find $HOME/scripts/ -type d -printf ":%p" )
+# add all subdirs to PATH
+# export PATH="$PATH:$(du "$HOME/scripts/" | cut -f2 | tr '/n' ':' | sed 's/:*$//')"
 export PATH=$PATH:$HOME/scripts
 export PATH=$PATH:$HOME/scripts/watchvids
 export PATH=$PATH:$HOME/scripts/nodeRedditDownloader

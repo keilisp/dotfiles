@@ -1,12 +1,10 @@
-"		 VIM configuration  - mediocre
 
 "    ██▒   █▓ ██▓ ███▄ ▄███▓ ██▀███   ▄████▄
 "   ▓██░   █▒▓██▒▓██▒▀█▀ ██▒▓██ ▒ ██▒▒██▀ ▀█
 "    ▓██  █▒░▒██▒▓██    ▓██░▓██ ░▄█ ▒▒▓█    ▄
 "     ▒██ █░░░██░▒██    ▒██ ▒██▀▀█▄  ▒▓▓▄ ▄██▒
 "      ▒▀█░  ░██░▒██▒   ░██▒░██▓ ▒██▒▒ ▓███▀ ░
-"      ░ ▐░  ░▓  ░ ▒░   ░  ░░ ▒▓ ░▒▓░░ ░▒ ▒  ░
-"      ░ ░░   ▒ ░░  ░      ░  ░▒ ░ ▒░  ░  ▒
+"      ░ ▐░  ░▓  ░ ▒░   ░  ░░ ▒▓ ░▒▓░░ ░▒ ▒  ░ ░ ░░   ▒ ░░  ░      ░  ░▒ ░ ▒░  ░  ▒
 "        ░░   ▒ ░░      ░     ░░   ░ ░
 "         ░   ░         ░      ░     ░ ░
 
@@ -117,7 +115,7 @@ filetype indent on
 
 " Use the dark version of gruvbox
 " set background=dark
-" let g:gruvbox_contrast_dark='hard'
+" let g:gruvbox_contrast_dark='soft'
 " colorscheme gruvbox
 colorscheme nord
 
