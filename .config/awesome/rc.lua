@@ -752,7 +752,7 @@ end,
   ),
   -- Standard program
   awful.key(
-  {modkey},
+  {modkey, altkey},
   "Return",
   function()
 	awful.spawn(terminal .. " -e fish ")
@@ -760,12 +760,12 @@ end,
   {description = "term with fish", group = "super"}
   ),
   awful.key(
-  {modkey, altkey},
+  {modkey},
   "Return",
   function()
 	awful.spawn(terminal)
   end,
-  {description = "term with bash", group = "super"}
+  {description = "term with zsh", group = "super"}
   ),
   awful.key({modkey, "Shift"}, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
   awful.key(
@@ -1163,7 +1163,7 @@ end,
 	},
 	{
 	  rule = {class = "Barrier"},
-	  properties = {screen = 2, tag = my_tags.tags[2].names[8]}
+	  properties = {screen = 2, tag = my_tags.tags[2].names[6]}
 	},
 	{
 	  rule = {class = "Zathura"},

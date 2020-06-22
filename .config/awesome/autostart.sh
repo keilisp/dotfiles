@@ -11,6 +11,7 @@ run "$HOME/scripts/wallplaylist"
 sxiv ~/pix/compendium/physics
 run "telegram-desktop"
 run "nm-applet"
+run "barrier"
 run "devmon"
 run "blueberry-tray"
 
@@ -18,7 +19,6 @@ run "blueberry-tray"
 # run "zathura ~/dox/books/Komandnaia_stroka_Linux.pdf"
 # run "discord"
 # run "rslsync"
-# run "barrier"
 # run "emacs"
 
 # dwall -s firewatch3 &
