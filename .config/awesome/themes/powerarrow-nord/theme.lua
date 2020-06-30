@@ -245,8 +245,6 @@ lain.widget.fs(
   end
 }
 )
---[[ commented because it needs Gio/Glib >= 2.54
---]]
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_battery)
 local bat =
@@ -418,25 +416,28 @@ function theme.at_screen_connect(s)
 	s.mytasklist, -- Middle widget
 	{
 	  -- Right widgets
+
 	  layout = wibox.layout.fixed.horizontal,
 	  wibox.widget.systray(),
 	  spr,
 	  arrl_ld,
+	  wibox.container.background(keyboardicon, theme.bg_focus),
+	  wibox.container.background(keyboardlayout, theme.bg_focus),
 	  arrl_dl,
-	  keyboardicon,
-	  keyboardlayout,
+	  mpdicon,
+	  theme.mpd.widget,
 	  arrl_ld,
-	  wibox.container.background(mpdicon, theme.bg_focus),
-	  wibox.container.background(theme.mpd.widget, theme.bg_focus),
+	  wibox.container.background(volicon, theme.bg_focus),
+	  wibox.container.background(theme.volume.widget, theme.bg_focus),
 	  arrl_dl,
-	  volicon,
-	  theme.volume.widget,
+	  memicon,
+	  mem.widget,
 	  arrl_ld,
-	  wibox.container.background(memicon, theme.bg_focus),
-	  wibox.container.background(mem.widget, theme.bg_focus),
+	  wibox.container.background(cpuicon, theme.bg_focus),
+	  wibox.container.background(cpu.widget, theme.bg_focus),
 	  arrl_dl,
-	  cpuicon,
-	  cpu.widget,
+	  tempicon,
+	  temp.widget,
 	  arrl_ld,
 	  wibox.container.background(fsicon, theme.bg_focus),
 	  wibox.container.background(theme.fs.widget, theme.bg_focus),

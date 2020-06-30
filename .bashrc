@@ -65,29 +65,27 @@ match_lhs=""
 
   if ${use_color} ; then
 	# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-	if type -P dircolors >/dev/null ; then
-	  if [[ -f ~/.dir_colors ]] ; then
-		eval $(dircolors -b ~/.dir_colors)
-	  elif [[ -f /etc/DIR_COLORS ]] ; then
-		eval $(dircolors -b /etc/DIR_COLORS)
-	  fi
+	if type -P dircolors >/dev/null ; then if [[ -f ~/.dir_colors ]] ; then eval $(dircolors -b ~/.dir_colors)
+	elif [[ -f /etc/DIR_COLORS ]] ; then
+	  eval $(dircolors -b /etc/DIR_COLORS)
+	fi
 	fi
 
 	if [[ ${EUID} == 0 ]] ; then
 	  PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
 	else
 	  # PS1="\[\033[s\033[0;0H\033[0;41m\033[K\033[1;33m\t\033[0m\033[u\]<\u@\h \W>\$ "
-	  # PS1=' \A \W\[\033[01;32m\] \$:\[\033[00m\] '
+	  # PS1=" \A \W\[\033[01;32m\] \$:\[\033[00m\] "
 	  PS1=" \A \[\033[0;34m\]\W\[\033[01;32m\] \$\[\033[0m\]: "
 
 	fi
 
-	## Aliases ##
+	# Aliases
 	if [ -f ~/.bash_aliases ]; then
 	  . ~/.bash_aliases
 	fi
 
-	# # ALIASES
+	# ALIASES
 	# # vim
 	# alias v="nvim"
 	# alias vim="nvim"
@@ -122,20 +120,22 @@ match_lhs=""
 	# alias SS="sudo systemctl"
 
 	# # doom-emacs
-	# alias doom-refresh='~/.emacs.d/bin/doom sync'
+	# alias doom='~/.emacs.d/bin/doom sync'
 
 	# # system stuff
 	# alias cp="cp -i"                          # confirm before overwriting something
 	# alias df='df -h'                          # human-readable sizes
 	# alias free='free -m'                      # show sizes in MB
+	# alias ka='killall'
+	# alias g='git'
 	# alias more=less
 	# alias cfa='nvim $HOME/.config/awesome/rc.lua'
 	# alias cfv='nvim $HOME/.vimrc'
 	# alias cfb='nvim $HOME/.bashrc'
-	# alias se='nvim $(fzf)'
+	# alias cff='nvim $HOME/.config/fish/conf.d/omf.fish'
+	# alias se='fzf | xargs -r -I % $EDITOR %'
 	# alias pf='systemctl poweroff'
 	# alias rb='systemctl reboot'
-
 	# # utils
 	# alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
 	# alias ytv='youtube-dl -o "~/vids/%(title)s.%(ext)s"' #Download video link
@@ -144,7 +144,7 @@ match_lhs=""
 	# alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 	# alias redditWall='node $HOME/scripts/nodeRedditDownloader/wallpaperDownloader -d -t day -p new -l 100 -mw 1920 -mh 1080 -s'
 
-	# # books
+	# books
 	# alias rpf='zathura ~/dox/books/fizyka_formula_zno.pdf'
 	# alias rlt='zathura ~/dox/books/Komandnaia_stroka_Linux.pdf'
 
@@ -212,18 +212,16 @@ shopt -s autocd
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
-# default apps
+# Env vars
 export EDITOR='nvim'
 export VISUAL='nvim'
-
-# OTHER
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_OPTS='--layout=reverse --height 40%'
 
 # OWN SCRIPTS
-# export PATH=$PATH$( find $HOME/scripts/ -type d -printf ":%p" )
+# add all subdirs to PATH
+# export PATH="$PATH:$(du "$HOME/scripts/" | cut -f2 | tr '/n' ':' | sed 's/:*$//')"
 export PATH=$PATH:$HOME/scripts
 export PATH=$PATH:$HOME/scripts/watchvids
-export PATH=$PATH:$HOME/scripts/Wall-d
 export PATH=$PATH:$HOME/scripts/nodeRedditDownloader
 export PATH=$PATH:$HOME/scripts/audiosplit
 
@@ -235,5 +233,5 @@ if [ -f /etc/bash.command-not-found ]; then
 fi
 
 ### RANDOM COLOR SCRIPT ###
-# /opt/shell-color-scripts/colorscript.sh random
+/opt/shell-color-scripts/colorscript.sh random
 

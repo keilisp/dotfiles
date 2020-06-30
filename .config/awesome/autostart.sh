@@ -9,10 +9,12 @@ function run {
 
 xset r rate 300 50
 # feh --bg-scale $HOME/pix/kek/1920x1080-px-emacs-Free-Software-GNU-Linux-Richard-Stallman-saint-1360085.jpg
-feh --bg-scale $HOME/pix/wallpapers/Art/Other/Flower-4.jpg
+# feh --bg-scale $HOME/pix/wallpapers/Art/Other/Flower-4.jpg
+feh --bg-scale $HOME/pix/wallpapers/Art/Other/thinkpad.png
 # run "$HOME/scripts/wallplaylist"
 # run "discord"
 # run "telegram-desktop"
+# xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" -0.6
 run "nm-applet"
 run "devmon"
 run "blueberry-tray"

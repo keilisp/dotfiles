@@ -113,74 +113,76 @@ float alpha = 1;
 
 /* GRUVBOX */
 /* Terminal colors (16 first used in escape sequence) */
-/* static const char *colorname[] = { */
-/* "#282828", /\* hard contrast: #1d2021 / soft contrast: #32302f *\/ */
-/* "#cc241d", */
-/* "#98971a", */
-/* "#d79921", */
-/* "#458588", */
-/* "#b16286", */
-/* "#689d6a", */
-/* "#a89984", */
-/* "#928374", */
-/* "#fb4934", */
-/* "#b8bb26", */
-/* "#fabd2f", */
-/* "#83a598", */
-/* "#d3869b", */
-/* "#8ec07c", */
-/* "#ebdbb2", */
-/* [255] = 0, */
-/* more colors can be added after 255 to use with DefaultXX */
-/* "#add8e6", /\* 256 -> cursor *\/ */
-/* "#555555", /\* 257 -> rev cursor*\/ */
-/* "#282828", /\* 258 -> bg *\/ */
-/* "#ebdbb2", /\* 259 -> fg *\/ */
-/* }; */
+static const char *colorname[] = {
+  /* "#282828", /\* hard contrast: #1d2021 / soft contrast: #32302f *\/ */
+  /* "#282828", */
+  "#32302f",
+  "#cc241d",
+  "#98971a",
+  "#d79921",
+  "#458588",
+  "#b16286",
+  "#689d6a",
+  "#a89984",
+  "#928374",
+  "#fb4934",
+  "#b8bb26",
+  "#fabd2f",
+  "#83a598",
+  "#d3869b",
+  "#8ec07c",
+  "#ebdbb2",
+  [255] = 0,
+  /* more colors can be added after 255 to use with DefaultXX */
+  "#add8e6",
+  "#555555",
+  "#282828",
+  "#ebdbb2",
+};
 
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-/* unsigned int defaultfg = 259; */
-/* unsigned int defaultbg = 258; */
-/* static unsigned int defaultcs = 256; */
-/* static unsigned int defaultrcs = 257; */
+unsigned int defaultfg = 259;
+unsigned int defaultbg = 258;
+static unsigned int defaultcs = 256;
+static unsigned int defaultrcs = 257;
 
 /* NORD */
-const char *colorname[] = {
-  "#3b4252", /*  0: nord1 */
-  "#bf616a", /*  1: nord11 */
-  "#a3be8c", /*  2: nord14 */
-  "#ebcb8b", /*  3: nord13 */
-  "#81a1c1", /*  4: nord9 */
-  "#b48ead", /*  5: nord15 */
-  "#88c0d0", /*  6: nord8 */
-  "#e5e9f0", /*  7: nord5 */
-  "#4c566a", /*  8: nord3 */
-  "#bf616a", /*  9: nord11 */
-  "#a3be8c", /* 10: nord14 */
-  "#ebcb8b", /* 11: nord3 */
-  "#81a1c1", /* 12: nord9 */
-  "#b48ead", /* 13: nord15 */
-  "#8fbcbb", /* 14: nord7 */
-  "#eceff4", /* 15: nord6 */
-  [255] = 0,
-  // defaults
-  [256] = "#d8dee9", /* 256: nord4 */
-  [257] = "#2e3440", /* 257: nord0 */
-};
+/* const char *colorname[] = { */
+/*   "#3b4252", */
+/*   "#bf616a", */
+/*   "#a3be8c", */
+/*   "#ebcb8b", */
+/*   "#81a1c1", */
+/*   "#b48ead", */
+/*   "#88c0d0", */
+/*   "#e5e9f0", */
+/*   "#4c566a", */
+/*   "#bf616a", */
+/*   "#a3be8c", */
+/*   "#ebcb8b", */
+/*   "#81a1c1", */
+/*   "#b48ead", */
+/*   "#8fbcbb", */
+/*   "#eceff4", */
+/*   [255] = 0, */
+/*   // defaults */
+/*   [256] = "#d8dee9", */
+/*   [257] = "#2e3440", */
+/* }; */
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse
  * cursor
  */
-unsigned int defaultfg = 256; /* nord4 */
-unsigned int defaultbg = 257; /* nord0 */
-unsigned int defaultcs = 256; /* nord4 */
-unsigned int defaultrcs = 8;  /* nord3 */
+/* unsigned int defaultfg = 256; */
+/* unsigned int defaultbg = 257; */
+/* unsigned int defaultcs = 256; */
+/* unsigned int defaultrcs = 8; */
 
 /*
  * Default shape of cursor

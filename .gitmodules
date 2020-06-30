@@ -1,3 +1,6 @@
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh
+[submodule "gruvbox"]
+	path = .themes/Gruvbox-Dark-Yellow
+	url = https://github.com/4rtzel/Gruvbox-Dark-Yellow

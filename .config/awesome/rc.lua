@@ -100,7 +100,7 @@ local themes = {
 }
 
 -- choose your theme here
-local chosen_theme = themes[5]
+local chosen_theme = themes[4]
 
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
@@ -700,7 +700,7 @@ end,
 ),
 -- Standard program
 awful.key(
-{modkey},
+{modkey, altkey},
 "Return",
 function()
   awful.spawn(terminal .. " -e fish ")
@@ -708,12 +708,12 @@ end,
 {description = "term with fish", group = "super"}
 ),
 awful.key(
-{modkey, altkey},
+{modkey},
 "Return",
 function()
   awful.spawn(terminal)
 end,
-{description = "term with bash", group = "super"}
+{description = "term with zsh", group = "super"}
 ),
 awful.key({modkey, "Shift"}, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
 awful.key(
