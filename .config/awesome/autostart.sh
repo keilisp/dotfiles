@@ -8,7 +8,6 @@ function run {
 }
 
 run "$HOME/scripts/wallplaylist"
-sxiv ~/pix/compendium/physics
 run "telegram-desktop"
 run "nm-applet"
 run "barrier"

@@ -391,6 +391,7 @@ end
 local mpdmap = {
   { "s", function() awful.util.spawn("mpd") end,        "start MPD" },
   { "S", function() awful.util.spawn("mpd --kill") end, "kill MPD" },
+  { "u", function() awful.util.spawn("mpc update") end, "update MPD" },
   { "g", function() awful.util.spawn(terminal .. " -e ncmpc") end,       "ncmpc" },
   { "G", function() awful.util.spawn(terminal .. " -e ncmpcpp") end,       "ncmpcpp" },
   { "separator", "Playback" },
