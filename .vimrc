@@ -44,6 +44,7 @@ Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'raimondi/delimitmate'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'arcticicestudio/nord-vim'
+Plugin 'terryma/vim-multiple-cursors'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

@@ -10,7 +10,7 @@ function run {
 run "$HOME/scripts/wallplaylist"
 run "telegram-desktop"
 run "nm-applet"
-run "barrier"
+# run "barrier"
 run "devmon"
 run "blueberry-tray"
 

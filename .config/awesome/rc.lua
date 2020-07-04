@@ -421,12 +421,15 @@ local appsmap = {
   { "separator", "Editors" },
   { "v", function() awful.util.spawn(terminal .. " -e nvim ") end,        "nvim" },
   { "e", function() awful.util.spawn("emacs") end,        "emacs" },
-  { "separator", "Chats" },
-  { "d", function() awful.util.spawn("discord") end,        "discord" },
-  { "t", function() awful.util.spawn("telegram-desktop") end,        "telegram" },
+  { "separator", "Media" },
+  { "D", function() awful.util.spawn("discord") end,        "discord-gui" },
+  { "d", function() awful.util.spawn(terminal .. " -e cordless") end,        "discord-tui" },
+  { "T", function() awful.util.spawn("telegram-desktop") end,        "telegram-gui" },
+  { "t", function() awful.util.spawn(terminal .. " -e tg") end,        "telegram-tui" },
+  { "n", function() awful.util.spawn(terminal .. " -e newsboat") end,        "newsboat" },
   { "separator", "File Managers" },
   { "f", function() awful.util.spawn("thunar") end,        "thunar" },
-  { "r", function() awful.util.spawn(terminal .. " -e ranger ") end,        "ranger" },
+  { "r", function() awful.util.spawn(terminal .. " -e ranger") end,        "ranger" },
   { "separator", "Other" },
   { "j", function() awful.util.spawn(terminal .. " -e joplin") end,        "joplin" },
   { "b", function() awful.util.spawn(browser) end,        browser},
@@ -1151,7 +1154,15 @@ end,
 	  properties = {screen = 2, tag = my_tags.tags[2].names[3]}
 	},
 	{
+	  rule = {name = "tg"},
+	  properties = {screen = 2, tag = my_tags.tags[2].names[3]}
+	},
+	{
 	  rule = {class = "discord"},
+	  properties = {screen = 2, tag = my_tags.tags[2].names[4]}
+	},
+	{
+	  rule = {name = "cordless"},
 	  properties = {screen = 2, tag = my_tags.tags[2].names[4]}
 	},
 	{
