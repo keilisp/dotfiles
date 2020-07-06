@@ -74,8 +74,8 @@ theme.widget_vol_no = theme.dir .. "/icons/vol_no.png"
 theme.widget_vol_mute = theme.dir .. "/icons/vol_mute.png"
 theme.widget_mail = theme.dir .. "/icons/mail.png"
 theme.widget_mail_on = theme.dir .. "/icons/mail_on.png"
-theme.tasklist_plain_task_name = true
-theme.tasklist_disable_icon = true
+theme.tasklist_plain_task_name = false
+theme.tasklist_disable_icon = false
 theme.useless_gap = dpi(5)
 theme.titlebar_close_button_focus = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal = theme.dir .. "/icons/titlebar/close_normal.png"
@@ -398,6 +398,7 @@ function theme.at_screen_connect(s)
   )
   )
   )
+
   -- Create a taglist widget
   s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
