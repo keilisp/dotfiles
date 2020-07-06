@@ -26,16 +26,15 @@ theme.font = "Hack 8.5"
 theme.taglist_font = "FontAwesome 10"
 theme.fg_normal = "#fbf1c7"
 -- theme.fg_focus                                  = "#EA6F81"
-theme.fg_focus = "#98971a"
-theme.fg_urgent = "#CC9393"
+theme.fg_focus = "#fabd2f"
+theme.fg_urgent = "#fb4934"
 theme.bg_normal = "#1A1A1A"
 theme.bg_focus = "#313131"
--- theme.bg_focus                                  = "#32CD32"
 theme.bg_urgent = "#1A1A1A"
 theme.border_width = dpi(2)
 theme.border_normal = "#3F3F3F"
-theme.border_focus = "#98971a"
-theme.border_marked = "#CC9393"
+theme.border_focus = "#d79921"
+theme.border_marked = "#fb4934"
 theme.tasklist_bg_focus = "#1A1A1A"
 theme.titlebar_bg_focus = theme.bg_focus
 theme.titlebar_bg_normal = theme.bg_normal
@@ -199,7 +198,7 @@ lain.widget.mpd(
 	  mpdicon:set_image(theme.widget_music)
 	end
 
-	widget:set_markup(markup.font(theme.font, markup("#98971a", artist) .. markup("#458588", title)))
+	widget:set_markup(markup.font(theme.font, markup("#fabd2f", artist) .. markup("#458588", title)))
   end
 }
 )
@@ -327,7 +326,7 @@ lain.widget.net(
 	widget:set_markup(
 	markup.font(
 	theme.font,
-	markup("#98971a", " " .. string.format("%06.1f", net_now.received)) ..
+	markup("#fabd2f", " " .. string.format("%06.1f", net_now.received)) ..
 	" " .. markup("#458588", " " .. string.format("%06.1f", net_now.sent) .. " ")
 	)
 	)
