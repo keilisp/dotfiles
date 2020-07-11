@@ -224,6 +224,17 @@ lain.widget.cpu(
   end
 }
 )
+cpuicon:buttons(
+awful.util.table.join(
+awful.button(
+{},
+1,
+function()
+  awful.util.spawn("st -e htop")
+end
+)
+)
+)
 
 -- Coretemp
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
@@ -251,6 +262,20 @@ lain.widget.fs(
   end
 }
 )
+fsicon:buttons(
+awful.util.table.join(
+awful.button(
+{},
+1,
+function()
+  awful.util.spawn("st -e ncdu")
+  theme.volume.update()
+end
+)
+)
+)
+
+
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_battery)
 local bat =
@@ -311,6 +336,14 @@ awful.button(
 5,
 function()
   awful.util.spawn("amixer set Master 1%-")
+  theme.volume.update()
+end
+),
+awful.button(
+{},
+1,
+function()
+  awful.util.spawn("pavucontrol")
   theme.volume.update()
 end
 )

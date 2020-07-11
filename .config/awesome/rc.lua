@@ -160,15 +160,15 @@ my_tags = {
   tags = {
 	{
 	  names = {
-		"  ",
-		"  ",
-		"  ",
-		"  ",
-		"  ",
-		"  ",
-		"  ",
-		"  ",
-		"  "
+		"    ",
+		"    ",
+		"    ",
+		"    ",
+		"    ",
+		"    ",
+		"   ",
+		"    ",
+		"    "
 	  },
 	  layout = {
 		awful.layout.layouts[1],
@@ -386,7 +386,7 @@ local mpdmap = {
 local systemmap = {
   { "p", function() awful.util.spawn("systemctl poweroff") end,        "poweroff" },
   { "r", function() awful.util.spawn("systemctl reboot") end,        "reboot" },
-  { "s", function() awful.util.spawn("betterlockscreen -sl") end,        "suspend" },
+  { "s", function() awful.util.spawn("systemctl suspend") end,        "suspend" },
   { "separator", "Lock screen" },
   { "l", function() awful.util.spawn("betterlockscreen -s") end,        "lock" },
 }
@@ -397,6 +397,7 @@ local utilsmap = {
   { "c", function() awful.util.spawn(terminal .. " -e yay -Sc") end,        "clear packages cache" },
   { "separator", "Other" },
   { "p", function() awful.util.spawn("flameshot gui") end,        "screenshot" },
+  { "r", function() awful.util.spawn("docread") end,        "read book" },
 }
 
 local appsmap = {
@@ -404,8 +405,10 @@ local appsmap = {
   { "v", function() awful.util.spawn(terminal .. " -e nvim ") end,        "nvim" },
   { "e", function() awful.util.spawn("emacs") end,        "emacs" },
   { "separator", "Chats" },
-  { "d", function() awful.util.spawn("discord") end,        "discord" },
-  { "t", function() awful.util.spawn("telegram-desktop") end,        "telegram" },
+  { "D", function() awful.util.spawn("discord") end,        "discord-gui" },
+  { "d", function() awful.util.spawn(terminal .. " -e cordless") end,        "discord-tui" },
+  { "T", function() awful.util.spawn("telegram-desktop") end,        "telegram-gui" },
+  { "t", function() awful.util.spawn(terminal .. " -e tg") end,        "telegram-tui" },
   { "separator", "File Managers" },
   { "f", function() awful.util.spawn("thunar") end,        "thunar" },
   { "r", function() awful.util.spawn(terminal .. " -e ranger") end,        "ranger" },
@@ -445,9 +448,9 @@ awful.key(
 function()
   awful.spawn(
   string.format(
-  -- "dmenu_run -nb '#282828' -sf '#b8bb26' -sb '#504945' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'",
+  "dmenu_run -nb '#282828' -sf '#fabd2f' -sb '#504945' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'",
   -- "dmenu_run -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'",
-  "dmenu-recent-aliases",
+  -- "dmenu-recent-aliases",
   beautiful.bg_normal,
   beautiful.fg_normal,
   beautiful.bg_focus,
@@ -1129,7 +1132,15 @@ awful.rules.rules = {
 	properties = {screen = 1, tag = my_tags.tags[1].names[3]}
   },
   {
+	rule = {name = "tg"},
+	properties = {screen = 1, tag = my_tags.tags[1].names[3]}
+  },
+  {
 	rule = {class = "discord"},
+	properties = {screen = 1, tag = my_tags.tags[1].names[4]}
+  },
+  {
+	rule = {name = "cordless"},
 	properties = {screen = 1, tag = my_tags.tags[1].names[4]}
   },
   {

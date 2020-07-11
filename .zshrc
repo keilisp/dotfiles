@@ -135,15 +135,15 @@ bindkey "^?" backward-delete-char
 
 #Change cursor shape for vi modes
 function zle-keymap-select {
-if [[ ${KEYMAP} == vicmd ]] ||
-  [[ $1 = 'block' ]]; then
-  echo -ne '\e[1 q'
-elif [[ ${KEYMAP} == main ]] ||
-  [[ ${KEYMAP} == viins ]] ||
-  [[ ${KEYMAP} == '' ]] ||
-  [[ $1 == 'beam' ]]; then
-  echo -ne '\e[5 q'
-fi
+  if [[ ${KEYMAP} == vicmd ]] ||
+	[[ $1 = 'block' ]]; then
+	  echo -ne '\e[1 q'
+	elif [[ ${KEYMAP} == main ]] ||
+	  [[ ${KEYMAP} == viins ]] ||
+	  [[ ${KEYMAP} == '' ]] ||
+	  [[ $1 == 'beam' ]]; then
+		  echo -ne '\e[5 q'
+  fi
 }
 
 zle -N zle-keymap-select
@@ -172,6 +172,8 @@ preexec() { echo -ne '\e[5 q' ;} #Use beam shape cursor for aech new prompt
 # fi
 
 # ALIASES
+#pacman/yay
+alias autoremove='sudo pacman -Rcns $(pacman -Qdtq)'
 # ls/exa
 alias ls='exa -al --color=always --group-directories-first' # my preferred listing
 alias la='exa -a --color=always --group-directories-first'  # all files and dirs
@@ -201,7 +203,6 @@ abbrev-alias -ge del='yay -R'
 abbrev-alias -ge upd="yay -Syu"
 abbrev-alias -ge i="yay -S"
 abbrev-alias -ge srch="yay -Q | grep"
-abbrev-alias -ge autoremove='sudo pacman -Rcns $(pacman -Qdtq)'
 # grub
 abbrev-alias -ge update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 abbrev-alias -ge grub-customizer="gksu grub-customizer"
