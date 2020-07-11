@@ -1,8 +1,9 @@
 #ALIASES
 #vim
 alias v="nvim"
+alias vv="nvim -u 'NONE'"
 alias vim="nvim"
-alias sv="sudo vim"
+alias sv="sudoedit"
 
 # pacman/yay
 alias del='yay -R'
@@ -54,6 +55,7 @@ alias rb='systemctl reboot'
 alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
 alias ytv='youtube-dl -o "~/vids/%(title)s.%(ext)s"' #Download video link
 alias yta='youtube-dl -o "~/musx/%(title)s.%(ext)s" -x --audio-format mp3' #Download only audio
+alias passmenu="passmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'"
 # the terminal rickroll
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 alias redditWall='node $HOME/scripts/nodeRedditDownloader/wallpaperDownloader -d -t day -p new -l 100 -mw 1920 -mh 1080 -s'

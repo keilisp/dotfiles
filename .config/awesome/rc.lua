@@ -129,9 +129,9 @@ awful.layout.layouts = {
   awful.layout.suit.floating,
   lain.layout.centerwork.horizontal,
   awful.layout.suit.tile.bottom,
-  awful.layout.suit.max.fullscreen
+  awful.layout.suit.magnifier,
+  -- awful.layout.suit.max.fullscreen,
   -- awful.layout.suit.spiral.dwindle,
-  -- awful.layout.suit.magnifier,
   -- awful.layout.suit.tile.left,
   -- awful.layout.suit.tile.top,
   --awful.layout.suit.fair,
@@ -160,14 +160,14 @@ my_tags = {
   tags = {
 	{
 	  names = {
-		"  ",
-		"  ",
-		"  ",
-		"  ",
-		"  ",
-		"  ",
-		"  ",
-		"  "
+		"    ",
+		"    ",
+		"    ",
+		"    ",
+		"    ",
+		"   ",
+		"    ",
+		"    "
 	  },
 	  layout = {
 		awful.layout.layouts[1],
@@ -182,12 +182,12 @@ my_tags = {
 	},
 	{
 	  names = {
-		"  ",
-		"  ",
-		"  ",
-		"  ",
-		"  ",
-		"  "
+		"    ",
+		"   ",
+		"    ",
+		"    ",
+		"    ",
+		"    "
 	  },
 	  layout = {
 		awful.layout.layouts[1],
@@ -407,6 +407,8 @@ local utilsmap = {
   { "separator", "Other" },
   { "p", function() awful.util.spawn("flameshot gui") end,        "screenshot" },
   { "m", function() awful.util.spawn(terminal .. " -e unimatrix") end,        "matrix" },
+  { "r", function() awful.util.spawn("docread") end,        "open book" },
+  { "s", function() awful.util.spawn("passmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'") end,        "passmenu" },
 }
 
 local systemmap = {
@@ -759,9 +761,9 @@ end,
   {modkey, altkey},
   "Return",
   function()
-	awful.spawn(terminal .. " -e fish ")
+	awful.spawn(terminal .. " -e bash ")
   end,
-  {description = "term with fish", group = "super"}
+  {description = "term with bash", group = "super"}
   ),
   awful.key(
   {modkey},
@@ -1169,22 +1171,22 @@ end,
 	  rule = {class = "Steam"},
 	  properties = {screen = 1, tag = my_tags.tags[1].names[7]}
 	},
-	{
-	  rule = {class = "Sxiv"},
-	  properties = {screen = 1, tag = my_tags.tags[1].names[5]}
-	},
+	-- {
+	--   rule = {class = "Sxiv"},
+	--   properties = {screen = 1, tag = my_tags.tags[1].names[5]}
+	-- },
 	{
 	  rule = {class = "Barrier"},
 	  properties = {screen = 2, tag = my_tags.tags[2].names[6]}
 	},
-	{
-	  rule = {class = "Zathura"},
-	  properties = {screen = 1, tag = my_tags.tags[1].names[4]}
-	},
-	{
-	  rule = {class = mediaplayer},
-	  properties = {screen = 1, tag = my_tags.tags[1].names[6]}
-	},
+	-- {
+	--   rule = {class = "Zathura"},
+	--   properties = {screen = 1, tag = my_tags.tags[1].names[4]}
+	-- },
+	-- {
+	--   rule = {class = mediaplayer},
+	--   properties = {screen = 1, tag = my_tags.tags[1].names[6]}
+	-- },
 	-- Set applications to be maximized at startup.
 	-- find class or role via xprop command
 	{

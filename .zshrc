@@ -184,9 +184,13 @@ alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
 #utils
 alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
+alias passmenu="passmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'"
+alias ytv='youtube-dl -o "~/vids/%(title)s.%(ext)s"' #Download video link
+alias yta='youtube-dl -o "~/musx/%(title)s.%(ext)s" -x --audio-format mp3' #Download only audio
 #system stuff
 alias se='fzf | xargs -r -I % $EDITOR %'
-
+# yay/pacman
+alias autoremove='sudo pacman -Rcns $(pacman -Qdtq)'
 
 
 # INIT ABBR
@@ -195,14 +199,14 @@ abbrev-alias -i
 #ABBRS
 #vim
 abbrev-alias -ge v="nvim"
+abbrev-alias -ge vv="nvim -u 'NONE'"
 abbrev-alias -ge vim="nvim"
-abbrev-alias -ge sv="sudo vim"
+abbrev-alias -ge sv="sudoedit"
 # pacman/yay
 abbrev-alias -ge del='yay -R'
 abbrev-alias -ge upd="yay -Syu"
 abbrev-alias -ge i="yay -S"
 abbrev-alias -ge srch="yay -Q | grep"
-abbrev-alias -ge autoremove='sudo pacman -Rcns $(pacman -Qdtq)'
 # grub
 abbrev-alias -ge update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 abbrev-alias -ge grub-customizer="gksu grub-customizer"
@@ -227,8 +231,7 @@ abbrev-alias -ge cfz='nvim $HOME/.zshrc'
 abbrev-alias -ge pf='systemctl poweroff'
 abbrev-alias -ge rb='systemctl reboot'
 # utils
-abbrev-alias -ge ytv='youtube-dl -o "~/vids/%(title)s.%(ext)s"' #Download video link
-abbrev-alias -ge yta='youtube-dl -o "~/musx/%(title)s.%(ext)s" -x --audio-format mp3' #Download only audio
+
 # the terminal rickroll
 abbrev-alias -ge rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 abbrev-alias -ge redditWall='node $HOME/scripts/nodeRedditDownloader/wallpaperDownloader -d -t day -p new -l 100 -mw 1920 -mh 1080 -s'

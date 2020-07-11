@@ -9,10 +9,12 @@ function run {
 
 run "$HOME/scripts/wallplaylist"
 run "telegram-desktop"
+run "discord"
 run "nm-applet"
 # run "barrier"
 run "devmon"
 run "blueberry-tray"
+run "unclutter &"
 
 # run "volumeicon"
 # run "zathura ~/dox/books/Komandnaia_stroka_Linux.pdf"

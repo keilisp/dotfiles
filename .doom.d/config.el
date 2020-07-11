@@ -61,9 +61,9 @@
 ;; SPC k to save buffer
 (define-key evil-motion-state-map (kbd "SPC k") 'save-buffer)
 ;; SPC \ to call ibuffer
-(define-key evil-motion-state-map (kbd "SPC \\") 'ibuffer)
+(define-key evil-motion-state-map (kbd "SPC \/") 'ibuffer)
 ;; SPC [ to call path-completion
-(define-key evil-motion-state-map (kbd "SPC [") 'company-files)
+;; (define-key evil-motion-state-map (kbd "SPC [") 'company-files)
 
 ;; Relative line numbers
 (setq doom-line-numbers-style 'relative)
@@ -93,13 +93,14 @@
 
 ;; Format on save
 (add-hook 'before-save-hook
-          (lambda()
-            (call-interactively #'format-all-buffer)))
+(lambda()
+(call-interactively #'format-all-buffer)))
+
 
 ;; Make tab work properly
-;; (setq tab-always-indent 'complete)
-(setq tab-always-indent 'complete
-      indent-tabs-mode nil)
+;; (setq tab-always-indent 'complete
+;;       indent-tabs-mode nil)
+
 
 ;; Emmet setup
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
@@ -107,8 +108,10 @@
 
 ;; Org setup
 (setq org-directory "~/org")
-
 (after! org
+  (map! :map org-mode-map
+        :n "M-j" #'org-metadown
+        :n "M-k" #'org-metaup)
   (setq org-todo-keywords '((sequence "TODO(t)" "INPROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
 			  org-todo-keyword-faces
 			  '(("TODO" :foreground "#7c7c75" :weight normal :underline t)
@@ -174,16 +177,120 @@
   :commands (speed-type-text))
 
 ;; Flycheck
-(use-package flycheck
-  :defer t
-  :hook (prog-mode . flycheck-mode)
-  :custom
-  (flycheck-emacs-lisp-load-path 'inherit)
-  :config
-  (flycheck-add-mode 'javascript-standard 'js2-mode))
+;; (use-package flycheck
+;;   :defer t
+;;   :hook (prog-mode . flycheck-mode)
+;;   :custom
+;;   (flycheck-emacs-lisp-load-path 'inherit)
+;;   :config
+;;   (flycheck-add-mode 'javascript-standard 'js2-mode))
 
 ;; Higlight colors everywhere
-(define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
-  (lambda () (rainbow-mode 1)))
+;; (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
+;; (lambda () (rainbow-mode 1)))
 
-(my-global-rainbow-mode 1)
+;; (my-global-rainbow-mode 1)
+
+;; set specific browser to open links
+(setq browse-url-browser-function 'browse-url-firefox)
+
+;; super agenda
+;; (use-package org-super-agenda
+;;   :after org-agenda
+;;   :init
+;;   (setq org-super-agenda-groups '((:name "Today"
+;;                                    :time-grid t
+;;                                    :scheduled today)
+;;                                   (:name "Due today"
+;;                                    :deadline today)
+;;                                   (:name "Important"
+;;                                    :priority "A")
+;;                                   (:name "Overdue"
+;;                                    :deadline past)
+;;                                   (:name "Due soon"
+;;                                    :deadline future)
+;;                                   (:name "Big Outcomes"
+;;                                    :tag "bo")))
+;;   :config
+;;   (org-super-agenda-mode))
+
+;; multiedit
+(require 'evil-multiedit)
+;; Highlights all matches of the selection in the buffer.
+(define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
+
+;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
+;; incrementally add the next unmatched match.
+(define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+;; Match selected region.
+(define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+;; Insert marker at point
+(define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
+
+;; Same as M-d but in reverse.
+(define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
+(define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
+;; OPTIONAL: If you prefer to grab symbols rather than words, use ;; `evil-multiedit-match-symbol-and-next` (or prev).
+
+;; Restore the last group of multiedit regions.
+(define-key evil-visual-state-map (kbd "C-M-D") 'evil-multiedit-restore)
+
+;; RET will toggle the region under the cursor
+(define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+;; ...and in visual mode, RET will disable all fields outside the selected region
+(define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+;; For moving between edit regions
+(define-key evil-multiedit-state-map (kbd "C-n") 'evil-multiedit-next)
+(define-key evil-multiedit-state-map (kbd "C-p") 'evil-multiedit-prev)
+(define-key evil-multiedit-insert-state-map (kbd "C-n") 'evil-multiedit-next)
+(define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
+
+;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
+(evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match)
+
+
+;; LaTeX
+;; (setq TeX-save-query nil
+;;       TeX-show-compilation t
+;;       TeX-command-extra-options "-shell-escape")
+;; (after! latex
+;;   (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t)))
+
+;; (setq +latex-viewers '(zathura pdf-tools evince okular skim sumatrapdf))
+
+;; (use-package! evil-tex
+;;   :hook (LaTeX-mode . evil-tex-mode))
+
+;; Force splits to open on the right
+(defun prefer-horizontal-split ()
+  (set-variable 'split-height-threshold nil t)
+  (set-variable 'split-width-threshold 40 t)) ; make this as low as needed
+(add-hook 'markdown-mode-hook 'prefer-horizontal-split)
+
+;; Image previews in dired
+(global-set-key (kbd "C-x i") 'peep-dired)
+(evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file
+                                             (kbd "k") 'peep-dired-prev-file)
+(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
+
+
+(setq-default indent-tabs-mode t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+	 (quote
+		(smart-tab typescript-mode tern-auto-complete speed-type rust-mode reverse-im peep-dired path-iterator org-super-agenda org-plus-contrib org-fancy-priorities lsp-mode key-chord js2-mode flycheck-rust exec-path-from-shell evil-multiedit doom-modeline)))
+ '(reverse-im-input-methods (quote ("russian-computer"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(setq-default smart-tab-mode t)

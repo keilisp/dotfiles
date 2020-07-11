@@ -17,7 +17,7 @@ local theme = {}
 theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-nord"
 theme.wallpaper = theme.dir .. "/wall.png"
 theme.font = "Hack 8.5"
-theme.taglist_font = "FontAwesome 10"
+theme.taglist_font = "FontAwesome 9"
 theme.fg_normal = "#eceff4"
 theme.fg_focus = "#8FBCBB"
 theme.fg_urgent = "#d08770"
@@ -68,8 +68,8 @@ theme.widget_vol_no = theme.dir .. "/icons/vol_no.png"
 theme.widget_vol_mute = theme.dir .. "/icons/vol_mute.png"
 theme.widget_mail = theme.dir .. "/icons/mail.png"
 theme.widget_mail_on = theme.dir .. "/icons/mail_on.png"
-theme.tasklist_plain_task_name = true
-theme.tasklist_disable_icon = true
+theme.tasklist_plain_task_name = false
+theme.tasklist_disable_icon = false
 theme.useless_gap = dpi(5)
 theme.titlebar_close_button_focus = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal = theme.dir .. "/icons/titlebar/close_normal.png"
@@ -218,6 +218,18 @@ lain.widget.cpu(
   end
 }
 )
+cpuicon:buttons(
+awful.util.table.join(
+awful.button(
+{},
+1,
+function()
+  awful.util.spawn("st -e htop")
+  theme.volume.update()
+end
+)
+)
+)
 
 -- Coretemp
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
@@ -245,6 +257,19 @@ lain.widget.fs(
   end
 }
 )
+fsicon:buttons(
+awful.util.table.join(
+awful.button(
+{},
+1,
+function()
+  awful.util.spawn("st -e ncdu")
+  theme.volume.update()
+end
+)
+)
+)
+
 --[[ commented because it needs Gio/Glib >= 2.54
 --]]
 -- Battery
@@ -307,6 +332,14 @@ awful.button(
 5,
 function()
   awful.util.spawn("amixer set Master 1%-")
+  theme.volume.update()
+end
+),
+awful.button(
+{},
+1,
+function()
+  awful.util.spawn("pavucontrol")
   theme.volume.update()
 end
 )
@@ -402,7 +435,7 @@ function theme.at_screen_connect(s)
 
   -- Create the wibox
   s.mywibox =
-  awful.wibar({position = "top", opacity = 0.85 , screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal})
+  awful.wibar({position = "top", opacity = 0.85 , screen = s, height = dpi(15), bg = theme.bg_normal, fg = theme.fg_normal})
 
   -- Add widgets to the wibox
   s.mywibox:setup {

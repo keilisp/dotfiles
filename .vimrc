@@ -45,6 +45,7 @@ Plugin 'raimondi/delimitmate'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-repeat'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -256,10 +257,9 @@ inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
 
 " LaTeX preview setup
 let g:livepreview_previewer = 'zathura'
-
+map <Leader>p :LLPStartPreview
 " To prevent conceal in LaTeX files
 let g:tex_conceal = ''
-
 " To prevent conceal in any file
 " set conceallevel = 0
 

@@ -27,8 +27,9 @@ fish_vi_key_bindings
 ## ALIASES ##
 #vim
 alias v="nvim"
+alias vv="nvim -u 'NONE'"
 alias vim="nvim"
-alias sv="sudo vim"
+alias sv="sudoedit"
 
 # pacman/yay
 alias del='yay -R'
@@ -62,7 +63,8 @@ alias free='free -m'                      # show sizes in MB
 alias ka='killall'
 alias g='git'
 alias more=less
-alias neofetch 'neofetch --ascii $HOME/pix/ascii/arch-test.txt'
+alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
+alias passmenu="passmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'"
 
 
 ## ABBREVIATIONS ##
