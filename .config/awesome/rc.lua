@@ -166,8 +166,8 @@ my_tags = {
 		"    ",
 		"    ",
 		"    ",
+		"    ",
 		"   ",
-		"    ",
 		"    "
 	  },
 	  layout = {
@@ -388,7 +388,7 @@ local systemmap = {
   { "r", function() awful.util.spawn("systemctl reboot") end,        "reboot" },
   { "s", function() awful.util.spawn("systemctl suspend") end,        "suspend" },
   { "separator", "Lock screen" },
-  { "l", function() awful.util.spawn("betterlockscreen -s") end,        "lock" },
+  { "l", function() awful.util.spawn("betterlockscreen -l") end,        "lock" },
 }
 
 local utilsmap = {
@@ -398,6 +398,7 @@ local utilsmap = {
   { "separator", "Other" },
   { "p", function() awful.util.spawn("flameshot gui") end,        "screenshot" },
   { "r", function() awful.util.spawn("docread") end,        "read book" },
+  { "m", function() awful.util.spawn("mansplain") end,        "read man" },
 }
 
 local appsmap = {
@@ -416,6 +417,7 @@ local appsmap = {
   { "j", function() awful.util.spawn(terminal .. " -e joplin") end,        "joplin" },
   { "b", function() awful.util.spawn(browser) end,        browser},
   { "s", function() awful.util.spawn("steam") end,        "steam" },
+  { "n", function() awful.util.spawn(terminal .. " -e newsboat") end,        "newsboat" },
 }
 
 -- Modalbind
