@@ -1,8 +1,6 @@
 --[[
-
 Powerarrow Dark Awesome WM theme
 github.com/lcpz
-
 --]]
 local gears = require("gears")
 local lain = require("lain")
@@ -18,24 +16,21 @@ theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-dark"
 theme.wallpaper = theme.dir .. "/wall.png"
 -- theme.font                                      = "Oxygen-Sans 9"
 -- theme.taglist_font                              = "Oxygen-Sans 9"
--- theme.font = "Mononoki Nerd Font 9.5"
+theme.font = "Mononoki Nerd Font 9.5"
 -- theme.taglist_font = "Mononoki Nerd Font 9.5"
--- theme.font = "JetBrains Mono 8.5"
--- theme.taglist_font = "JetBrains Mono 8.5"
-theme.font = "Hack 8.5"
-theme.taglist_font = "Hack 8.5"
+-- theme.font = "Monaco 8.5"
+theme.taglist_font = "FontAwesome 10"
 theme.fg_normal = "#fbf1c7"
 -- theme.fg_focus                                  = "#EA6F81"
-theme.fg_focus = "#98971a"
-theme.fg_urgent = "#CC9393"
+theme.fg_focus = "#fabd2f"
+theme.fg_urgent = "#fb4934"
 theme.bg_normal = "#1A1A1A"
 theme.bg_focus = "#313131"
--- theme.bg_focus                                  = "#32CD32"
 theme.bg_urgent = "#1A1A1A"
 theme.border_width = dpi(2)
 theme.border_normal = "#3F3F3F"
-theme.border_focus = "#98971a"
-theme.border_marked = "#CC9393"
+theme.border_focus = "#d79921"
+theme.border_marked = "#fb4934"
 theme.tasklist_bg_focus = "#1A1A1A"
 theme.titlebar_bg_focus = theme.bg_focus
 theme.titlebar_bg_normal = theme.bg_normal
@@ -68,14 +63,15 @@ theme.widget_net = theme.dir .. "/icons/net.png"
 theme.widget_hdd = theme.dir .. "/icons/hdd.png"
 theme.widget_music = theme.dir .. "/icons/note.png"
 theme.widget_music_on = theme.dir .. "/icons/note_on.png"
+theme.widget_keyboard = theme.dir .. "/icons/keyboardicon.png"
 theme.widget_vol = theme.dir .. "/icons/vol.png"
 theme.widget_vol_low = theme.dir .. "/icons/vol_low.png"
 theme.widget_vol_no = theme.dir .. "/icons/vol_no.png"
 theme.widget_vol_mute = theme.dir .. "/icons/vol_mute.png"
 theme.widget_mail = theme.dir .. "/icons/mail.png"
 theme.widget_mail_on = theme.dir .. "/icons/mail_on.png"
-theme.tasklist_plain_task_name = true
-theme.tasklist_disable_icon = true
+theme.tasklist_plain_task_name = false
+theme.tasklist_disable_icon = false
 theme.useless_gap = dpi(5)
 theme.titlebar_close_button_focus = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal = theme.dir .. "/icons/titlebar/close_normal.png"
@@ -198,7 +194,7 @@ lain.widget.mpd(
 	  mpdicon:set_image(theme.widget_music)
 	end
 
-	widget:set_markup(markup.font(theme.font, markup("#98971a", artist) .. markup("#458588", title)))
+	widget:set_markup(markup.font(theme.font, markup("#fabd2f", artist) .. markup("#458588", title)))
   end
 }
 )
@@ -224,6 +220,17 @@ lain.widget.cpu(
   end
 }
 )
+cpuicon:buttons(
+awful.util.table.join(
+awful.button(
+{},
+1,
+function()
+  awful.util.spawn("st -e htop")
+end
+)
+)
+)
 
 -- Coretemp
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
@@ -238,6 +245,7 @@ lain.widget.temp(
 
 -- Keyboard layout
 local keyboardlayout = awful.widget.keyboardlayout()
+local keyboardicon = wibox.widget.imagebox(theme.widget_keyboard)
 
 -- / fs
 local fsicon = wibox.widget.imagebox(theme.widget_hdd)
@@ -250,8 +258,20 @@ lain.widget.fs(
   end
 }
 )
---[[ commented because it needs Gio/Glib >= 2.54
---]]
+fsicon:buttons(
+awful.util.table.join(
+awful.button(
+{},
+1,
+function()
+  awful.util.spawn("st -e ncdu")
+  theme.volume.update()
+end
+)
+)
+)
+
+
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_battery)
 local bat =
@@ -314,6 +334,14 @@ function()
   awful.util.spawn("amixer set Master 1%-")
   theme.volume.update()
 end
+),
+awful.button(
+{},
+1,
+function()
+  awful.util.spawn("pavucontrol")
+  theme.volume.update()
+end
 )
 )
 )
@@ -327,7 +355,7 @@ lain.widget.net(
 	widget:set_markup(
 	markup.font(
 	theme.font,
-	markup("#98971a", " " .. string.format("%06.1f", net_now.received)) ..
+	markup("#fabd2f", " " .. string.format("%06.1f", net_now.received)) ..
 	" " .. markup("#458588", " " .. string.format("%06.1f", net_now.sent) .. " ")
 	)
 	)
@@ -399,6 +427,7 @@ function theme.at_screen_connect(s)
   )
   )
   )
+
   -- Create a taglist widget
   s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
@@ -407,7 +436,7 @@ function theme.at_screen_connect(s)
 
   -- Create the wibox
   s.mywibox =
-  awful.wibar({position = "top", screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal})
+  awful.wibar({position = "top", opacity=0.90, screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal})
 
   -- Add widgets to the wibox
   s.mywibox:setup {
@@ -427,33 +456,23 @@ function theme.at_screen_connect(s)
 	  wibox.widget.systray(),
 	  spr,
 	  arrl_ld,
+	  wibox.container.background(keyboardicon, theme.bg_focus),
 	  wibox.container.background(keyboardlayout, theme.bg_focus),
 	  arrl_dl,
-	  -- wibox.container.background(mpdicon, theme.bg_focus),
-	  -- wibox.container.background(theme.mpd.widget, theme.bg_focus),
 	  mpdicon,
 	  theme.mpd.widget,
 	  arrl_ld,
 	  wibox.container.background(volicon, theme.bg_focus),
 	  wibox.container.background(theme.volume.widget, theme.bg_focus),
-	  -- arrl_ld,
-	  -- wibox.container.background(mailicon, theme.bg_focus),
-	  --wibox.container.background(theme.mail.widget, theme.bg_focus),
 	  arrl_dl,
 	  memicon,
 	  mem.widget,
 	  arrl_ld,
 	  wibox.container.background(cpuicon, theme.bg_focus),
 	  wibox.container.background(cpu.widget, theme.bg_focus),
-	  -- arrl_dl,
-	  -- tempicon,
-	  -- temp.widget,
 	  arrl_dl,
 	  wibox.container.background(fsicon),
 	  wibox.container.background(theme.fs.widget),
-	  -- arrl_dl,
-	  -- baticon,
-	  -- bat.widget,
 	  arrl_ld,
 	  wibox.container.background(neticon, theme.bg_focus),
 	  wibox.container.background(net.widget, theme.bg_focus),
@@ -465,5 +484,6 @@ function theme.at_screen_connect(s)
 	}
   }
 end
+
 
 return theme

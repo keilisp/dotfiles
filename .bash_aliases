@@ -28,19 +28,20 @@ alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
 
 # mongodb
-alias mongod='mongod --port 27017 --auth --dbpath $HOME/db/mongodb/'
+alias mongod='mongod --port 27017 --auth --dbpath $HOME/progs/db/mongodb'
 
 # systemctl
 alias SS="sudo systemctl"
 
 # doom-emacs
-alias doom='~/.emacs.d/bin/doom sync'
+alias doom='~/.emacs.d/bin/doom'
 
 # system stuff
-alias cp="cp -i"                          # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
+alias cp="cp -i"     # confirm before overwriting something
+alias df='df -h'     # human-readable sizes
+alias free='free -m' # show sizes in MB
 alias ka='killall'
+alias rm='logrm'
 alias g='git'
 alias more=less
 alias cfa='nvim $HOME/.config/awesome/rc.lua'
@@ -53,14 +54,9 @@ alias pf='systemctl poweroff'
 alias rb='systemctl reboot'
 # utils
 alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
-alias ytv='youtube-dl -o "~/vids/%(title)s.%(ext)s"' #Download video link
+alias ytv='youtube-dl -o "~/vids/%(title)s.%(ext)s"'                       #Download video link
 alias yta='youtube-dl -o "~/musx/%(title)s.%(ext)s" -x --audio-format mp3' #Download only audio
 alias passmenu="passmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'"
 # the terminal rickroll
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 alias redditWall='node $HOME/scripts/nodeRedditDownloader/wallpaperDownloader -d -t day -p new -l 100 -mw 1920 -mh 1080 -s'
-
-# books
-alias rpf='zathura ~/dox/books/fizyka_formula_zno.pdf'
-alias rlt='zathura ~/dox/books/Komandnaia_stroka_Linux.pdf'
-

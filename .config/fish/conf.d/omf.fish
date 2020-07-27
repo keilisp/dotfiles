@@ -69,10 +69,10 @@ alias passmenu="passmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984'
 
 ## ABBREVIATIONS ##
 # mongodb
-abbr mongod 'mongod --port 27017 --auth --dbpath $HOME/db/mongodb/'
+abbr mongod 'mongod --port 27017 --auth --dbpath $HOME/progs/db/mongodb'
 
 # doom-emacs
-abbr doom '~/.emacs.d/bin/doom sync'
+abbr doom '~/.emacs.d/bin/doom'
 
 # system stuff
 abbr cfa 'nvim $HOME/.config/awesome/rc.lua'
@@ -88,10 +88,5 @@ abbr cheat 'curl cht.sh/'
 abbr ytv 'youtube-dl -o "~/vids/%(title)s.%(ext)s"' #Download video link
 abbr yta 'youtube-dl -o "~/musx/%(title)s.%(ext)s" -x --audio-format mp3' #Download only audio
 abbr redditWall 'node $HOME/scripts/nodeRedditDownloader/wallpaperDownloader -d -t day -p new -l 100 -mw 1920 -mh 1080 -s'
-
-# books
-abbr rpf 'zathura ~/dox/books/fizyka_formula_zno.pdf'
-abbr rlt 'zathura ~/dox/books/Komandnaia_stroka_Linux.pdf'
-# abbr rb 'zathura ~/dox/'
 
 

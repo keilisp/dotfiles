@@ -26,10 +26,7 @@ export FZF_DEFAULT_OPTS='--layout=reverse --height 40%'
 # OWN SCRIPTS
 # add all subdirs to PATH
 # export PATH="$PATH:$(du "$HOME/scripts/" | cut -f2 | tr '/n' ':' | sed 's/:*$//')"
-export PATH=$PATH:$HOME/scripts
-export PATH=$PATH:$HOME/scripts/watchvids
-export PATH=$PATH:$HOME/scripts/nodeRedditDownloader
-export PATH=$PATH:$HOME/scripts/audiosplit
+export PATH=$PATH:$(du $HOME/scripts/ | grep -v 'node_modules\|.git\|.log' | cut -f2 | tr '\n' ':' | sed 's/:*$//')
 
 
 # Set name of the theme to load --- if set to "random", it will
@@ -175,6 +172,8 @@ preexec() { echo -ne '\e[5 q' ;} #Use beam shape cursor for aech new prompt
 # ALIASES
 # ls/exa
 alias ls='exa -al --color=always --group-directories-first' # my preferred listing
+alias rm='logrm'
+alias rm='logrm'
 alias la='exa -a --color=always --group-directories-first'  # all files and dirs
 alias ll='exa -l --color=always --group-directories-first'  # long format
 alias lt='exa -aT --color=always --group-directories-first' # tree listing
@@ -183,7 +182,8 @@ alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
 #utils
-alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
+alias neofetch='neofetch --w3m $HOME/pix/wallpapers/Art/Other/planets.jpg'
+# alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
 alias passmenu="passmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'"
 alias ytv='youtube-dl -o "~/vids/%(title)s.%(ext)s"' #Download video link
 alias yta='youtube-dl -o "~/musx/%(title)s.%(ext)s" -x --audio-format mp3' #Download only audio
@@ -211,11 +211,11 @@ abbrev-alias -ge srch="yay -Q | grep"
 abbrev-alias -ge update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 abbrev-alias -ge grub-customizer="gksu grub-customizer"
 # mongodb
-abbrev-alias -ge mongod='mongod --port 27017 --auth --dbpath $HOME/db/mongodb/'
+abbrev-alias -ge mongod='mongod --port 27017 --auth --dbpath $HOME/progs/db/mongodb'
 # systemctl
 abbrev-alias -ge SS="sudo systemctl"
 # doom-gemacs
-abbrev-alias -ge doom='~/.emacs.d/bin/doom sync'
+abbrev-alias -ge doom='~/.emacs.d/bin/doom'
 # system stuff
 abbrev-alias -ge cp="cp -i"                          # confirm before overwriting something
 abbrev-alias -ge df='df -h'                          # human-readable sizes
@@ -235,10 +235,6 @@ abbrev-alias -ge rb='systemctl reboot'
 # the terminal rickroll
 abbrev-alias -ge rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 abbrev-alias -ge redditWall='node $HOME/scripts/nodeRedditDownloader/wallpaperDownloader -d -t day -p new -l 100 -mw 1920 -mh 1080 -s'
-
-# books
-abbrev-alias -ge rpf='zathura ~/dox/books/fizyka_formula_zno.pdf'
-abbrev-alias -ge rlt='zathura ~/dox/books/Komandnaia_stroka_Linux.pdf'
 
 # Autocomplete autosuggestion
 bindkey '^ ' autosuggest-accept

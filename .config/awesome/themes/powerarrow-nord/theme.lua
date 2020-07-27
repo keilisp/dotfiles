@@ -2,9 +2,7 @@
 
 Powerarrow Dark Awesome WM theme
 github.com/lcpz
-
---]]
-local gears = require("gears")
+--]] local gears = require("gears")
 local lain = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
@@ -16,7 +14,8 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme = {}
 theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-nord"
 theme.wallpaper = theme.dir .. "/wall.png"
-theme.font = "Hack 8.5"
+-- theme.font = "Hack 8.5"
+theme.font = "Monaco 8.5"
 theme.taglist_font = "FontAwesome 9"
 theme.fg_normal = "#eceff4"
 theme.fg_focus = "#8FBCBB"
@@ -435,7 +434,9 @@ function theme.at_screen_connect(s)
 
   -- Create the wibox
   s.mywibox =
-  awful.wibar({position = "top", opacity = 0.85 , screen = s, height = dpi(15), bg = theme.bg_normal, fg = theme.fg_normal})
+  awful.wibar(
+  {position = "top", opacity = 0.85, screen = s, height = dpi(15), bg = theme.bg_normal, fg = theme.fg_normal}
+  )
 
   -- Add widgets to the wibox
   s.mywibox:setup {

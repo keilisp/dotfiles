@@ -9,7 +9,6 @@
 "         ░   ░         ░      ░     ░ ░
 
 set nocompatible
-
 " Vundle settings(idk really)
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -19,7 +18,6 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -116,10 +114,13 @@ filetype plugin on
 filetype indent on
 
 " Use the dark version of gruvbox
-" set background=dark
-" let g:gruvbox_contrast_dark='soft'
-" colorscheme gruvbox
-colorscheme nord
+if has ('termguicolors')
+  set termguicolors
+endif
+set background=dark
+let g:gruvbox_contrast_dark='soft'
+colorscheme gruvbox
+" colorscheme nord
 
 " Set font
 " set guifont=DejaVu\ Sans\ Mono\ 10
@@ -149,6 +150,9 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+
+" SPC k to save
+map <Space>k :write <cr>
 
 " Map Tab for autocomplition
 inoremap <silent><expr> <TAB>

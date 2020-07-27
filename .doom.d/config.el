@@ -20,13 +20,17 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "Mononoki Nerd Font" :size 14))
+;; (setq doom-font (font-spec :family "Monaco" :size 14))
 
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-gruvbox)
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-gruvbox)
+
+(unless (display-graphic-p)
+  (setq doom-theme 'doom-nord))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -93,8 +97,8 @@
 
 ;; Format on save
 (add-hook 'before-save-hook
-(lambda()
-(call-interactively #'format-all-buffer)))
+					(lambda()
+						(call-interactively #'format-all-buffer)))
 
 
 ;; Make tab work properly
@@ -107,7 +111,7 @@
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
 ;; Org setup
-(setq org-directory "~/org")
+(setq org-directory "~/progs/emacs/org")
 (after! org
   (map! :map org-mode-map
         :n "M-j" #'org-metadown
@@ -177,13 +181,13 @@
   :commands (speed-type-text))
 
 ;; Flycheck
-;; (use-package flycheck
-;;   :defer t
-;;   :hook (prog-mode . flycheck-mode)
-;;   :custom
-;;   (flycheck-emacs-lisp-load-path 'inherit)
-;;   :config
-;;   (flycheck-add-mode 'javascript-standard 'js2-mode))
+(use-package flycheck
+  :defer t
+  :hook (prog-mode . flycheck-mode)
+  :custom
+  (flycheck-emacs-lisp-load-path 'inherit)
+  :config
+  (flycheck-add-mode 'javascript-standard 'js2-mode))
 
 ;; Higlight colors everywhere
 ;; (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
@@ -272,7 +276,7 @@
 ;; Image previews in dired
 (global-set-key (kbd "C-x i") 'peep-dired)
 (evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file
-                                             (kbd "k") 'peep-dired-prev-file)
+	(kbd "k") 'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
 
 
@@ -283,9 +287,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-	 (quote
-		(smart-tab typescript-mode tern-auto-complete speed-type rust-mode reverse-im peep-dired path-iterator org-super-agenda org-plus-contrib org-fancy-priorities lsp-mode key-chord js2-mode flycheck-rust exec-path-from-shell evil-multiedit doom-modeline)))
- '(reverse-im-input-methods (quote ("russian-computer"))))
+	 '(rust-auto-use rustic flycheck-rust flymake-rust clippy smart-tab typescript-mode tern-auto-complete speed-type reverse-im peep-dired path-iterator org-super-agenda org-plus-contrib org-fancy-priorities lsp-mode key-chord js2-mode exec-path-from-shell evil-multiedit doom-modeline))
+ '(reverse-im-input-methods '("russian-computer")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -294,3 +297,6 @@
  )
 
 (setq-default smart-tab-mode t)
+
+;; Rustic flycheck
+(remove-hook 'rustic-mode-hook 'flycheck-mode)

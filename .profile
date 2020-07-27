@@ -5,3 +5,5 @@
 # devmon &
 # blueberry-tray &
 # volumeicon &
+
+export PATH="$HOME/.cargo/bin:$PATH"
