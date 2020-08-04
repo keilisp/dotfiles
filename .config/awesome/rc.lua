@@ -645,6 +645,13 @@ local appsmap = {
 	  awful.util.spawn("steam")
 	end,
 	"steam"
+  },
+  {
+	"V",
+	function()
+	  awful.util.spawn("virtualbox")
+	end,
+	browser
   }
 }
 
@@ -1570,12 +1577,12 @@ end
 )
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal(
-"mouse::enter",
-function(c)
-  c:emit_signal("request::activate", "mouse_enter", {raise = true})
-end
-)
+-- client.connect_signal(
+-- "mouse::enter",
+-- function(c)
+--   c:emit_signal("request::activate", "mouse_enter", {raise = true})
+-- end
+-- )
 
 -- No border for maximized clients
 function border_adjust(c)

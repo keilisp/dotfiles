@@ -41,7 +41,6 @@ alias cp="cp -i"     # confirm before overwriting something
 alias df='df -h'     # human-readable sizes
 alias free='free -m' # show sizes in MB
 alias ka='killall'
-alias rm='logrm'
 alias g='git'
 alias more=less
 alias cfa='nvim $HOME/.config/awesome/rc.lua'
