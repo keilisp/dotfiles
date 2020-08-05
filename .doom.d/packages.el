@@ -11,6 +11,7 @@
 
 (package! speed-type)
 (package! key-chord)
+(package! reverse-im)
 (package! evil-multiedit)
 (package! org-super-agenda)
 (package! peep-dired)
