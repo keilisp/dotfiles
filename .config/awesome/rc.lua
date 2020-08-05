@@ -416,6 +416,7 @@ local appsmap = {
   { "separator", "Other" },
   { "j", function() awful.util.spawn(terminal .. " -e joplin") end,        "joplin" },
   { "b", function() awful.util.spawn(browser) end,        browser},
+  { "B", function() awful.util.spawn("firefox --private-window") end,        "browser(private)"},
   { "s", function() awful.util.spawn("steam") end,        "steam" },
   { "n", function() awful.util.spawn(terminal .. " -e newsboat") end,        "newsboat" },
 }
