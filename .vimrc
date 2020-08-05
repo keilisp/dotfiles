@@ -169,8 +169,11 @@ endfunction
 inoremap jj <Esc>
 inoremap оо <Esc>
 
-" Set mapleader to ','
+" Set mapleader to 'SPC'
 let mapleader=" "
+
+" Save on SPC k
+map <Space>k :write <cr>
 
 " CtrlP
 let g:ctrlp_map = '<leader>c'

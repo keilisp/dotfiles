@@ -284,7 +284,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
 	 (quote
-		(emojify smart-tabs-mode smart-tab typescript-mode tern-auto-complete speed-type rust-mode reverse-im peep-dired path-iterator org-super-agenda org-plus-contrib org-fancy-priorities lsp-mode key-chord js2-mode flycheck-rust exec-path-from-shell evil-multiedit doom-modeline)))
+		(flymake-rust rustic emojify smart-tabs-mode smart-tab typescript-mode tern-auto-complete speed-type rust-mode reverse-im peep-dired path-iterator org-super-agenda org-plus-contrib org-fancy-priorities lsp-mode key-chord js2-mode flycheck-rust exec-path-from-shell evil-multiedit doom-modeline)))
  '(reverse-im-input-methods (quote ("russian-computer"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

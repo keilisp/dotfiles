@@ -1,6 +1,0 @@
-#!/bin/sh
-while true;
-do
-  find $HOME/pix/wallpapers -type f -name '*.jpg' -o -name '*.png' | shuf -n 1 | xargs feh --bg-scale
-  sleep 30m
-done &

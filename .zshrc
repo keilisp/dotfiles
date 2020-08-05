@@ -207,11 +207,11 @@ abbrev-alias -ge srch="yay -Q | grep"
 abbrev-alias -ge update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 abbrev-alias -ge grub-customizer="gksu grub-customizer"
 # mongodb
-abbrev-alias -ge mongod='mongod --port 27017 --auth --dbpath $HOME/db/mongodb/'
+abbrev-alias -ge mongod='mongod --port 27017 --auth --dbpath $HOME/progs/db/mongodb/'
 # systemctl
 abbrev-alias -ge SS="sudo systemctl"
 # doom-gemacs
-abbrev-alias -ge doom='~/.emacs.d/bin/doom sync'
+abbrev-alias -ge doom='~/.emacs.d/bin/doom'
 # system stuff
 abbrev-alias -ge cp="cp -i"                          # confirm before overwriting something
 abbrev-alias -ge df='df -h'                          # human-readable sizes

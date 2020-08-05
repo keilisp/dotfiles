@@ -63,10 +63,10 @@ alias more=less
 
 ## ABBREVIATIONS ##
 # mongodb
-abbr mongod 'mongod --port 27017 --auth --dbpath $HOME/db/mongodb/'
+abbr mongod 'mongod --port 27017 --auth --dbpath $HOME/progs/db/mongodb/'
 
 # doom-emacs
-abbr doom '~/.emacs.d/bin/doom sync'
+abbr doom '~/.emacs.d/bin/doom'
 
 # system stuff
 abbr cfa 'nvim $HOME/.config/awesome/rc.lua'
