@@ -6,9 +6,9 @@ function run() {
 	fi
 }
 
-run "telegram-desktop"
+# run "telegram-desktop"
 run "emacs --daemon"
-run "discord"
+# run "discord"
 run "nm-applet"
 # run "barrier"
 run "devmon"
