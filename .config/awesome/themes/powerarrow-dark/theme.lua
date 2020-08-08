@@ -198,7 +198,7 @@ lain.widget.mpd(
 	  mpdicon:set_image(theme.widget_music)
 	end
 
-	widget:set_markup(markup.font(theme.font, markup("#fabd2f", artist) .. markup("#458588", title)))
+	widget:set_markup(markup.font(theme.font, markup(theme.fg_focus, artist) .. markup(theme.fg_urgent, title)))
   end
 }
 )
@@ -359,8 +359,8 @@ lain.widget.net(
 	widget:set_markup(
 	markup.font(
 	theme.font,
-	markup("#fabd2f", " " .. string.format("%06.1f", net_now.received)) ..
-	" " .. markup("#458588", " " .. string.format("%06.1f", net_now.sent) .. " ")
+	markup(theme.fg_focus, " " .. string.format("%06.1f", net_now.received)) ..
+	" " .. markup(theme.fg_urgent, " " .. string.format("%06.1f", net_now.sent) .. " ")
 	)
 	)
   end

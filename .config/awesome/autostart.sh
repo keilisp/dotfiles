@@ -1,16 +1,15 @@
 #!/usr//bin/env bash
 
-function run {
-  if ! pgrep -f $1 ;
-  then
-	$@&
-  fi
+function run() {
+	if ! pgrep -f $1; then
+		$@ &
+	fi
 }
 
 xset r rate 300 50
 # feh --bg-scale $HOME/pix/kek/1920x1080-px-emacs-Free-Software-GNU-Linux-Richard-Stallman-saint-1360085.jpg
 # feh --bg-scale $HOME/pix/wallpapers/Art/Other/Flower-4.jpg
-feh --bg-scale $HOME/pix/wallpapers/Art/Other/thinkpad.png
+feh --bg-fill $HOME/pix/wallpapers/Anime/yamamoto.jpg
 # run "$HOME/scripts/wallplaylist"
 # run "discord"
 # run "telegram-desktop"
