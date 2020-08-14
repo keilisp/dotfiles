@@ -42,7 +42,7 @@ Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'raimondi/delimitmate'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'arcticicestudio/nord-vim'
-Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-repeat'
 
 " All of your Plugins must be added before the following line
