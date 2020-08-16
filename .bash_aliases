@@ -50,6 +50,8 @@ alias cfz='nvim $HOME/.zshrc'
 alias se='fzf | xargs -r -I % $EDITOR %'
 alias pf='systemctl poweroff'
 alias rb='systemctl reboot'
+alias gpgrecv="gpg --keyserver pool.sks-keyservers.net --recv-keys"
+alias lc="betterlockscreen -l"
 # utils
 alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
 alias ytv='youtube-dl -o "~/vids/%(title)s.%(ext)s"'                       #Download video link

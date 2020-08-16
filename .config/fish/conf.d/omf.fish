@@ -54,8 +54,10 @@ alias SS="sudo systemctl"
 
 # system stuff
 alias cp="cp -i"                          # confirm before overwriting something
+alias gpgrecv="gpg --keyserver pool.sks-keyservers.net --recv-keys"
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
+alias lc="betterlockscreen -l"
 alias ka='killall'
 alias g='git'
 alias more=less

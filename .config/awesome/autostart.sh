@@ -9,7 +9,7 @@ function run() {
 xset r rate 300 50
 # feh --bg-scale $HOME/pix/kek/1920x1080-px-emacs-Free-Software-GNU-Linux-Richard-Stallman-saint-1360085.jpg
 # feh --bg-scale $HOME/pix/wallpapers/Art/Other/Flower-4.jpg
-feh --bg-fill $HOME/pix/wallpapers/Anime/yamamoto.jpg
+feh --bg-fill /home/gideon/pix/wallpapers/Anime/yamamoto.jpg
 # run "$HOME/scripts/wallplaylist"
 # run "discord"
 # run "telegram-desktop"
@@ -30,3 +30,4 @@ run "blueberry-tray"
 # run "setxkbmap -layout 'us, ru'"
 # run "setxkbmap -option grp:caps_toggle"
 # run "xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off"
+wal -R

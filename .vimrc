@@ -46,6 +46,7 @@ Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'raimondi/delimitmate'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'arcticicestudio/nord-vim'
+Plugin 'dylanaraps/wal.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -116,12 +117,12 @@ filetype plugin on
 filetype indent on
 
 " Use the dark version of gruvbox
-if has ('termguicolors')
-  set termguicolors
-endif
-set background=dark
-let g:gruvbox_contrast_dark='soft'
-colorscheme gruvbox
+" if has ('termguicolors')
+"   set termguicolors
+" endif
+" set background=dark
+" let g:gruvbox_contrast_dark='soft'
+colorscheme wal
 " colorscheme nord
 
 " Set font
