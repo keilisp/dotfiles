@@ -58,10 +58,12 @@ alias SS="sudo systemctl"
 
 # system stuff
 alias cp="cp -i"                          # confirm before overwriting something
+alias gpgrecv="gpg --keyserver pool.sks-keyservers.net --recb-keys"
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias ka='killall'
 alias g='git'
+alias lc='betterlockscreen -l'
 alias more=less
 alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
 alias passmenu="passmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'"

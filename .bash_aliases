@@ -37,7 +37,8 @@ alias SS="sudo systemctl"
 alias doom='~/.emacs.d/bin/doom'
 
 # system stuff
-alias cp="cp -i"     # confirm before overwriting something
+alias cp="cp -i" # confirm before overwriting something
+alias gpgrecv="gpg --keyserver pool.sks-keyservers.net --recb-keys"
 alias df='df -h'     # human-readable sizes
 alias free='free -m' # show sizes in MB
 alias ka='killall'
@@ -48,6 +49,7 @@ alias cfv='nvim $HOME/.vimrc'
 alias cfb='nvim $HOME/.bashrc'
 alias cff='nvim $HOME/.config/fish/conf.d/omf.fish'
 alias cfz='nvim $HOME/.zshrc'
+alias lc='betterlockscreen -l'
 alias se='fzf | xargs -r -I % $EDITOR %'
 alias pf='systemctl poweroff'
 alias rb='systemctl reboot'

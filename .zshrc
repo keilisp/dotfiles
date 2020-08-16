@@ -215,10 +215,12 @@ abbrev-alias -ge SS="sudo systemctl"
 abbrev-alias -ge doom='~/.emacs.d/bin/doom'
 # system stuff
 abbrev-alias -ge cp="cp -i"                          # confirm before overwriting something
+abbrev-alias -ge gpgrecv="gpg --keyserver pool.sks-keyservers.net --recb-keys"
 abbrev-alias -ge df='df -h'                          # human-readable sizes
 abbrev-alias -ge free='free -m'                      # show sizes in MB
 abbrev-alias -ge ka='killall'
 abbrev-alias -ge g='git'
+abbrev-alias -ge lc='betterlockscreen -l'
 abbrev-alias -ge more=less
 abbrev-alias -ge cfa='nvim $HOME/.config/awesome/rc.lua'
 abbrev-alias -ge cfv='nvim $HOME/.vimrc'
