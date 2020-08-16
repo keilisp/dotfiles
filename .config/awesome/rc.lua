@@ -1133,6 +1133,14 @@ end,
 {description = "increase the number of columns", group = "layout"}
 ),
 awful.key(
+{modkey, "Control"},
+"l",
+function()
+  awful.tag.incncol(-1, nil, true)
+end,
+{description = "decrease the number of columns", group = "layout"}
+),
+awful.key(
 {altkey},
 "space",
 function()
