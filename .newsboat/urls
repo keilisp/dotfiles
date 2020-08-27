@@ -4,9 +4,12 @@ https://habr.com/ru/rss/all/all/?fl=ru
 https://parabolagnulinux.org/feeds/news/
 https://os.phil-opp.com/rss.xml
 https://this-week-in-rust.org/rss.xml
+https://dou.ua/feed/
+https://hnrss.org/newest
 
 ---REDDIT---
 https://www.reddit.com/r/rust/new.rss
+https://www.reddit.com/r/learnrust/new.rss
 https://www.reddit.com/r/bash/new.rss
 https://www.reddit.com/r/archlinux/new.rss
 https://www.reddit.com/r/artixlinux/new.rss
@@ -21,6 +24,11 @@ https://www.reddit.com/r/linux/new.rss
 https://www.reddit.com/r/thinkpad/new.rss
 https://www.reddit.com/r/Gentoo/new.rss
 https://www.reddit.com/r/voidlinux/new.rss
+
+---PODCASTS---
+https://rustacean-station.org/podcast.rss
+http://feeds.rucast.net/radio-t
+https://thecommandline.net/feed/
 
 ---PEERTUBE---
 https://videos.lukesmith.xyz/feeds/videos.atom

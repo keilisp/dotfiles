@@ -19,7 +19,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Mononoki Nerd Font" :size 14))
+(setq doom-font (font-spec :family "Mononoki Nerd Font" :size 12))
 ;; (setq doom-font (font-spec :family "Monaco" :size 14))
 
 
@@ -79,7 +79,7 @@
 (define-key global-map (kbd "C-l") #'evil-window-right)
 
 ;; Projectile folders
-(setq projectile-project-search-path '("~/scripts/" "~/code/projects/"))
+(setq projectile-project-search-path '("~/scripts/" "~/code/projects/" "~/code/" ))
 
 ;; Resizing windows
 (global-set-key (kbd "<C-down>") 'shrink-window)
