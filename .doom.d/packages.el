@@ -7,7 +7,6 @@
 
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
-																				;(package! some-package)
 
 (package! speed-type)
 (package! reverse-im)
@@ -18,13 +17,17 @@
 (package! evil-multiedit)
 (package! org-super-agenda)
 (package! peep-dired)
+(package! racer)
+(package! company-racer)
 (package! typescript-mode)
-(package! toml)
 (package! toml-mode)
+(package! toml)
 (package! rustic)
 (package! flycheck-rust)
 (package! flymake-rust)
 (package! emojify)
+(package! pdf-tools)
+
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
