@@ -21,16 +21,21 @@
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "Mononoki Nerd Font" :size 12))
 ;; (setq doom-font (font-spec :family "Monaco" :size 14))
-
+;; (setq doom-font (font-spec :family "Source Code Pro" :size 12))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-;; (setq doom-theme 'doom-gruvbox)
+;; (setq doom-theme 'ewal-doom-one)
 (setq doom-theme 'doom-gruvbox)
 
+;; Terminal mode
 (unless (display-graphic-p)
-  (setq doom-theme 'doom-nord))
+  (setq doom-theme 'doom-gruvbox))
+
+(use-package! evil-terminal-cursor-changer
+  :hook (tty-setup . evil-terminal-cursor-changer-activate))
+
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -97,9 +102,8 @@
 
 ;; Format on save
 (add-hook 'before-save-hook
-					(lambda()
-						(call-interactively #'format-all-buffer)))
-
+	  (lambda()
+	    (call-interactively #'format-all-buffer)))
 
 ;; Make tab work properly
 ;; (setq tab-always-indent 'complete
@@ -114,16 +118,16 @@
 (setq org-directory "~/progs/emacs/org")
 (after! org
   (map! :map org-mode-map
-        :n "M-j" #'org-metadown
-        :n "M-k" #'org-metaup)
+	:n "M-j" #'org-metadown
+	:n "M-k" #'org-metaup)
   (setq org-todo-keywords '((sequence "TODO(t)" "INPROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
-			  org-todo-keyword-faces
-			  '(("TODO" :foreground "#7c7c75" :weight normal :underline t)
-          ("WAITING" :foreground "#9f7efe" :weight normal :underline t)
-          ("INPROGRESS" :foreground "#0098dd" :weight normal :underline t)
-          ("DONE" :foreground "#50a14f" :weight normal :underline t)
-          ("CANCELLED" :foreground "#ff6480" :weight normal :underline t))
-			  ))
+	org-todo-keyword-faces
+	'(("TODO" :foreground "#7c7c75" :weight normal :underline t)
+	  ("WAITING" :foreground "#9f7efe" :weight normal :underline t)
+	  ("INPROGRESS" :foreground "#0098dd" :weight normal :underline t)
+	  ("DONE" :foreground "#50a14f" :weight normal :underline t)
+	  ("CANCELLED" :foreground "#ff6480" :weight normal :underline t))
+	))
 
 ;; Priorities
 (use-package! org-fancy-priorities
@@ -145,8 +149,8 @@
   :load-path (lambda () (expand-file-name "~/.doom.d/plugins/instant-rename-tag"))
   :config
   (map! :leader
-        (:prefix ("m" . "local leader")
-         :desc "Instantly rename opening/closing HTML tag" "o" #'instant-rename-tag)))
+	(:prefix ("m" . "local leader")
+	 :desc "Instantly rename opening/closing HTML tag" "o" #'instant-rename-tag)))
 
 
 ;; Confirm kill proccess
@@ -157,12 +161,12 @@
 
 ;; Treat underscore and hyphen as part of the word
 (add-hook 'after-change-major-mode-hook
-          (lambda ()
-            (modify-syntax-entry ?_ "w")))
+	  (lambda ()
+	    (modify-syntax-entry ?_ "w")))
 
 (add-hook 'after-change-major-mode-hook
-          (lambda ()
-            (modify-syntax-entry ?- "w")))
+	  (lambda ()
+	    (modify-syntax-entry ?- "w")))
 
 ;; Paste menu
 (map! "M-v" #'counsel-yank-pop)
@@ -190,10 +194,13 @@
   (flycheck-add-mode 'javascript-standard 'js2-mode))
 
 ;; Higlight colors everywhere
-;; (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
-;; (lambda () (rainbow-mode 1)))
+(define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
+  (lambda () (rainbow-mode 1)))
 
-;; (my-global-rainbow-mode 1)
+;; Xclip mode everywhere
+(define-globalized-minor-mode my-global-xclip-mode xclip-mode
+  (lambda () (xclip-mode 1)))
+(my-global-xclip-mode 1)
 
 ;; set specific browser to open links
 (setq browse-url-browser-function 'browse-url-firefox)
@@ -276,7 +283,7 @@
 ;; Image previews in dired
 (global-set-key (kbd "C-x i") 'peep-dired)
 (evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file
-	(kbd "k") 'peep-dired-prev-file)
+  (kbd "k") 'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
 
 
@@ -313,3 +320,16 @@
 (require 'rust-mode)
 (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
 (setq company-tooltip-align-annotations t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(pretty-symbols flymake-racket racket-mode geiser chicken-scheme typescript-mode tern-auto-complete speed-type rustic rust-auto-use reverse-im peep-dired path-iterator org-super-agenda org-plus-contrib org-fancy-priorities lsp-mode key-chord js2-mode flymake-rust flycheck-rust exec-path-from-shell evil-multiedit doom-modeline clippy)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

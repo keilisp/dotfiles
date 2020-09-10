@@ -113,7 +113,7 @@ local modkey1 = "Control"
 
 -- personal variables
 --change these variables if you want
-local browser = "firefox"
+local browser = "brave"
 local editor = os.getenv("EDITOR") or "nvim"
 local editorgui = "Emacs"
 local filemanager = "thunar"
@@ -205,18 +205,67 @@ awful.util.terminal = terminal
 
 -- VERTICAL SETUP
 
+-- my_tags = {
+--   tags = {
+--	{
+--	  names = {
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      "
+--	  },
+--	  layout = {
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1]
+--	  }
+--	},
+--	{
+--	  names = {
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      "
+--	  },
+--	  layout = {
+--		awful.layout.layouts[5],
+--		awful.layout.layouts[5],
+--		awful.layout.layouts[5],
+--		awful.layout.layouts[5],
+--		awful.layout.layouts[5],
+--		awful.layout.layouts[5]
+--	  }
+--	}
+--   }
+-- }
+
+
+-- TEST
+-- Ⅰ	Ⅱ	Ⅲ	Ⅳ	Ⅴ	Ⅵ	Ⅶ	Ⅷ	Ⅸ	Ⅹ	Ⅺ	Ⅻ
+
 my_tags = {
   tags = {
 	{
 	  names = {
-		"      ",
-		"      ",
-		"      ",
-		"      ",
-		"      ",
-		"      ",
-		"      ",
-		"      "
+		"    Ⅰ    ",
+		"    Ⅱ    ",
+		"    Ⅲ    ",
+		"    Ⅳ    ",
+		"    Ⅴ    ",
+		"    Ⅵ    ",
+		"    Ⅶ    ",
+		"    Ⅷ	"
 	  },
 	  layout = {
 		awful.layout.layouts[1],
@@ -231,12 +280,12 @@ my_tags = {
 	},
 	{
 	  names = {
-		"      ",
-		"      ",
-		"      ",
-		"      ",
-		"      ",
-		"      "
+		"    Ⅰ    ",
+		"    Ⅱ    ",
+		"    Ⅲ    ",
+		"    Ⅳ    ",
+		"    Ⅴ    ",
+		"    Ⅵ    ",
 	  },
 	  layout = {
 		awful.layout.layouts[5],
@@ -249,6 +298,8 @@ my_tags = {
 	}
   }
 }
+
+
 awful.layout.suit.tile.left.mirror = true
 awful.util.taglist_buttons =
 my_table.join(
@@ -563,7 +614,16 @@ local utilsmap = {
 	  )
 	end,
 	"passmenu"
-  }
+  },
+  {
+	"g",
+	function()
+	  awful.util.spawn(
+	  "peek"
+	  )
+	end,
+	"record gif"
+  },
 }
 
 local systemmap = {
@@ -608,11 +668,18 @@ local appsmap = {
 	"nvim"
   },
   {
-	"e",
+	"E",
 	function()
 	  awful.util.spawn("emacs")
 	end,
-	"emacs"
+	"emacs gui"
+  },
+  {
+	"e",
+	function()
+	  awful.util.spawn("termite -e 'emacs -nw'")
+	end,
+	"emacs tui"
   },
   {"separator", "Media"},
   {
@@ -683,7 +750,7 @@ local appsmap = {
   {
 	"B",
 	function()
-	  awful.util.spawn(browser .. " --private-window")
+	  awful.util.spawn(browser .. " --incognito")
 	end,
 	browser
   },
@@ -1663,4 +1730,4 @@ end
 
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
-awful.spawn.with_shell("compton --config  $HOME/.config/compton/compton.conf")
+-- awful.spawn.with_shell("compton --config  $HOME/.config/compton/compton.conf")

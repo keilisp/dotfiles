@@ -7,6 +7,8 @@
  */
 static char* font = "Mononoki Nerd Font:pixelsize=12:antialias=true:autohint=true";
 static char* font2[] = { "Mononoki Nerd Font:pixelsize=10:antialias=true:autohint=true" };
+/* static char* font = "Fira Code:pixelsize=12:antialias=true:autohint=true"; */
+/* static char* font2[] = { "Fira Code:pixelsize=10:antialias=true:autohint=true" }; */
 static int borderpx = 2;
 
 /*
@@ -88,7 +90,7 @@ const int boxdraw_braille = 1;
 static int bellvolume = 0;
 
 /* default TERM value */
-char* termname = "st-256color";
+/* char* termname = "st-256color"; */
 
 /*
  * spaces per tab

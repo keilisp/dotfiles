@@ -17,6 +17,7 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
+Plugin 'dylanaraps/wal.vim'
 Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -120,7 +121,7 @@ endif
 set background=dark
 let g:gruvbox_contrast_dark='soft'
 colorscheme gruvbox
-" colorscheme nord
+" colorscheme wal
 
 " Set font
 " set guifont=DejaVu\ Sans\ Mono\ 10
