@@ -5,10 +5,12 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char* font = "Mononoki Nerd Font:pixelsize=12:antialias=true:autohint=true";
-static char* font2[] = { "Mononoki Nerd Font:pixelsize=10:antialias=true:autohint=true" };
-/* static char* font = "Fira Code:pixelsize=12:antialias=true:autohint=true"; */
-/* static char* font2[] = { "Fira Code:pixelsize=10:antialias=true:autohint=true" }; */
+/* static char* font = "Mononoki Nerd Font:pixelsize=12:antialias=true:autohint=true"; */
+/* static char* font2[] = { "Mononoki Nerd Font:pixelsize=10:antialias=true:autohint=true" }; */
+/* static char* font = "Iosevka:pixelsize=13:antialias=true:autohint=true"; */
+/* static char* font2[] = { "Iosevka:pixelsize=11:antialias=true:autohint=true" }; */
+static char* font = "Monaco:pixelsize=12:antialias=true:autohint=true";
+static char* font2[] = { "Monaco:pixelsize=10:antialias=true:autohint=true" };
 static int borderpx = 2;
 
 /*
@@ -90,7 +92,7 @@ const int boxdraw_braille = 1;
 static int bellvolume = 0;
 
 /* default TERM value */
-/* char* termname = "st-256color"; */
+char* termname = "st-256color";
 
 /*
  * spaces per tab

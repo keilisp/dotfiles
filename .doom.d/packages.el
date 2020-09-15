@@ -31,7 +31,9 @@
 (package! geiser)
 (package! markdown-preview-mode)
 (package! evil-terminal-cursor-changer)
+(package! pretty-symbols)
 (package! xclip)
+(package! nasm-mode)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

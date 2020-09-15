@@ -258,14 +258,14 @@ my_tags = {
   tags = {
 	{
 	  names = {
-		"    Ⅰ    ",
-		"    Ⅱ    ",
-		"    Ⅲ    ",
-		"    Ⅳ    ",
-		"    Ⅴ    ",
-		"    Ⅵ    ",
-		"    Ⅶ    ",
-		"    Ⅷ	"
+		"   Ⅰ   ",
+		"   Ⅱ   ",
+		"   Ⅲ   ",
+		"   Ⅳ   ",
+		"   Ⅴ   ",
+		"   Ⅵ   ",
+		"   Ⅶ   ",
+		"   Ⅷ   "
 	  },
 	  layout = {
 		awful.layout.layouts[1],
@@ -280,12 +280,12 @@ my_tags = {
 	},
 	{
 	  names = {
-		"    Ⅰ    ",
-		"    Ⅱ    ",
-		"    Ⅲ    ",
-		"    Ⅳ    ",
-		"    Ⅴ    ",
-		"    Ⅵ    ",
+		"   Ⅰ   ",
+		"   Ⅱ   ",
+		"   Ⅲ   ",
+		"   Ⅳ   ",
+		"   Ⅴ   ",
+		"   Ⅵ   ",
 	  },
 	  layout = {
 		awful.layout.layouts[5],
@@ -610,7 +610,8 @@ local utilsmap = {
 	"s",
 	function()
 	  awful.util.spawn(
-	  "passmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'"
+	  -- "passmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'"
+	  "passmenu"
 	  )
 	end,
 	"passmenu"
@@ -867,7 +868,7 @@ awful.key(
 function()
   awful.spawn(
   string.format(
-  "dmenu_run -nb '#282828' -sf '#fabd2f' -sb '#504945' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'",
+  "dmenu_run -nb '#282828' -sf '#fabd2f' -sb '#504945' -nf '#a89984' -fn 'Monaco:pixelsize=13'",
   -- "dmenu_run -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'",
   beautiful.bg_normal,
   beautiful.fg_normal,
