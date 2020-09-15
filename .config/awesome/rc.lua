@@ -101,7 +101,7 @@ local themes = {
 }
 
 -- choose your theme here
-local chosen_theme = themes[3]
+local chosen_theme = themes[1]
 
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
@@ -113,7 +113,7 @@ local modkey1 = "Control"
 
 -- personal variables
 --change these variables if you want
-local browser = "firefox"
+local browser = "brave"
 local editor = os.getenv("EDITOR") or "nvim"
 local editorgui = "Emacs"
 local filemanager = "thunar"
@@ -157,19 +157,48 @@ awful.util.terminal = terminal
 -- Use this : https://fontawesome.com/cheatsheet
 --awful.util.tagnames = { "", "", "", "", "" }
 
+-- my_tags = {
+--   tags = {
+--	{
+--	  names = {
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      ",
+--		"      "
+--	  },
+--	  layout = {
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[1],
+--	  }
+--	}
+--   }
+-- }
+
 my_tags = {
   tags = {
 	{
 	  names = {
-		"      ",
-		"      ",
-		"      ",
-		"      ",
-		"      ",
-		"      ",
-		"      ",
-		"      ",
-		"      "
+		"    Ⅰ    ",
+		"    Ⅱ    ",
+		"    Ⅲ    ",
+		"   Ⅳ   ",
+		"   Ⅴ   ",
+		"   Ⅵ   ",
+		"   Ⅶ   ",
+		"   Ⅷ  ",
+		"   IX   "
 	  },
 	  layout = {
 		awful.layout.layouts[1],
@@ -405,7 +434,8 @@ local utilsmap = {
 local appsmap = {
   { "separator", "Editors" },
   { "v", function() awful.util.spawn(terminal .. " -e nvim ") end,        "nvim" },
-  { "e", function() awful.util.spawn("emacs") end,        "emacs" },
+  { "e", function() awful.util.spawn("termite -e 'emacs -nw'") end,        "emacs-tui" },
+  { "E", function() awful.util.spawn("emacs") end,        "emacs-gui" },
   { "separator", "Chats" },
   { "D", function() awful.util.spawn("discord") end,        "discord-gui" },
   { "d", function() awful.util.spawn(terminal .. " -e cordless") end,        "discord-tui" },
@@ -417,7 +447,7 @@ local appsmap = {
   { "separator", "Other" },
   { "j", function() awful.util.spawn(terminal .. " -e joplin") end,        "joplin" },
   { "b", function() awful.util.spawn(browser) end,        browser},
-  { "B", function() awful.util.spawn("firefox --private-window") end,        "browser(private)"},
+  { "B", function() awful.util.spawn("firefox --incognito") end,        "browser(private)"},
   { "s", function() awful.util.spawn("steam") end,        "steam" },
   { "n", function() awful.util.spawn(terminal .. " -e newsboat") end,        "newsboat" },
 }

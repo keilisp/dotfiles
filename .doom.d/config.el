@@ -19,17 +19,27 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Mononoki Nerd Font" :size 14))
-
+;; (setq doom-font (font-spec :family "Mononoki Nerd Font" :size 12))
+(setq doom-font (font-spec :family "Monaco" :size 12))
+;; (setq doom-font (font-spec :family "Iosevka" :size 12))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-;; (setq doom-theme 'doom-gruvbox)
+;; (setq doom-theme 'ewal-doom-one)
 (setq doom-theme 'doom-gruvbox)
+
+;; Terminal mode
+(unless (display-graphic-p)
+  (setq doom-theme 'doom-gruvbox))
+
+(use-package! evil-terminal-cursor-changer
+  :hook (tty-setup . evil-terminal-cursor-changer-activate))
+
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
+
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -75,7 +85,7 @@
 (define-key global-map (kbd "C-l") #'evil-window-right)
 
 ;; Projectile folders
-(setq projectile-project-search-path '("~/scripts/" "~/code/projects/"))
+(setq projectile-project-search-path '("~/scripts/" "~/code/projects/" "~/code/" ))
 
 ;; Resizing windows
 (global-set-key (kbd "<C-down>") 'shrink-window)
@@ -93,9 +103,8 @@
 
 ;; Format on save
 (add-hook 'before-save-hook
-					(lambda()
-						(call-interactively #'format-all-buffer)))
-
+	  (lambda()
+	    (call-interactively #'format-all-buffer)))
 
 ;; Make tab work properly
 ;; (setq tab-always-indent 'complete
@@ -107,19 +116,19 @@
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
 ;; Org setup
-(setq org-directory "~/org")
+(setq org-directory "~/progs/emacs/org")
 (after! org
   (map! :map org-mode-map
-        :n "M-j" #'org-metadown
-        :n "M-k" #'org-metaup)
+	:n "M-j" #'org-metadown
+	:n "M-k" #'org-metaup)
   (setq org-todo-keywords '((sequence "TODO(t)" "INPROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
-			  org-todo-keyword-faces
-			  '(("TODO" :foreground "#7c7c75" :weight normal :underline t)
-          ("WAITING" :foreground "#9f7efe" :weight normal :underline t)
-          ("INPROGRESS" :foreground "#0098dd" :weight normal :underline t)
-          ("DONE" :foreground "#50a14f" :weight normal :underline t)
-          ("CANCELLED" :foreground "#ff6480" :weight normal :underline t))
-			  ))
+	org-todo-keyword-faces
+	'(("TODO" :foreground "#7c7c75" :weight normal :underline t)
+	  ("WAITING" :foreground "#9f7efe" :weight normal :underline t)
+	  ("INPROGRESS" :foreground "#0098dd" :weight normal :underline t)
+	  ("DONE" :foreground "#50a14f" :weight normal :underline t)
+	  ("CANCELLED" :foreground "#ff6480" :weight normal :underline t))
+	))
 
 ;; Priorities
 (use-package! org-fancy-priorities
@@ -141,8 +150,8 @@
   :load-path (lambda () (expand-file-name "~/.doom.d/plugins/instant-rename-tag"))
   :config
   (map! :leader
-        (:prefix ("m" . "local leader")
-         :desc "Instantly rename opening/closing HTML tag" "o" #'instant-rename-tag)))
+	(:prefix ("m" . "local leader")
+	 :desc "Instantly rename opening/closing HTML tag" "o" #'instant-rename-tag)))
 
 
 ;; Confirm kill proccess
@@ -153,12 +162,12 @@
 
 ;; Treat underscore and hyphen as part of the word
 (add-hook 'after-change-major-mode-hook
-          (lambda ()
-            (modify-syntax-entry ?_ "w")))
+	  (lambda ()
+	    (modify-syntax-entry ?_ "w")))
 
 (add-hook 'after-change-major-mode-hook
-          (lambda ()
-            (modify-syntax-entry ?- "w")))
+	  (lambda ()
+	    (modify-syntax-entry ?- "w")))
 
 ;; Paste menu
 (map! "M-v" #'counsel-yank-pop)
@@ -177,19 +186,22 @@
   :commands (speed-type-text))
 
 ;; Flycheck
-;; (use-package flycheck
-;;   :defer t
-;;   :hook (prog-mode . flycheck-mode)
-;;   :custom
-;;   (flycheck-emacs-lisp-load-path 'inherit)
-;;   :config
-;;   (flycheck-add-mode 'javascript-standard 'js2-mode))
+(use-package flycheck
+  :defer t
+  :hook (prog-mode . flycheck-mode)
+  :custom
+  (flycheck-emacs-lisp-load-path 'inherit)
+  :config
+  (flycheck-add-mode 'javascript-standard 'js2-mode))
 
 ;; Higlight colors everywhere
-;; (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
-;; (lambda () (rainbow-mode 1)))
+(define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
+  (lambda () (rainbow-mode 1)))
 
-;; (my-global-rainbow-mode 1)
+;; Xclip mode everywhere
+(define-globalized-minor-mode my-global-xclip-mode xclip-mode
+  (lambda () (xclip-mode 1)))
+(my-global-xclip-mode 1)
 
 ;; set specific browser to open links
 (setq browse-url-browser-function 'browse-url-firefox)
@@ -272,25 +284,53 @@
 ;; Image previews in dired
 (global-set-key (kbd "C-x i") 'peep-dired)
 (evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file
-	(kbd "k") 'peep-dired-prev-file)
+  (kbd "k") 'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
 
 
-(setq-default indent-tabs-mode t)
+;; (setq-default indent-tabs-mode t)
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(elfeed-feeds nil)
+;;  '(package-selected-packages
+;;    '(rust-auto-use rustic flycheck-rust flymake-rust clippy typescript-mode tern-auto-complete speed-type reverse-im peep-dired path-iterator org-super-agenda org-plus-contrib org-fancy-priorities lsp-mode key-chord js2-mode exec-path-from-shell evil-multiedit doom-modeline))
+;;  '(reverse-im-input-methods '("russian-computer")))
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  )
+
+
+;; Rustic flycheck
+(remove-hook 'rustic-mode-hook 'flycheck-mode)
+
+;; TAB
+(after! evil (map! :n "TAB" #'indent-for-tab-command))
+
+;; Racer
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+
+(add-hook 'racer-mode-hook #'company-mode)
+
+(require 'rust-mode)
+(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+(setq company-tooltip-align-annotations t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-	 (quote
-		(flymake-rust rustic emojify smart-tabs-mode smart-tab typescript-mode tern-auto-complete speed-type rust-mode reverse-im peep-dired path-iterator org-super-agenda org-plus-contrib org-fancy-priorities lsp-mode key-chord js2-mode flycheck-rust exec-path-from-shell evil-multiedit doom-modeline)))
- '(reverse-im-input-methods (quote ("russian-computer"))))
+   '(pretty-symbols flymake-racket racket-mode geiser chicken-scheme typescript-mode tern-auto-complete speed-type rustic rust-auto-use reverse-im peep-dired path-iterator org-super-agenda org-plus-contrib org-fancy-priorities lsp-mode key-chord js2-mode flymake-rust flycheck-rust exec-path-from-shell evil-multiedit doom-modeline clippy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-(setq-default smart-tab-mode t)
