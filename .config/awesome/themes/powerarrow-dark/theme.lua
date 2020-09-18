@@ -23,7 +23,7 @@ theme.wallpaper = theme.dir .. "/wall.png"
 -- theme.font = "JetBrains Mono 8.5"
 -- theme.taglist_font = "JetBrains Mono 8.5"
 theme.font = "Monaco 8"
-theme.taglist_font = "FontAwesome 10"
+theme.taglist_font = "Iosevka 9"
 theme.fg_normal = "#fbf1c7"
 -- theme.fg_focus                                  = "#EA6F81"
 theme.fg_focus = "#fabd2f"
@@ -276,6 +276,9 @@ end
 )
 
 
+-- Github contributions
+local github_contributions_widget = require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
+
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_battery)
 local bat =
@@ -457,6 +460,8 @@ function theme.at_screen_connect(s)
 	{
 	  -- Right widgets
 	  layout = wibox.layout.fixed.horizontal,
+	  github_contributions_widget({username = 'mediocreeee'}),
+	  spr,
 	  wibox.widget.systray(),
 	  spr,
 	  arrl_ld,

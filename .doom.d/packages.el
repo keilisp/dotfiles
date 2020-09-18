@@ -30,6 +30,7 @@
 (package! pdf-tools)
 (package! geiser)
 (package! markdown-preview-mode)
+(package! evil-terminal-cursor-changer)
 (package! pretty-symbols)
 (package! xclip)
 (package! nasm-mode)

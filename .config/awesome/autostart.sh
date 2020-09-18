@@ -17,6 +17,7 @@ feh --bg-fill /home/gideon/pix/wallpapers/Anime/yamamoto.jpg
 run "nm-applet"
 run "devmon"
 run "blueberry-tray"
+run "cargo run --manifest-path=$HOME/code/rust/markust/Cargo.toml"
 
 # run "volumeicon"
 # run "rslsync"
@@ -30,4 +31,3 @@ run "blueberry-tray"
 # run "setxkbmap -layout 'us, ru'"
 # run "setxkbmap -option grp:caps_toggle"
 # run "xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off"
-wal -R

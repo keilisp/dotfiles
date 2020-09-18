@@ -16,8 +16,8 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme = {}
 theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-nord"
 theme.wallpaper = theme.dir .. "/wall.png"
-theme.font = "Hack 8.5"
-theme.taglist_font = "FontAwesome 10"
+theme.font = "Monaco 8"
+theme.taglist_font = "Iosevka 9"
 theme.fg_normal = "#eceff4"
 theme.fg_focus = "#8FBCBB"
 theme.fg_urgent = "#d08770"
@@ -245,6 +245,10 @@ lain.widget.fs(
   end
 }
 )
+
+-- Github contributions
+local github_contributions_widget = require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
+
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_battery)
 local bat =
@@ -418,6 +422,8 @@ function theme.at_screen_connect(s)
 	  -- Right widgets
 
 	  layout = wibox.layout.fixed.horizontal,
+	  github_contributions_widget({username = 'mediocreeee'}),
+	  spr,
 	  wibox.widget.systray(),
 	  spr,
 	  arrl_ld,

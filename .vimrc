@@ -117,12 +117,13 @@ filetype plugin on
 filetype indent on
 
 " Use the dark version of gruvbox
-" if has ('termguicolors')
-"   set termguicolors
-" endif
-" set background=dark
-" let g:gruvbox_contrast_dark='soft'
-colorscheme wal
+if has ('termguicolors')
+  set termguicolors
+endif
+set background=dark
+let g:gruvbox_contrast_dark='soft'
+colorscheme gruvbox
+" colorscheme wal
 " colorscheme nord
 
 " Set font
