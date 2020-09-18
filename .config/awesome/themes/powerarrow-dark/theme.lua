@@ -273,6 +273,8 @@ end
 )
 )
 
+-- Github contributions
+local github_contributions_widget = require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
 
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_battery)
@@ -457,6 +459,8 @@ function theme.at_screen_connect(s)
 	{
 	  -- Right widgets
 	  layout = wibox.layout.fixed.horizontal,
+	  github_contributions_widget({username = 'mediocreeee'}),
+	  spr,
 	  wibox.widget.systray(),
 	  spr,
 	  arrl_ld,
