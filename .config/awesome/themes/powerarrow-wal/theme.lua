@@ -16,10 +16,8 @@ theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-dark"
 theme.wallpaper = theme.dir .. "/wall.png"
 -- theme.font                                      = "Oxygen-Sans 9"
 -- theme.taglist_font                              = "Oxygen-Sans 9"
-theme.font = "Mononoki Nerd Font 9.5"
--- theme.taglist_font = "Mononoki Nerd Font 9.5"
--- theme.font = "Monaco 8.5"
-theme.taglist_font = "FontAwesome 9"
+theme.font = "Monaco 8"
+theme.taglist_font = "Iosevka 9"
 
 theme.fg_normal = "#fbf1c7"
 -- theme.fg_focus                                  = "#EA6F81"
@@ -273,6 +271,8 @@ end
 )
 )
 
+-- Github contributions
+local github_contributions_widget = require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
 
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_battery)
@@ -457,6 +457,8 @@ function theme.at_screen_connect(s)
 	{
 	  -- Right widgets
 	  layout = wibox.layout.fixed.horizontal,
+	  github_contributions_widget({username = 'mediocreeee'}),
+	  spr,
 	  wibox.widget.systray(),
 	  spr,
 	  arrl_ld,

@@ -14,7 +14,6 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme = {}
 theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-dark"
 theme.wallpaper = theme.dir .. "/wall.png"
--- theme.font                                      = "Oxygen-Sans 9"
 -- theme.taglist_font                              = "Oxygen-Sans 9"
 -- theme.font = "Mononoki Nerd Font 9"
 -- theme.taglist_font = "FontAwesome 10"
@@ -442,7 +441,7 @@ function theme.at_screen_connect(s)
 
   -- Create the wibox
   s.mywibox =
-  awful.wibar({position = "top", opacity=0.90, screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal})
+  awful.wibar({position = "top", opacity=0.90, screen = s, height = dpi(16), bg = theme.bg_normal, fg = theme.fg_normal})
 
   -- Add widgets to the wibox
   s.mywibox:setup {

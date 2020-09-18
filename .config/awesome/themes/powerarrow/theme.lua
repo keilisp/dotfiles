@@ -17,8 +17,8 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow"
 theme.wallpaper                                 = theme.dir .. "/wallpaper.jpg"
-theme.font                                      = "Noto Sans Regular 9"
-theme.taglist_font                              = "Droid Sans Bold 7"
+theme.font                                      = "Monaco 8"
+theme.taglist_font                              = "Iosevka 9"
 theme.fg_normal                                 = "#FEFEFE"
 theme.fg_focus                                  = "#98971a"
 theme.fg_urgent                                 = "#b74822"
@@ -262,6 +262,9 @@ theme.fs = lain.widget.fs({
   end
 })
 
+-- Github contributions
+local github_contributions_widget = require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
+
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_battery)
 local bat = lain.widget.bat({
@@ -372,7 +375,7 @@ function theme.at_screen_connect(s)
   s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
   -- Create the wibox
-  s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(15), bg = theme.bg_normal, fg = theme.fg_normal })
+  s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(16), bg = theme.bg_normal, fg = theme.fg_normal })
 
   -- Add widgets to the wibox
   s.mywibox:setup {
@@ -387,6 +390,7 @@ function theme.at_screen_connect(s)
   s.mytasklist, -- Middle widget
   { -- Right widgets
   layout = wibox.layout.fixed.horizontal,
+  github_contributions_widget({username = 'mediocreeee'}),
   wibox.widget.systray(),
   --[[ using shapes
   pl(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, "#343434"),

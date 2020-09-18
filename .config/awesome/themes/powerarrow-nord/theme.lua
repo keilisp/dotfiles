@@ -15,8 +15,8 @@ local theme = {}
 theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-nord"
 theme.wallpaper = theme.dir .. "/wall.png"
 -- theme.font = "Hack 8.5"
-theme.font = "Monaco 8.5"
-theme.taglist_font = "FontAwesome 9"
+theme.font = "Monaco 8"
+theme.taglist_font = "Iosevka 9"
 theme.fg_normal = "#eceff4"
 theme.fg_focus = "#8FBCBB"
 theme.fg_urgent = "#d08770"
@@ -269,6 +269,9 @@ end
 )
 )
 
+-- Github contributions
+local github_contributions_widget = require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
+
 --[[ commented because it needs Gio/Glib >= 2.54
 --]]
 -- Battery
@@ -435,7 +438,7 @@ function theme.at_screen_connect(s)
   -- Create the wibox
   s.mywibox =
   awful.wibar(
-  {position = "top", opacity = 0.85, screen = s, height = dpi(15), bg = theme.bg_normal, fg = theme.fg_normal}
+  {position = "top", opacity = 0.85, screen = s, height = dpi(16), bg = theme.bg_normal, fg = theme.fg_normal}
   )
 
   -- Add widgets to the wibox
@@ -453,6 +456,8 @@ function theme.at_screen_connect(s)
 	{
 	  -- Right widgets
 	  layout = wibox.layout.fixed.horizontal,
+	  github_contributions_widget({username = 'mediocreeee'}),
+	  spr,
 	  wibox.widget.systray(),
 	  spr,
 	  arrl_ld,

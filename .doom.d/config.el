@@ -62,9 +62,12 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are
 
-;; jj --> esc
+;; jj, оо --> esc
 (setq key-chord-two-keys-delay 0.8)
 (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+(key-chord-mode 1)
+(setq key-chord-two-keys-delay 0.8)
+(key-chord-define evil-insert-state-map "оо" 'evil-normal-state)
 (key-chord-mode 1)
 
 (define-key evil-motion-state-map " " nil)
