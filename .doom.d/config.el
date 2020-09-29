@@ -36,6 +36,10 @@
 (use-package! evil-terminal-cursor-changer
   :hook (tty-setup . evil-terminal-cursor-changer-activate))
 
+;; Which-key global-mode
+(which-key-mode)
+
+;; Line number
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -43,7 +47,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type nil)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -62,12 +66,9 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are
 
-;; jj, оо --> esc
-(setq key-chord-two-keys-delay 0.8)
+;; jj --> esc
+(setq key-chord-two-keys-delay 1)
 (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
-(key-chord-mode 1)
-(setq key-chord-two-keys-delay 0.8)
-(key-chord-define evil-insert-state-map "оо" 'evil-normal-state)
 (key-chord-mode 1)
 
 (define-key evil-motion-state-map " " nil)
@@ -77,9 +78,6 @@
 (define-key evil-motion-state-map (kbd "SPC \/") 'ibuffer)
 ;; SPC [ to call path-completion
 ;; (define-key evil-motion-state-map (kbd "SPC [") 'company-files)
-
-;; Relative line numbers
-(setq doom-line-numbers-style 'relative)
 
 ;; Vim-like changing windows
 (define-key global-map (kbd "C-h") #'evil-window-left)
@@ -130,8 +128,11 @@
 	  ("WAITING" :foreground "#9f7efe" :weight normal :underline t)
 	  ("INPROGRESS" :foreground "#0098dd" :weight normal :underline t)
 	  ("DONE" :foreground "#50a14f" :weight normal :underline t)
-	  ("CANCELLED" :foreground "#ff6480" :weight normal :underline t))
-	))
+	  ("CANCELLED" :foreground "#ff6480" :weight normal :underline t)))
+  (setq org-fontify-quote-and-verse-blocks nil
+        org-fontify-whole-heading-line nil
+        org-hide-leading-stars nil
+        org-startup-indented nil))
 
 ;; Priorities
 (use-package! org-fancy-priorities
@@ -180,9 +181,9 @@
   (setq fancy-splash-image "~/pix/doom/stallman.png"))
 
 ;; Doom modeline
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
+;; (use-package doom-modeline
+;;   :ensure t
+;;   :init (doom-modeline-mode 1))
 
 ;; Speed type
 (use-package speed-type
@@ -203,7 +204,7 @@
 
 ;; Xclip mode everywhere
 (define-globalized-minor-mode my-global-xclip-mode xclip-mode
-  (lambda () (xclip-mode 1)))
+  (lambda ()  (xclip-mode 1)))
 (my-global-xclip-mode 1)
 
 ;; set specific browser to open links

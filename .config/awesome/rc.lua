@@ -669,14 +669,14 @@ local appsmap = {
 	"nvim"
   },
   {
-	"E",
+	"e",
 	function()
 	  awful.util.spawn("emacs")
 	end,
 	"emacs gui"
   },
   {
-	"e",
+	"E",
 	function()
 	  awful.util.spawn("termite -e 'emacs -nw'")
 	end,
@@ -746,14 +746,14 @@ local appsmap = {
 	function()
 	  awful.util.spawn(browser)
 	end,
-	browser
+	"browser"
   },
   {
 	"B",
 	function()
 	  awful.util.spawn(browser .. " --incognito")
 	end,
-	browser
+	"browser incognito"
   },
   {
 	"s",
@@ -767,7 +767,7 @@ local appsmap = {
 	function()
 	  awful.util.spawn("virtualbox")
 	end,
-	browser
+	"VirtualBox"
   }
 }
 
@@ -1731,4 +1731,4 @@ end
 
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
--- awful.spawn.with_shell("compton --config  $HOME/.config/compton/compton.conf")
+-- awful.spawn.with_shell("compton --config  $HOME/.config/picom/picom.conf")
