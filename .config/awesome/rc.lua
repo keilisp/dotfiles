@@ -684,28 +684,28 @@ local appsmap = {
   },
   {"separator", "Media"},
   {
-	"D",
+	"d",
 	function()
 	  awful.util.spawn("discord")
 	end,
 	"discord-gui"
   },
   {
-	"d",
+	"D",
 	function()
 	  awful.util.spawn(terminal .. " -e cordless")
 	end,
 	"discord-tui"
   },
   {
-	"T",
+	"t",
 	function()
 	  awful.util.spawn("telegram-desktop")
 	end,
 	"telegram-gui"
   },
   {
-	"t",
+	"T",
 	function()
 	  awful.util.spawn(terminal .. " -e tg")
 	end,
@@ -1517,10 +1517,10 @@ awful.rules.rules = {
   --     rule = {class = "Opera"},
   --     properties = {screen = 1, tag = my_tags.tags[1].names[1]}
   -- },
-  {
-	rule = {class = editorgui},
-	properties = {screen = 1, tag = my_tags.tags[1].names[2]}
-  },
+  -- {
+  -- rule = {class = editorgui},
+  -- properties = {screen = 1, tag = my_tags.tags[1].names[2]}
+  -- },
   {
 	rule = {class = "TelegramDesktop"},
 	properties = {screen = 2, tag = my_tags.tags[2].names[3]}
@@ -1731,4 +1731,4 @@ end
 
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
--- awful.spawn.with_shell("compton --config  $HOME/.config/picom/picom.conf")
+-- awful.spawn.with_shell("picom --config  $HOME/.config/picom/picom.conf")

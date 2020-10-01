@@ -28,6 +28,8 @@
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'ewal-doom-one)
 (setq doom-theme 'doom-gruvbox)
+;; (require 'ayu-theme)
+;; (load-theme 'ayu-light t)
 
 ;; Terminal mode
 (unless (display-graphic-p)
@@ -67,9 +69,12 @@
 ;; they are
 
 ;; jj --> esc
-(setq key-chord-two-keys-delay 1)
+(setq key-chord-two-keys-delay 0.9)
 (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
 (key-chord-mode 1)
+
+;; disable o/O continue commented lines
+(setq +evil-want-o/O-to-continue-comments nil)
 
 (define-key evil-motion-state-map " " nil)
 ;; SPC k to save buffer
@@ -199,8 +204,8 @@
   (flycheck-add-mode 'javascript-standard 'js2-mode))
 
 ;; Higlight colors everywhere
-(define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
-  (lambda () (rainbow-mode 1)))
+;; (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
+;;   (lambda () (rainbow-mode 1)))
 
 ;; Xclip mode everywhere
 (define-globalized-minor-mode my-global-xclip-mode xclip-mode
