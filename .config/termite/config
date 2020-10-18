@@ -66,44 +66,96 @@ browser = lynx
 # color14 = #8fbcbb
 # color15 = #eceff4
 
+# [colors]
+# # hard contrast: background = #1d2021
+# background = #282828
+# # soft contrast: background = #32302f
+# foreground = #ebdbb2
+# foreground_bold = #ebdbb2
+
+# # dark0 + gray
+# color0 = #282828
+# color8 = #928374
+
+# # neutral_red + bright_red
+# color9 = #fb4934
+# color1 = #fb4934
+
+# # neutral_green + bright_green
+# color10 = #b8bb26
+# color2 = #b8bb26
+
+# # neutral_yellow + bright_yellow
+# color11 = #fabd2f
+# color3 = #fabd2f
+
+# # neutral_blue + bright_blue
+# color12 = #83a598
+# color4 = #83a598
+
+# # neutral_purple + bright_purple
+# color13 = #d3869b
+# color5 = #d3869b
+
+# # neutral_aqua + faded_aqua
+# color14 = #8ec07c
+# color6 = #8ec07c
+
+# # light4 + light1
+# color15 = #ebdbb2
+# color7 = #a89984
+
+# Start flavours
 [colors]
-# hard contrast: background = #1d2021
-background = #282828
-# soft contrast: background = #32302f
-foreground = #ebdbb2
-foreground_bold = #ebdbb2
+# Base16 Tomorrow
+# Author: Chris Kempson (http://chriskempson.com)
 
-# dark0 + gray
-color0 = #282828
-color8 = #928374
+foreground          = #4d4d4c
+foreground_bold     = #4d4d4c
+cursor              = #4d4d4c
+cursor_foreground   = #ffffff
+background          = #ffffff
 
-# neutral_red + bright_red
-color9 = #fb4934
-color1 = #fb4934
+# 16 color space
 
-# neutral_green + bright_green
-color10 = #b8bb26
-color2 = #b8bb26
+# Black, Gray, Silver, White
+color0  = #ffffff
+color8  = #8e908c
+color7  = #4d4d4c
+color15 = #1d1f21
 
-# neutral_yellow + bright_yellow
-color11 = #fabd2f
-color3 = #fabd2f
+# Red
+color1  = #c82829
+color9  = #c82829
 
-# neutral_blue + bright_blue
-color12 = #83a598
-color4 = #83a598
+# Green
+color2  = #718c00
+color10 = #718c00
 
-# neutral_purple + bright_purple
-color13 = #d3869b
-color5 = #d3869b
+# Yellow
+color3  = #eab700
+color11 = #eab700
 
-# neutral_aqua + faded_aqua
-color14 = #8ec07c
-color6 = #8ec07c
+# Blue
+color4  = #4271ae
+color12 = #4271ae
 
-# light4 + light1
-color15 = #ebdbb2
-color7 = #a89984
+# Purple
+color5  = #8959a8
+color13 = #8959a8
+
+# Teal
+color6  = #3e999f
+color14 = #3e999f
+
+# Extra colors
+color16 = #f5871f
+color17 = #a3685a
+color18 = #e0e0e0
+color19 = #d6d6d6
+color20 = #969896
+color21 = #282a2e
+# End flavours
 
 # vim: ft=dosini cms=#%s
 

@@ -46,6 +46,7 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'arcticicestudio/nord-vim'
 " Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-repeat'
+Plugin 'chriskempson/base16-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -119,10 +120,11 @@ filetype indent on
 if has ('termguicolors')
   set termguicolors
 endif
-set background=dark
-let g:gruvbox_contrast_dark='soft'
-colorscheme gruvbox
+" set background=dark
+" let g:gruvbox_contrast_dark='soft'
+" colorscheme gruvbox
 " colorscheme wal
+colorscheme base16-default-light
 
 " Set font
 " set guifont=DejaVu\ Sans\ Mono\ 10
@@ -262,10 +264,10 @@ hi Normal guibg=NONE ctermbg=NONE
 inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
 
 " LaTeX preview setup
-let g:livepreview_previewer = 'zathura'
-map <Leader>p :LLPStartPreview
-" To prevent conceal in LaTeX files
-let g:tex_conceal = ''
+" let g:livepreview_previewer = 'zathura'
+" map <Leader>p :LLPStartPreview
+" " To prevent conceal in LaTeX files
+" let g:tex_conceal = ''
 " To prevent conceal in any file
 " set conceallevel = 0
 
@@ -290,3 +292,8 @@ nnoremap S :%s//g<Left><Left>
 
 " Optimize file for audiosplit
 nnoremap F :% norm $Bd$0Pa jj
+
+"  Yank and comment out
+nnoremap <Leader>y :yank \| Commentary<CR>
+vnoremap <Leader>y :'<,'>yank \| '<,'>Commentary<CR>
+

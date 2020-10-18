@@ -179,8 +179,8 @@ alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
 #utils
-alias neofetch='neofetch --w3m $HOME/pix/wallpapers/Art/Other/planets.jpg'
-# alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
+# alias neofetch='neofetch --w3m $HOME/pix/wallpapers/Art/Other/planets.jpg'
+alias neofetch='neofetch --ascii $HOME/pix/ascii/arch-test.txt'
 alias passmenu="passmenu -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'"
 alias ytv='youtube-dl -o "~/vids/%(title)s.%(ext)s"' #Download video link
 alias yta='youtube-dl -o "~/musx/%(title)s.%(ext)s" -x --audio-format mp3' #Download only audio

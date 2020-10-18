@@ -89,19 +89,20 @@ local themes = {
   "powerarrow-nord", -- 2
   "powerarrow-wal", -- 3
   "powerarrow-blue", -- 4
-  "powerarrow", -- 5
-  "multicolor", -- 6
-  "blackburn", -- 7
-  "copland", -- 8
-  "dremora", -- 9
-  "holo", -- 10
-  "rainbow", -- 11
-  "steamburn", -- 12
-  "vertex" -- 13
+  "powerarrow-tomorrow", -- 5
+  "powerarrow", -- 6
+  "multicolor", -- 7
+  "blackburn", -- 8
+  "copland", -- 9
+  "dremora", -- 10
+  "holo", -- 11
+  "rainbow", -- 12
+  "steamburn", -- 13
+  "vertex" -- 14
 }
 
 -- choose your theme here
-local chosen_theme = themes[1]
+local chosen_theme = themes[5]
 
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
@@ -120,7 +121,7 @@ local filemanager = "thunar"
 local mailclient = "geary"
 local mediaplayer = "mpv"
 local scrlocker = "betterlockscreen"
-local terminal = "st"
+local terminal = "alacritty"
 local virtualmachine = "virtualbox"
 
 -- awesome variables
@@ -203,6 +204,51 @@ awful.util.terminal = terminal
 --   }
 -- }
 
+my_tags = {
+  tags = {
+	{
+	  names = {
+		"   Ⅰ   ",
+		"   Ⅱ   ",
+		"   Ⅲ   ",
+		"   Ⅳ   ",
+		"   Ⅴ   ",
+		"   Ⅵ   ",
+		"   Ⅶ   ",
+		"   Ⅷ   "
+	  },
+	  layout = {
+		awful.layout.layouts[1],
+		awful.layout.layouts[1],
+		awful.layout.layouts[1],
+		awful.layout.layouts[2],
+		awful.layout.layouts[2],
+		awful.layout.layouts[2],
+		awful.layout.layouts[1],
+		awful.layout.layouts[1]
+	  }
+	},
+	{
+	  names = {
+		"   Ⅰ   ",
+		"   Ⅱ   ",
+		"   Ⅲ   ",
+		"   Ⅳ   ",
+		"   Ⅴ   ",
+		"   Ⅵ   ",
+	  },
+	  layout = {
+		awful.layout.layouts[1],
+		awful.layout.layouts[1],
+		awful.layout.layouts[1],
+		awful.layout.layouts[1],
+		awful.layout.layouts[1],
+		awful.layout.layouts[1]
+	  }
+	}
+  }
+}
+
 -- VERTICAL SETUP
 
 -- my_tags = {
@@ -250,54 +296,50 @@ awful.util.terminal = terminal
 --   }
 -- }
 
-
--- TEST
--- Ⅰ	Ⅱ	Ⅲ	Ⅳ	Ⅴ	Ⅵ	Ⅶ	Ⅷ	Ⅸ	Ⅹ	Ⅺ	Ⅻ
-
-my_tags = {
-  tags = {
-	{
-	  names = {
-		"   Ⅰ   ",
-		"   Ⅱ   ",
-		"   Ⅲ   ",
-		"   Ⅳ   ",
-		"   Ⅴ   ",
-		"   Ⅵ   ",
-		"   Ⅶ   ",
-		"   Ⅷ   "
-	  },
-	  layout = {
-		awful.layout.layouts[1],
-		awful.layout.layouts[1],
-		awful.layout.layouts[1],
-		awful.layout.layouts[2],
-		awful.layout.layouts[2],
-		awful.layout.layouts[2],
-		awful.layout.layouts[1],
-		awful.layout.layouts[1]
-	  }
-	},
-	{
-	  names = {
-		"   Ⅰ   ",
-		"   Ⅱ   ",
-		"   Ⅲ   ",
-		"   Ⅳ   ",
-		"   Ⅴ   ",
-		"   Ⅵ   ",
-	  },
-	  layout = {
-		awful.layout.layouts[5],
-		awful.layout.layouts[5],
-		awful.layout.layouts[5],
-		awful.layout.layouts[5],
-		awful.layout.layouts[5],
-		awful.layout.layouts[5]
-	  }
-	}
-  }
-}
+-- my_tags = {
+--   tags = {
+--	{
+--	  names = {
+--		"   Ⅰ   ",
+--		"   Ⅱ   ",
+--		"   Ⅲ   ",
+--		"   Ⅳ   ",
+--		"   Ⅴ   ",
+--		"   Ⅵ   ",
+--		"   Ⅶ   ",
+--		"   Ⅷ   "
+--	  },
+--	  layout = {
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[2],
+--		awful.layout.layouts[1],
+--		awful.layout.layouts[1]
+--	  }
+--	},
+--	{
+--	  names = {
+--		"   Ⅰ   ",
+--		"   Ⅱ   ",
+--		"   Ⅲ   ",
+--		"   Ⅳ   ",
+--		"   Ⅴ   ",
+--		"   Ⅵ   ",
+--	  },
+--	  layout = {
+--		awful.layout.layouts[5],
+--		awful.layout.layouts[5],
+--		awful.layout.layouts[5],
+--		awful.layout.layouts[5],
+--		awful.layout.layouts[5],
+--		awful.layout.layouts[5]
+--	  }
+--	}
+--   }
+-- }
 
 
 awful.layout.suit.tile.left.mirror = true
@@ -678,7 +720,7 @@ local appsmap = {
   {
 	"E",
 	function()
-	  awful.util.spawn("termite -e 'emacs -nw'")
+	  awful.util.spawn(terminal .. " -e emacs -nw")
 	end,
 	"emacs tui"
   },
@@ -752,6 +794,7 @@ local appsmap = {
 	"B",
 	function()
 	  awful.util.spawn(browser .. " --incognito")
+	  -- awful.util.spawn(browser .. " --private-window")
 	end,
 	"browser incognito"
   },
@@ -868,7 +911,8 @@ awful.key(
 function()
   awful.spawn(
   string.format(
-  "dmenu_run -nb '#282828' -sf '#fabd2f' -sb '#504945' -nf '#a89984' -fn 'Monaco:pixelsize=13'",
+  "dmenu_run -nb '#ffffff' -sf '#fabd2f' -sb '#4271ae' -nf '#eab700' -fn 'Monaco:pixelsize=12'",
+  -- "dmenu_run -nb '#282828' -sf '#fabd2f' -sb '#504945' -nf '#a89984' -fn 'Monaco:pixelsize=13'",
   -- "dmenu_run -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'",
   beautiful.bg_normal,
   beautiful.fg_normal,

@@ -28,11 +28,11 @@ color info red black bold
 color article white default bold
 
 
-browser firefox
+browser brave
 macro , open-in-browser
-macro t set browser "qndl" ; open-in-browser ; set browser firefox
-macro v set browser "setsid -f mpv --no-terminal" ; open-in-browser ; set browser firefox
-macro c set browser "xsel -b <<<" ; open-in-browser ; set browser firefox
+macro t set browser "qndl" ; open-in-browser ; set browser brave
+macro v set browser "setsid -f mpv --no-terminal" ; open-in-browser ; set browser brave
+macro c set browser "xsel -b <<<" ; open-in-browser ; set browser brave
 
 highlight all "---.*---" yellow
 highlight feedlist ".*(0/0))" black
