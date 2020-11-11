@@ -29,6 +29,7 @@
 ; (gtk_accel_path "<Actions>/ThunarStandardView/delete" "")
 ; (gtk_accel_path "<Actions>/ThunarActions/uca-action-1586476768436815-1" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/select-by-pattern" "<Primary>s")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/b84f5aaa06aa7610ba1867df2f999b6d" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/2614bbdad18f59bf3dc3758185a7169b" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/close-tab" "<Primary>w")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/f0b916f66cd7dcf192db5a6dd7488944" "")

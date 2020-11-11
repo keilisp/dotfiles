@@ -1,9 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Druk Alexander" user-mail-address
@@ -19,27 +15,53 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "Mononoki Nerd Font" :size 12))
-(setq doom-font (font-spec :family "Monaco"
-                           :size 12))
-;; (setq doom-font (font-spec :family "Iosevka" :size 12))
+;; (setq doom-font (font-spec :family "Monaco"
+;;                            :size 12))
+
+(setq doom-font (font-spec :family "Monaco" :size 12)
+      doom-big-font (font-spec :family "Monaco")
+      doom-variable-pitch-font (font-spec :family "Libre Baskerville" :size 12)
+      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'ewal-doom-one)
-;; (setq doom-theme 'doom-gruvbox)
 (setq doom-theme 'doom-tomorrow-day)
+;; (setq doom-theme 'doom-tomorrow-day)
 ;; (require 'ayu-theme)
-;; (load-theme 'ayu-light t)
-
 ;; Terminal mode
 (unless (display-graphic-p)
-  ;; (setq doom-theme 'doom-gruvbox))
-  (setq doom-theme 'doom-tomorrow-night))
+  (setq doom-theme 'doom-gruvbox)
+  ;; (setq doom-theme 'doom-tomorrow-night))
+  (use-package! evil-terminal-cursor-changer
+    :hook (tty-setup . evil-terminal-cursor-changer-activate)))
 
-(use-package! evil-terminal-cursor-changer
-  :hook (tty-setup . evil-terminal-cursor-changer-activate))
+;; Set theme based on time
+;; (defvar install-theme-loading-times nil
+;;   "An association list of time strings and theme names.
+;; The themes will be loaded at the specified time every day.")
+;; (defvar install-theme-timers nil)
+
+;; (defun install-theme-loading-at-times ()
+;;   "Set up theme loading according to `install-theme-loading-at-times`"
+;;   (interactive)
+;;   (dolist (timer install-theme-timers)
+;;     (cancel-timer timer))
+;;   (setq install-theme-timers nil)
+;;   (dolist (time-theme install-theme-loading-times)
+;;     (add-to-list 'install-theme-timers
+;;                  (run-at-time (car time-theme) (* 60 60 24) 'load-theme (cdr time-theme)))))
+
+;; (setq install-theme-loading-times '(("9:00am" . doom-tomorrow-day)
+;;                                     ("8:00pm" . doom-gruvbox)))
+
+(setq calendar-location-name "Europe, Kiev")
+(setq calendar-latitude 50.43)
+(setq calendar-longitude 30.52)
+(require 'theme-changer)
+(change-theme 'doom-tomorrow-day 'doom-gruvbox)
+
 
 ;; Which-key global-mode
 (which-key-mode)
@@ -75,6 +97,8 @@
 (setq key-chord-two-keys-delay 0.9)
 (key-chord-define evil-insert-state-map "jj"
                   'evil-normal-state)
+(key-chord-define evil-insert-state-map "оо"
+                  'evil-normal-state)
 (key-chord-mode 1)
 
 ;; disable o/O continue commented lines
@@ -86,7 +110,16 @@
 (define-key evil-motion-state-map (kbd "SPC k") 'save-buffer)
 ;; SPC \ to call ibuffer
 ;; (define-key evil-motion-state-map (kbd "SPC \/") 'ibuffer)
-(define-key evil-motion-state-map (kbd "SPC DEL") 'ibuffer)
+;; (define-key evil-motion-state-map (kbd "SPC DEL") 'ibuffer)
+(map! :leader :desc
+      "SPC / to open ibuffer" "\/" 'ibuffer)
+
+;; (general-define-key
+;;  :states 'normal
+;;  :keymaps 'override
+;;  :prefix "SPC"
+;;  "\/" 'ibuffer)
+
 ;; SPC [ to call path-completion
 ;; (define-key evil-motion-state-map (kbd "SPC [") 'company-files)
 
@@ -94,18 +127,23 @@
 (defun yank-and-comment ()
   (interactive)
   (call-interactively 'evil-yank)
-  (call-interactively 'evilnc-comment-operator))
+  (call-interactively 'evilnc-comment-or-uncomment-lines))
 
-(define-key evil-visual-state-map (kbd "SPC y") 'yank-and-comment)
+(general-define-key :states 'motion
+                    :prefix "SPC"
+                    "y" 'yank-and-comment)
+
 
 ;; Vim-like changing windows
-;; (define-key global-map (kbd "C-h") #'evil-window-left)
-;; (define-key global-map (kbd "C-j") #'evil-window-down)
-;; (define-key global-map (kbd "C-k") #'evil-window-up)
-;; (define-key global-map (kbd "C-l") #'evil-window-right)
+(define-key global-map (kbd "C-h") #'evil-window-left)
+(define-key global-map (kbd "C-j") #'evil-window-down)
+(define-key global-map (kbd "C-k") #'evil-window-up)
+(define-key global-map (kbd "C-l") #'evil-window-right)
 
 ;; Projectile folders
+(projectile-mode +1)
 (setq projectile-project-search-path '("~/scripts/" "~/code/projects/" "~/code/"))
+(setq projectile-globally-ignored-directories '("~/doom-emacs/"))
 
 ;; Resizing windows
 (global-set-key (kbd "<C-down>")
@@ -118,14 +156,14 @@
                 'enlarge-window-horizontally)
 
 ;; Reverse mode
-;; (use-package! reverse-im
-;;   :init :custom
-;;   (reverse-im-input-methods '("russian-computer"))
-;;   :config (reverse-im-mode t))
+(use-package! reverse-im
+  :init :custom
+  (reverse-im-input-methods '("russian-computer"))
+  :config (reverse-im-mode t))
 
 
 ;; Format lisp code
-(require 'srefactor)
+;; (require 'srefactor)
 (require 'srefactor-lisp)
 
 ;; OPTIONAL: ADD IT ONLY IF YOU USE C/C++.
@@ -182,14 +220,6 @@
 (use-package! org-fancy-priorities
   :hook (org-mode . org-fancy-priorities-mode):config
   (setq org-fancy-priorities-list '("⚡" ,"⚡" ,"⚡")))
-
-;; Make use-package to always defer loading packages unless they are explicitly used
-;; (with-eval-after-load 'use-package
-;;   (setq use-package-always-defer t
-;;         use-package-verbose t
-;;         use-package-expand-minimally t
-;;         use-package-compute-statistics t
-;;         use-package-enable-imenu-support t))
 
 ;; Auto-rename tag
 (use-package instant-rename-tag
@@ -253,26 +283,6 @@
 ;; set specific browser to open links
 (setq browse-url-browser-function 'browse-url-firefox)
 
-;; super agenda
-;; (use-package org-super-agenda
-;;   :after org-agenda
-;;   :init
-;;   (setq org-super-agenda-groups '((:name "Today"
-;;                                    :time-grid t
-;;                                    :scheduled today)
-;;                                   (:name "Due today"
-;;                                    :deadline today)
-;;                                   (:name "Important"
-;;                                    :priority "A")
-;;                                   (:name "Overdue"
-;;                                    :deadline past)
-;;                                   (:name "Due soon"
-;;                                    :deadline future)
-;;                                   (:name "Big Outcomes"
-;;                                    :tag "bo")))
-;;   :config
-;;   (org-super-agenda-mode))
-
 ;; multiedit
 (require 'evil-multiedit)
 ;; Highlights all matches of the selection in the buffer.
@@ -311,17 +321,6 @@
 
 
 ;; LaTeX
-;; (setq TeX-save-query nil
-;;       TeX-show-compilation t
-;;       TeX-command-extra-options "-shell-escape")
-;; (after! latex
-;;   (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t)))
-
-;; (setq +latex-viewers '(zathura pdf-tools evince okular skim sumatrapdf))
-
-;; (use-package! evil-tex
-;;   :hook (LaTeX-mode . evil-tex-mode))
-
 (latex-preview-pane-enable)
 
 ;; Force splits to open on the right
@@ -343,30 +342,18 @@
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
 
 
-;; (setq-default indent-tabs-mode t)
-;; (custom-set-variables
-;;  ;; custom-set-variables was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(elfeed-feeds nil)
-;;  '(package-selected-packages
-;;    '(rust-auto-use rustic flycheck-rust flymake-rust clippy typescript-mode tern-auto-complete speed-type reverse-im peep-dired path-iterator org-super-agenda org-plus-contrib org-fancy-priorities lsp-mode key-chord js2-mode exec-path-from-shell evil-multiedit doom-modeline))
-;;  '(reverse-im-input-methods '("russian-computer")))
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  )
-
-
 ;; Rustic flycheck
 (remove-hook 'rustic-mode-hook 'flycheck-mode)
 
 ;; TAB
+
+;; Make Tab always indent
+(setq tab-always-indent 'complete)
+
+;; Tab code and path autocompletion
+(setq company-backends '((company-files company-capf company-dabbrev-code)))
 (after! evil
-  (map! :n "TAB"#'indent-for-tab-command))
+  (map! :n "TAB"'company-indent-or-complete-common))
 
 ;; Racer
 (add-hook 'rust-mode-hook #'racer-mode)
@@ -396,3 +383,17 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; So long mode
+(setq large-file-warning-threshold 100000000000000)
+
+;; When saving a file that start with '#!', make it executable
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
+;; Treat CamelCaseSubWords as separate words in every programming mode
+;; (add-hook 'prog-mode-hook 'subword-mode)
+
+(defun pdf-view-save-page ()
+  "Save the current page number for the document."
+  (interactive)
+  (message (number-to-string (pdf-view-current-page))))

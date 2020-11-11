@@ -107,54 +107,54 @@ browser = lynx
 
 # Start flavours
 [colors]
-# Base16 Tomorrow
-# Author: Chris Kempson (http://chriskempson.com)
+# Base16 Gruvbox dark, medium
+# Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
-foreground          = #4d4d4c
-foreground_bold     = #4d4d4c
-cursor              = #4d4d4c
-cursor_foreground   = #ffffff
-background          = #ffffff
+foreground          = #d5c4a1
+foreground_bold     = #d5c4a1
+cursor              = #d5c4a1
+cursor_foreground   = #282828
+background          = #282828
 
 # 16 color space
 
 # Black, Gray, Silver, White
-color0  = #ffffff
-color8  = #8e908c
-color7  = #4d4d4c
-color15 = #1d1f21
+color0  = #282828
+color8  = #665c54
+color7  = #d5c4a1
+color15 = #fbf1c7
 
 # Red
-color1  = #c82829
-color9  = #c82829
+color1  = #fb4934
+color9  = #fb4934
 
 # Green
-color2  = #718c00
-color10 = #718c00
+color2  = #b8bb26
+color10 = #b8bb26
 
 # Yellow
-color3  = #eab700
-color11 = #eab700
+color3  = #fabd2f
+color11 = #fabd2f
 
 # Blue
-color4  = #4271ae
-color12 = #4271ae
+color4  = #83a598
+color12 = #83a598
 
 # Purple
-color5  = #8959a8
-color13 = #8959a8
+color5  = #d3869b
+color13 = #d3869b
 
 # Teal
-color6  = #3e999f
-color14 = #3e999f
+color6  = #8ec07c
+color14 = #8ec07c
 
 # Extra colors
-color16 = #f5871f
-color17 = #a3685a
-color18 = #e0e0e0
-color19 = #d6d6d6
-color20 = #969896
-color21 = #282a2e
+color16 = #fe8019
+color17 = #d65d0e
+color18 = #3c3836
+color19 = #504945
+color20 = #bdae93
+color21 = #ebdbb2
 # End flavours
 
 # vim: ft=dosini cms=#%s

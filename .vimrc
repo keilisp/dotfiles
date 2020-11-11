@@ -120,11 +120,11 @@ filetype indent on
 if has ('termguicolors')
   set termguicolors
 endif
-" set background=dark
-" let g:gruvbox_contrast_dark='soft'
-" colorscheme gruvbox
+set background=dark
+let g:gruvbox_contrast_dark='soft'
+colorscheme gruvbox
 " colorscheme wal
-colorscheme base16-default-light
+" colorscheme base16-default-light
 
 " Set font
 " set guifont=DejaVu\ Sans\ Mono\ 10

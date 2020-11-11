@@ -6,8 +6,9 @@ function run() {
 	fi
 }
 
+run "$HOME/.screenlayout/horizontalmonitorsetup.sh"
 # run "telegram-desktop"
-# run "picom"
+run "picom"
 # run "emacs --daemon"
 # run "discord"
 run "nm-applet"

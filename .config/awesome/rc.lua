@@ -98,11 +98,13 @@ local themes = {
   "holo", -- 11
   "rainbow", -- 12
   "steamburn", -- 13
-  "vertex" -- 14
+  "vertex", -- 14
+  "macos-bright",
+  "macos-dark"
 }
 
 -- choose your theme here
-local chosen_theme = themes[5]
+local chosen_theme = themes[1]
 
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
@@ -114,7 +116,7 @@ local modkey1 = "Control"
 
 -- personal variables
 --change these variables if you want
-local browser = "brave"
+local browser = "firefox"
 local editor = os.getenv("EDITOR") or "nvim"
 local editorgui = "Emacs"
 local filemanager = "thunar"
@@ -221,9 +223,9 @@ my_tags = {
 		awful.layout.layouts[1],
 		awful.layout.layouts[1],
 		awful.layout.layouts[1],
-		awful.layout.layouts[2],
-		awful.layout.layouts[2],
-		awful.layout.layouts[2],
+		awful.layout.layouts[1],
+		awful.layout.layouts[1],
+		awful.layout.layouts[1],
 		awful.layout.layouts[1],
 		awful.layout.layouts[1]
 	  }
@@ -236,6 +238,8 @@ my_tags = {
 		"   Ⅳ   ",
 		"   Ⅴ   ",
 		"   Ⅵ   ",
+		"   Ⅶ   ",
+		"   Ⅷ   "
 	  },
 	  layout = {
 		awful.layout.layouts[1],
@@ -713,14 +717,14 @@ local appsmap = {
   {
 	"e",
 	function()
-	  awful.util.spawn("emacs")
+	  awful.util.spawn("emacs --with-profile doom-emacs")
 	end,
 	"emacs gui"
   },
   {
 	"E",
 	function()
-	  awful.util.spawn(terminal .. " -e emacs -nw")
+	  awful.util.spawn("emacs --with-profile custom-emacs")
 	end,
 	"emacs tui"
   },
@@ -793,8 +797,8 @@ local appsmap = {
   {
 	"B",
 	function()
-	  awful.util.spawn(browser .. " --incognito")
-	  -- awful.util.spawn(browser .. " --private-window")
+	  -- awful.util.spawn(browser .. " --incognito")
+	  awful.util.spawn(browser .. " --private-window")
 	end,
 	"browser incognito"
   },
@@ -911,8 +915,8 @@ awful.key(
 function()
   awful.spawn(
   string.format(
-  "dmenu_run -nb '#ffffff' -sf '#fabd2f' -sb '#4271ae' -nf '#eab700' -fn 'Monaco:pixelsize=12'",
-  -- "dmenu_run -nb '#282828' -sf '#fabd2f' -sb '#504945' -nf '#a89984' -fn 'Monaco:pixelsize=13'",
+  -- "dmenu_run -nb '#ffffff' -sf '#fabd2f' -sb '#4271ae' -nf '#eab700' -fn 'Monaco:pixelsize=12'",
+  "dmenu_run -nb '#282828' -sf '#fabd2f' -sb '#504945' -nf '#a89984' -fn 'Monaco:pixelsize=13'",
   -- "dmenu_run -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'",
   beautiful.bg_normal,
   beautiful.fg_normal,

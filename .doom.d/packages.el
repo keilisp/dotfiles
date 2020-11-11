@@ -11,6 +11,7 @@
 
 (package! speed-type)
 (package! reverse-im)
+(package! theme-changer)
 (package! key-chord)
 (package! ewal)
 (package! ewal-doom-themes)
