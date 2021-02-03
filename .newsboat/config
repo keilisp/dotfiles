@@ -20,15 +20,15 @@ bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
 
-color listnormal cyan default
-color listfocus black yellow standout bold
-color listnormal_unread green default
-color listfocus_unread yellow default bold
-color info red black bold
+color listnormal blue default
+color listfocus black magenta bold
+color listnormal_unread magenta default
+color listfocus_unread cyan default bold
+color info magenta white bold
 color article white default bold
 
 
-browser firefox
+browser brave
 macro , open-in-browser
 macro t set browser "qndl" ; open-in-browser ; set browser brave
 macro v set browser "setsid -f mpv --no-terminal" ; open-in-browser ; set browser brave

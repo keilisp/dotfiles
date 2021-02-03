@@ -47,6 +47,8 @@ Plugin 'arcticicestudio/nord-vim'
 " Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-repeat'
 Plugin 'chriskempson/base16-vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'chasinglogic/modus-themes-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -120,11 +122,16 @@ filetype indent on
 if has ('termguicolors')
   set termguicolors
 endif
-set background=dark
-let g:gruvbox_contrast_dark='soft'
-colorscheme gruvbox
+set background=light
+
+" let g:solarized_termcolors=256
+colorscheme solarized
+
+" let g:gruvbox_contrast_dark='soft'
+" colorscheme gruvbox
 " colorscheme wal
 " colorscheme base16-default-light
+colorscheme modus-operandi
 
 " Set font
 " set guifont=DejaVu\ Sans\ Mono\ 10
@@ -294,6 +301,6 @@ nnoremap S :%s//g<Left><Left>
 nnoremap F :% norm $Bd$0Pa jj
 
 "  Yank and comment out
-nnoremap <Leader>y :yank \| Commentary<CR>
-vnoremap <Leader>y :'<,'>yank \| '<,'>Commentary<CR>
+nnoremap gC :yank \| Commentary<CR>
+vnoremap gC :'<,'>yank \| '<,'>Commentary<CR>
 

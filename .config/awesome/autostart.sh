@@ -7,10 +7,13 @@ function run() {
 }
 
 run "$HOME/.screenlayout/horizontalmonitorsetup.sh"
-# run "telegram-desktop"
+run "syncthing --no-browser"
+# run "$HOME/.screenlayout/verticalmonitorsetup.sh"
+run "telegram-desktop"
+run "dropbox"
+run "discord"
 run "picom"
-# run "emacs --daemon"
-# run "discord"
+run "emacs --daemon --with-profile doomacs"
 run "nm-applet"
 # run "barrier"
 run "devmon"
@@ -21,7 +24,6 @@ run "cargo run --manifest-path=$HOME/code/rust/markust/Cargo.toml"
 
 # run "volumeicon"
 # run "zathura ~/dox/books/Komandnaia_stroka_Linux.pdf"
-# run "discord"
 # run "rslsync"
 # run "emacs"
 

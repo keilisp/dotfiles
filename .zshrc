@@ -19,15 +19,20 @@ export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
 # Env vars
-export EDITOR='nvim'
-export VISUAL='nvim'
+# export EDITOR='nvim'
+# export VISUAL='nvim'
+export EDITOR='emacs'
+export VISUAL='emacs'
 export FZF_DEFAULT_OPTS='--layout=reverse --height 40%'
 
 # OWN SCRIPTS
 # add all subdirs to PATH
 # export PATH="$PATH:$(du "$HOME/scripts/" | cut -f2 | tr '/n' ':' | sed 's/:*$//')"
 export PATH=$PATH:$(du $HOME/scripts/ | grep -v 'node_modules\|.git\|.log' | cut -f2 | tr '\n' ':' | sed 's/:*$//')
+export PATH=$PATH:$HOME/.local/bin
 
+# Bat theme
+export BAT_THEME="ansi-light"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,

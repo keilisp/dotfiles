@@ -1,35 +1,18 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
-(setq user-full-name "Druk Alexander" user-mail-address
-      "druksasha@ukr.net")
+(setq user-full-name "Druk Alexander" user-mail-address "druksasha@ukr.net")
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "Monaco"
-;;                            :size 12))
+(setq doom-font (font-spec :family "Hack" :size 12)
+      doom-big-font (font-spec :family "Hack")
+      doom-variable-pitch-font (font-spec :family "Hack" :size 12)
+      doom-serif-font (font-spec :family "Hack" :weight 'light))
 
-(setq doom-font (font-spec :family "Monaco" :size 12)
-      doom-big-font (font-spec :family "Monaco")
-      doom-variable-pitch-font (font-spec :family "Libre Baskerville" :size 12)
-      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-;; (setq doom-theme 'ewal-doom-one)
-(setq doom-theme 'doom-tomorrow-day)
-;; (setq doom-theme 'doom-tomorrow-day)
-;; (require 'ayu-theme)
+(after! doom-themes
+  (setq doom-themes-enable-bold t doom-themes-enable-italic t))
+(custom-set-faces! '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+
 ;; Terminal mode
 (unless (display-graphic-p)
   (setq doom-theme 'doom-gruvbox)
@@ -37,200 +20,542 @@
   (use-package! evil-terminal-cursor-changer
     :hook (tty-setup . evil-terminal-cursor-changer-activate)))
 
-;; Set theme based on time
-;; (defvar install-theme-loading-times nil
-;;   "An association list of time strings and theme names.
-;; The themes will be loaded at the specified time every day.")
-;; (defvar install-theme-timers nil)
-
-;; (defun install-theme-loading-at-times ()
-;;   "Set up theme loading according to `install-theme-loading-at-times`"
-;;   (interactive)
-;;   (dolist (timer install-theme-timers)
-;;     (cancel-timer timer))
-;;   (setq install-theme-timers nil)
-;;   (dolist (time-theme install-theme-loading-times)
-;;     (add-to-list 'install-theme-timers
-;;                  (run-at-time (car time-theme) (* 60 60 24) 'load-theme (cdr time-theme)))))
-
-;; (setq install-theme-loading-times '(("9:00am" . doom-tomorrow-day)
-;;                                     ("8:00pm" . doom-gruvbox)))
-
 (setq calendar-location-name "Europe, Kiev")
 (setq calendar-latitude 50.43)
 (setq calendar-longitude 30.52)
-(require 'theme-changer)
-(change-theme 'doom-tomorrow-day 'doom-gruvbox)
+;; (require 'theme-changer)
+(use-package theme-changer)
+(change-theme 'modus-operandi 'modus-operandi)
 
+;; (change-theme 'modus-operandi 'modus-vivendi)
+;; (change-theme 'doom-tomorrow-day 'doom-gruvbox)
+;; (change-theme 'doom-solarized-light 'doom-solarized-light)
+
+;; Leader-key setup
+(map! "C-SPC" nil)
+(setq doom-leader-alt-key "C-SPC")
+(setq doom-localleader-alt-key "C-SPC m")
+;; Setup fringes
+(set-fringe-mode 5)
 
 ;; Which-key global-mode
 (which-key-mode)
 
 ;; Line number
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
-
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c g k').
-;; This will open documentation for it, including demos of how they are used.
-
-;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
-;; they are
 
 ;; jj --> esc
 (setq key-chord-two-keys-delay 0.9)
-(key-chord-define evil-insert-state-map "jj"
-                  'evil-normal-state)
-(key-chord-define evil-insert-state-map "оо"
-                  'evil-normal-state)
+(key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
 (key-chord-mode 1)
+;; (setq evil-escape-key-sequence "jj")
+
+;; oo --> esc
+(define-key evil-insert-state-map "о" #'mediocre/maybe-exit)
+
+(evil-define-command mediocre/maybe-exit ()
+  :repeat change
+  (interactive)
+  (let ((modified (buffer-modified-p)))
+    (insert "о")
+    (let ((evt (read-event nil 0.9)))
+      (cond
+       ((null evt) (message ""))
+       ((and (integerp evt) (char-equal evt ?о))
+        (delete-char -1)
+        (set-buffer-modified-p modified)
+        (push 'escape unread-command-events))
+       (t (setq unread-command-events (append unread-command-events
+                                              (list evt))))))))
 
 ;; disable o/O continue commented lines
-(setq +evil-want-o/O-to-continue-comments
-      nil)
+(setq +evil-want-o/O-to-continue-comments nil)
 
+;;; Keybindings
+;;; TODO rewrite with mediocre/leader-key-def what possible
 (define-key evil-motion-state-map " " nil)
 ;; SPC k to save buffer
-(define-key evil-motion-state-map (kbd "SPC k") 'save-buffer)
-;; SPC \ to call ibuffer
-;; (define-key evil-motion-state-map (kbd "SPC \/") 'ibuffer)
-;; (define-key evil-motion-state-map (kbd "SPC DEL") 'ibuffer)
-(map! :leader :desc
-      "SPC / to open ibuffer" "\/" 'ibuffer)
+(map! :leader :g :desc "save-buffer" "k" 'save-buffer)
+;; (define-key evil-motion-state-map (kbd "SPC k") 'save-buffer)
 
-;; (general-define-key
-;;  :states 'normal
-;;  :keymaps 'override
-;;  :prefix "SPC"
-;;  "\/" 'ibuffer)
+;; SPC ] to call ibuffer
+(map! :leader :g :desc "ibuffer" "]" 'ibuffer)
 
-;; SPC [ to call path-completion
-;; (define-key evil-motion-state-map (kbd "SPC [") 'company-files)
+;; Switch buffer with C-j
+(map! :leader :desc "switch-buffer" "C-j" 'counsel-switch-buffer)
 
-;; SPC y --> Yank and comment out
-(defun yank-and-comment ()
+;;; Rust
+(use-package rust-mode
+  :mode "\\.rs\\'"
+  :init (setq rust-format-on-save t))
+
+(use-package cargo
+  :defer t)
+
+;; Racer
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+(add-hook 'racer-mode-hook #'company-mode)
+(setq company-tooltip-align-annotations t)
+
+
+;; When saving a file that start with '#!', make it executable
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
+;; Treat CamelCaseSubWords as separate words in every programming mode
+;; (add-hook 'prog-mode-hook 'subword-mode)
+
+(defun pdf-view-save-page ()
+  "Save the current page number for the document."
   (interactive)
-  (call-interactively 'evil-yank)
-  (call-interactively 'evilnc-comment-or-uncomment-lines))
+  (message (number-to-string (pdf-view-current-page))))
 
-(general-define-key :states 'motion
-                    :prefix "SPC"
-                    "y" 'yank-and-comment)
+;; Highlight uncommitted changes (using diff-hl)
+
+;; (use-package diff-hl
+;;   :disabled)
+;; :config (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
+;; (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
+
+;; (use-package general
+;;   :config (general-evil-setup t)
+;;   (general-create-definer mediocre/leader-key-def
+;;     :keymaps '(normal insert visual emacs)
+;;     :prefix "SPC"))
+
+;; Bindings for jumping
+(map! :map evil-motion-state-map :m :desc "avy-goto-line" "gsl" 'avy-goto-line)
+(map! :map evil-visual-state-map :m :desc "avy-goto-line" "gsl" 'avy-goto-line)
+(map! :map evil-motion-state-map :m :desc "avy-goto-char-timer" "g SPC" 'avy-goto-char-timer)
+(map! :map evil-visual-state-map :m :desc "avy-goto-char-timer" "g SPC" 'avy-goto-char-timer)
+(map! :after evil :map evil-normal-state-map "gw" nil)
+(map! :after evil :map evil-visual-state-map "gw" nil)
+(map! :map evil-motion-state-map :m :desc "avy-goto-word-0" "gw" 'avy-goto-word-0)
+(map! :map evil-visual-state-map :m :desc "avy-goto-word-0" "gw" 'avy-goto-word-0)
+
+;;; Auto-saving changed file
+(use-package super-save
+  :defer 1
+  :diminish super-save-mode
+  :config
+  (super-save-mode +1)
+  (setq super-save-auto-save-when-idle t))
+
+;;; Minor Mode to override keybindings
+;; (defvar my-keys-minor-mode-map
+;;   (let ((map (make-sparse-keymap)))
+;;     (define-key map (kbd "C-j") 'counsel-switch-buffer)
+;;     map)
+;;   "my-keys-minor-mode keymap.")
+
+;; (define-minor-mode my-keys-minor-mode
+;;   "A minor mode so that my key settings override annoying major modes."
+;;   :init-value t
+;;   :lighter " my-keys")
+
+;; (my-keys-minor-mode 1)
+
+;; (defun my-minibuffer-setup-hook ()
+;;   (my-keys-minor-mode 0))
+
+;; (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
+
+;; Define yank-and-comment operator
+(evil-define-operator evil-yank-and-comment (beg end type register yank-handler)
+  (cond
+   ((and (fboundp 'cua--global-mark-active)
+         (fboundp 'cua-copy-region-to-global-mark)
+         (cua--global-mark-active))
+    (cua-copy-region-to-global-mark beg end))
+   ((eq type 'block)
+    (progn (evil-yank-rectangle beg end) (comment-or-uncomment-region beg end)))
+   ((memq type '(line screen-line))
+    (progn (evil-yank-lines beg end) (comment-or-uncomment-region beg end)))
+   (t
+    (progn (evil-yank-characters beg end) (comment-or-uncomment-region beg end)))))
+
+;; Yank-and-comment on gC
+(map! :after evil :map evil-normal-state-map "gC" nil)
+(map! :after evil :map evil-visual-state-map "gC" nil)
+(map! :map evil-motion-state-map :m :desc "yank-and-comment" "gC" 'evil-yank-and-comment)
+(map! :map evil-visual-state-map :m :desc "yank-and-comment" "gC" 'evil-yank-and-comment)
 
 
-;; Vim-like changing windows
-(define-key global-map (kbd "C-h") #'evil-window-left)
-(define-key global-map (kbd "C-j") #'evil-window-down)
-(define-key global-map (kbd "C-k") #'evil-window-up)
-(define-key global-map (kbd "C-l") #'evil-window-right)
+;; Additional documentatation
+(map! :leader :m
+      "cm" 'man
+      "cM" 'man-follow
+      "c," 'rustdoc-search)
+
+
+;; Bindings for vhanging windows
+(map! :leader :g :desc "window-left" "<left>" 'evil-window-left)
+(map! :leader :g :desc "window-down" "<down>" 'evil-window-down)
+(map! :leader :g :desc "window-up" "<up>" 'evil-window-up)
+(map! :leader :g :desc "window-right" "<right>" 'evil-window-right)
+
+;; Resizing windows
+(map! :g :desc "enlarge-left" "<C-left>" 'enlarge-window-horizontally)
+(map! :g :desc "shrink-down" "<C-down>" 'shrink-window)
+(map! :g :desc "enlarge-top" "<C-up>" 'enlarge-window)
+(map! :g :desc "shring-right" "<C-right>" 'shrink-window-horizontally)
+
 
 ;; Projectile folders
 (projectile-mode +1)
 (setq projectile-project-search-path '("~/scripts/" "~/code/projects/" "~/code/"))
-(setq projectile-globally-ignored-directories '("~/doom-emacs/"))
 
-;; Resizing windows
-(global-set-key (kbd "<C-down>")
-                'shrink-window)
-(global-set-key (kbd "<C-up>")
-                'enlarge-window)
-(global-set-key (kbd "<C-right>")
-                'shrink-window-horizontally)
-(global-set-key (kbd "<C-left>")
-                'enlarge-window-horizontally)
 
 ;; Reverse mode
 (use-package! reverse-im
-  :init :custom
-  (reverse-im-input-methods '("russian-computer"))
+  :init
+  :custom (reverse-im-input-methods '("russian-computer"))
   :config (reverse-im-mode t))
 
+;; Localization
+(use-package mule
+  :defer 0.1
+  :config
+  (prefer-coding-system 'utf-8)
+  (set-language-environment "UTF-8")
+  (set-terminal-coding-system 'utf-8))
 
-;; Format lisp code
-;; (require 'srefactor)
-(require 'srefactor-lisp)
+(use-package ispell
+  :defer t
+  :custom
+  ;; (ispell-local-dictionary "ru_RU")
+  (ispell-local-dictionary-alist
+   '(("russian"
+      "[АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯабвгдеёжзийклмнопрстуфхцчшщьыъэюяіїєґ’A-Za-z]"
+      "[^АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯабвгдеёжзийклмнопрстуфхцчшщьыъэюяіїєґ’A-Za-z]"
+      "[-']"  nil ("-d" "uk_UA,ru_RU,en_US") nil utf-8)))
+  ;; (ispell-program-name "aspell")
+  (ispell-program-name "hunspell")
+  (ispell-dictionary "english")
+  ;; (ispell-dictionary "russian")
+  ;; (ispell-really-aspell t)
+  ;; (ispell-really-hunspell nil)
+  (ispell-really-aspell nil)
+  (ispell-really-hunspell t)
+  (ispell-encoding8-command t)
+  (ispell-silently-savep t))
 
-;; OPTIONAL: ADD IT ONLY IF YOU USE C/C++.
-(semantic-mode 1) ;; -> this is optional for Lisp
+;; (use-package flyspell
+;;   :defer t
+;;   :custom
+;;   (flyspell-delay 1))
 
-(add-hook 'lisp-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook
-                      (lambda ()
-                        (call-interactively #'srefactor-lisp-format-buffer)))))
+(map! :i "C-i" #'flyspell-auto-correct-word)
+
+;; Emacs Lisp
+(use-package lisp
+  :hook (after-save . check-parens))
+
+(use-package highlight-quoted
+  :ensure t
+  :hook (emacs-lisp-mode . highlight-quoted-mode))
+
+(use-package suggest :ensure t
+  :defer t)
+
+(use-package ipretty
+  :defer t
+  :ensure t
+  :config (ipretty-mode 1))
+
+(use-package google-translate
+  :general
+  ('normal
+   ;; '(markdown-mode-map org-mode-map)
+   "z t" #'mediocre/google-translate-at-point
+   "z T" #'google-translate-smooth-translate)
+  :commands (google-translate-smooth-translate)
+  :custom
+  (google-translate-backend-method 'curl)
+  :config
+  (defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130))
+  (defun mediocre/google-translate-at-point (arg)
+    "Translate word at point. If prefix is provided, do reverse translation"
+    (interactive "P")
+    (if arg
+        (google-translate-at-point-reverse)
+      (google-translate-at-point)))
+
+  (require 'google-translate-default-ui)
+  (require 'google-translate-smooth-ui)
+  (setq google-translate-show-phonetic t)
+
+  (setq google-translate-default-source-language "en"
+        google-translate-default-target-language "ru")
+
+  (setq google-translate-translation-directions-alist '(("en" . "ru") ("ru" . "en")))
+  ;; auto-toggle input method
+  (setq google-translate-input-method-auto-toggling t
+        google-translate-preferable-input-methods-alist '((nil . ("en"))
+                                                          (russian-computer . ("ru"))))
+  )
+
+(require 'google-translate)
+(defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130))
+(setq google-translate-backend-method 'curl)
+
+;; (require 'elisp-format)
+;; (add-hook 'emacs-lisp-mode-hook (lambda ()
+;;                                   (add-hook 'before-save-hook (lambda ()
+;;                                                                 (call-interactively
+;;                                                                  #'elisp-format-buffer)))))
+
 
 ;; Format on save
-(add-hook 'before-save-hook
-          (lambda ()
-            (call-interactively #'format-all-buffer)))
-
-;; Make tab work properly
-;; (setq tab-always-indent 'complete
-;;       indent-tabs-mode nil)
-
+(add-hook 'before-save-hook (lambda ()
+                              (call-interactively #'format-all-buffer)))
 
 ;; Emmet setup
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-(add-hook 'css-mode-hook 'emmet-mode) ;; enable Emmet's css abbreviation.
+(add-hook 'css-mode-hook 'emmet-mode)  ;; enable Emmet's css abbreviation.
 
 ;; Org setup
-(setq org-directory "~/progs/emacs/org")
+(use-package org
+  :config
+  (setq org-startup-folded t)
+  (setq org-directory "~/org")
+  (setq org-agenda-files
+        '("~/org/learning.org"
+          "~/org/food.org"
+          "~/org/university.org"
+          "~/org/tasks.org"
+          "~/org/people.org"
+          "~/org/birthdays.org"
+          "~/org/habits.org"
+          "~/org/books.org"
+          "~/org/bookmarks.org"
+          "~/org/ideas.org"
+          "~/org/life.org"
+          ))
+
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-into-drawer t)
+  (setq org-log-done 'time)
+  (setq org-hide-emphasis-markers t)
+
+  (setq org-todo-keywords
+        '((sequence
+           "INPROGRESS(p)"
+           "TODO(t)"
+           "NEXT(n)"
+           "READY(r)"
+           "REVIEW(v)"
+           "WAIT(w@/!)"
+           "SOMEDAY(.)" "|" "DONE(x!)" "CANC(c)")
+          (sequence "LEARN(l)" "TRY" "STARTED(s)" "IMPL(i)" "|" "COMPLETE(x)")
+          (sequence "TOBUY(b)" "|" "DONE(x)"))
+        org-todo-keyword-faces '(("STARTED" :foreground "#0098dd" :weight normal :underline t)
+                                 ("TODO" :foreground "#7c7c75" :weight normal :underline t)
+                                 ("NEXT" :foreground "#ff5733" :weight normal :underline t)
+                                 ("REVIEW" :foreground "#e733ff" :weight normal :underline t)
+                                 ("SOMEDAY" :foreground "#3733ff" :weight normal :underline t)
+                                 ("READY" :foreground "#33ffd2" :weight normal :underline t)
+                                 ("INPGROGRESS" :foreground "#0098dd" :weight normal :underline t)
+                                 ("WAIT" :foreground "#9f7efe" :weight normal :underline t)
+                                 ("DONE" :foreground "#50a14f" :weight normal :underline t)
+                                 ("CANC" :foreground "#ff6480" :weight normal :underline t)
+                                 ("IMPL" :foreground "#ff3733" :weight normal :underline t)
+                                 ("TOBUY" :foreground "#ff3395" :weight normal :underline t)
+                                 )
+        )
+
+  (require 'org-habit)
+  (add-to-list 'org-modules 'org-habit)
+  (setq org-habit-graph-column 60)
+
+    ;; Priorities
+    (use-package! org-fancy-priorities
+    :hook (org-mode . org-fancy-priorities-mode):config
+    (setq org-fancy-priorities-list '("🗲" ,"🡩", "🡫", "☕")))
+
+  (use-package org-bullets
+    :hook (org-mode . org-bullets-mode))
+
+  (setq org-refile-targets
+        '(("archive.org" :maxlevel . 1)
+          ("bookmarks.org" :maxlevel . 2)
+          ("learning.org" :maxlevel . 2)))
+
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+  (setq org-tag-alist
+        '((:startgroup)
+          ;; Put mutually exclusive tags here
+          (:endgroup)
+          ("@home" . ?H)
+          ("@work" . ?W)
+          ("agenda" . ?a)
+          ("task" . ?a)
+          ("buy" . ?f)
+          ("watch" . ?w)
+          ("university" . ?w)
+          ("listen" . ?L)
+          ("practice" . ?p)
+          ("read" . ?r)
+          ("book" . ?b)
+          ("note" . ?n)
+          ("idea" . ?i)))
+
+  ;; Configure custom agenda views
+  (setq org-agenda-custom-commands
+        '(
+          ("b" "Low-effort books"
+           ((tags-todo "book-practice/!+INPROGRESS|+NEXT"
+                       ((org-agenda-overriding-header "Books without Practice")))))
+          ("B" "Books"
+           ((tags-todo "book+practice/!+INPROGRESS|+NEXT"
+                       ((org-agenda-overriding-header "Books with Practice")))))
+
+          ("e" tags-todo "task+Effort<6&+Effort>0"
+           ((org-agenda-overriding-header "Low Effort Tasks")
+            ;; (org-agenda-max-todos 20)
+            (org-agenda-files org-agenda-files)))
+
+          ("E" tags-todo "task+Effort>5"
+           ((org-agenda-overriding-header "Tasks")
+            ;; (org-agenda-max-todos 20)
+            (org-agenda-files org-agenda-files)))
+
+          ("p" tags-todo "-practice/!+LEARN|+STARTED"
+           ((org-agenda-overriding-header "Things to learn without practice")
+            ;; (org-agenda-max-todos 20)
+            (org-agenda-files org-agenda-files)))
+
+          ("P" tags-todo "+practice/!+LEARN|STARTED"
+           ((org-agenda-overriding-header "Things to learn on practice")
+            ;; (org-agenda-max-todos 20)
+            (org-agenda-files org-agenda-files)))
+
+          ("l" tags-todo "+LEARN+listen"
+           ((org-agenda-overriding-header "Things to listen")
+            ;; (org-agenda-max-todos 20)
+            (org-agenda-files org-agenda-files)))
+
+          ("w" tags-todo "+watch-practice/!+LEARN|+STARTED"
+           ((org-agenda-overriding-header "Things to watch without practice")
+            ;; (org-agenda-max-todos 20)
+            (org-agenda-files org-agenda-files)))
+
+          ("W" tags-todo "+watch+practice+watch/!+LEARN|STARTED"
+           ((org-agenda-overriding-header "Things to watch and practice")
+            ;; (org-agenda-max-todos 20)
+            (org-agenda-files org-agenda-files)))
+
+          ("r" tags-todo "+read-practice/!+LEARN|+STARTED"
+           ((org-agenda-overriding-header "Things to read without practice")
+            ;; (org-agenda-max-todos 20)
+            (org-agenda-files org-agenda-files)))
+
+          ("R" tags-todo "+read+practice/!+LEARN|STARTED"
+           ((org-agenda-overriding-header "Things to read and practice")
+            ;; (org-agenda-max-todos 20)
+            (org-agenda-files org-agenda-files)))
+
+          ("u" tags-todo "university"
+           ((org-agenda-overriding-header "Things for university")
+            ;; (org-agenda-max-todos 20)
+            (org-agenda-files org-agenda-files)))
+
+          ("f" "To buy"
+           ((tags-todo "+buy"
+                       ((org-agenda-overriding-header "Things to buy")))))
+
+
+          ;; ("w" "Workflow Status"
+          ;;  ((todo "WAIT"
+          ;;         ((org-agenda-overriding-header "Waiting on External")
+          ;;          (org-agenda-files org-agenda-files)))
+          ;;   (todo "REVIEW"
+          ;;         ((org-agenda-overriding-header "In Review")
+          ;;          (org-agenda-files org-agenda-files)))
+          ;;   (todo "SOMEDAY"
+          ;;         ((org-agenda-overriding-header "In Planning")
+          ;;          (org-agenda-todo-list-sublevels nil)
+          ;;          (org-agenda-files org-agenda-files)))
+          ;;   (todo "READY"
+          ;;         ((org-agenda-overriding-header "Ready for Work")
+          ;;          (org-agenda-files org-agenda-files)))
+          ;;   (todo "STARTED"
+          ;;         ((org-agenda-overriding-header "Active Projects")
+          ;;          (org-agenda-files org-agenda-files)))
+          ;;   (todo "COMPLETE"
+          ;;         ((org-agenda-overriding-header "Completed Projects")
+          ;;          (org-agenda-files org-agenda-files)))
+          ;;   (todo "CANC"
+          ;;         ((org-agenda-overriding-header "Cancelled Projects")
+          ;;          (org-agenda-files org-agenda-files)))))))
+          ))
+
+  (setq org-capture-templates
+        `(("t" "Tasks")
+          ("tt" "Task" entry
+           (file+olp "~/org/tasks.org")
+           "* TODO %t %? :task:\n")
+          ("tb" "Bookmark" entry
+           (file+olp "~/org/bookmarks.org")
+           "* TODO [[%?][]] \n")
+          ("tl" "Learn" entry
+           (file+olp "~/org/learning.org")
+           "\n* LEARN [[%/][]] \n")
+          ("tu" "University" entry
+           (file+olp+datetree "~/org/university.org")
+           "* TODO DEADLINE: %t %? :university:\n")
+          ("ti" "Ideas" entry
+           (file+olp+datetree "~/org/ideas.org")
+           "* TODO %T %? :idea:\n")
+          ("tf" "Food" entry
+           (file+olp+datetree "~/org/food.org")
+           "* TODO %T %? :buy:\n"))
+
+        ;; ("m" "Metrics Capture")
+        ;; ("mw" "Weight" table-line (file+headline "~/Projects/Code/emacs-from-scratch/OrgFiles/Metrics.org" "Weight")
+        ;;  "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
+        )
+
+
+  ;; (define-key global-map (kbd "C-c j")
+  ;;   (lambda () (interactive) (org-capture nil "jj")))
+
+
+  (defun mediocre/org-babel-tangle-dont-ask ()
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle)))
+
+  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'mediocre/org-babel-tangle-dont-ask
+                                                'run-at-end 'only-in-org-mode))))
+
 (after! org
   (map! :map org-mode-map
-        :n "M-j"#'org-metadown :n "M-k"#'org-metaup)
-  (setq org-todo-keywords '((sequence "TODO(t)" "INPROGRESS(i)" "WAITING(w)"
-                                      "|" "DONE(d)" "CANCELLED(c)"))
-        org-todo-keyword-faces
-        '(("TODO" :foreground "#7c7c75"
-           :weight normal
-           :underline t)
-          ("WAITING" :foreground "#9f7efe"
-           :weight normal
-           :underline t)
-          ("INPROGRESS" :foreground "#0098dd"
-           :weight normal
-           :underline t)
-          ("DONE" :foreground "#50a14f"
-           :weight normal
-           :underline t)
-          ("CANCELLED" :foreground "#ff6480"
-           :weight normal
-           :underline t)))
-  (setq org-fontify-quote-and-verse-blocks nil
-        org-fontify-whole-heading-line nil org-hide-leading-stars
-        nil org-startup-indented nil))
+        :n "M-j" 'org-metadown
+        :n "M-k" 'org-metaup
+        :n "C-j" 'org-next-visible-heading
+        :n "C-k" 'org-previous-visible-heading)
 
-;; Priorities
-(use-package! org-fancy-priorities
-  :hook (org-mode . org-fancy-priorities-mode):config
-  (setq org-fancy-priorities-list '("⚡" ,"⚡" ,"⚡")))
+  (map! :leader :m :map org-mode-map "mS" 'org-insert-structure-template)
 
-;; Auto-rename tag
-(use-package instant-rename-tag
-  :defer 3
-  :load-path (lambda ()
-               (expand-file-name "~/.doom.d/plugins/instant-rename-tag")):config
-  (map! :leader (:prefix ("m" . "local leader")
-                 :desc "Instantly rename opening/closing HTML tag"
-                 "o"
-                 #'instant-rename-tag)))
+  (map! :leader
+        :prefix ("fo" . "org-files")
+        :desc "Bookmarks" "b"  (lambda () (interactive) (find-file "~/org/bookmarks.org"))
+        :desc "Books" "B"  (lambda () (interactive) (find-file "~/org/books.org"))
+        :desc "Learning" "l"  (lambda () (interactive) (find-file "~/org/learning.org"))
+        :desc "Tasks" "t"  (lambda () (interactive) (find-file "~/org/tasks.org"))
+        :desc "Habits" "h"  (lambda () (interactive) (find-file "~/org/habits.org"))
+        :desc "University" "u"  (lambda () (interactive) (find-file "~/org/university.org")))
 
+  (add-to-list 'org-structure-template-alist '("sh" . "src sh"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("sc" . "src scheme"))
+  (add-to-list 'org-structure-template-alist '("rs" . "src rust"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+  (add-to-list 'org-structure-template-alist '("json" . "src json")))
+
+(add-hook 'org-mode-hook (lambda () (set-face-attribute 'fixed-pitch nil :font "Hack-9")))
 
 ;; Confirm kill proccess
 (use-package files
@@ -238,13 +563,10 @@
   :config (setq confirm-kill-processes nil))
 
 ;; Treat underscore and hyphen as part of the word
-(add-hook 'after-change-major-mode-hook
-          (lambda ()
-            (modify-syntax-entry ?_ "w")))
-
-(add-hook 'after-change-major-mode-hook
-          (lambda ()
-            (modify-syntax-entry ?- "w")))
+(add-hook 'after-change-major-mode-hook (lambda ()
+                                          (modify-syntax-entry ?_ "w")))
+(add-hook 'after-change-major-mode-hook (lambda ()
+                                          (modify-syntax-entry ?- "w")))
 
 ;; Paste menu
 (map! "M-v" #'counsel-yank-pop)
@@ -254,40 +576,35 @@
   (setq fancy-splash-image "~/pix/doom/stallman.png"))
 
 ;; Doom modeline
-;; (use-package doom-modeline
-;;   :ensure t
-;;   :init (doom-modeline-mode 1))
+(setq +modeline-height 15)
 
-;; Speed type
-(use-package speed-type
-  :commands (speed-type-text))
-
-;; Flycheck
-(use-package flycheck
-  :defer t
-  :hook (prog-mode . flycheck-mode):custom
-  (flycheck-emacs-lisp-load-path 'inherit)
-  :config (flycheck-add-mode 'javascript-standard 'js2-mode))
-
-;; Higlight colors everywhere
-;; (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
-;;   (lambda () (rainbow-mode 1)))
+;; Clock in modeline
+(display-time-mode 1)
 
 ;; Xclip mode everywhere
-(define-globalized-minor-mode my-global-xclip-mode
-  xclip-mode
+(define-globalized-minor-mode my-global-xclip-mode xclip-mode
   (lambda ()
     (xclip-mode 1)))
 (my-global-xclip-mode 1)
 
-;; set specific browser to open links
-(setq browse-url-browser-function 'browse-url-firefox)
+;; Set specific browser to open links
+;; (setq browse-url-browser-function 'browse-url-firefox)
 
-;; multiedit
+;; Move by visual lines
+;; (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+;; (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+;; (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+;; (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+
+;; Use visual line motions even outside of visual-line-mode buffers
+;; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+;; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+;; Multiedit
 (require 'evil-multiedit)
+
 ;; Highlights all matches of the selection in the buffer.
 (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
-
 ;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
 ;; incrementally add the next unmatched match.
 (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
@@ -299,7 +616,7 @@
 ;; Same as M-d but in reverse.
 (define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
 (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
-;; OPTIONAL: If you prefer to grab symbols rather than words, use ;; `evil-multiedit-match-symbol-and-next` (or prev).
+;; OPTIONAL: To grab symbols rather than words, use ;; `evil-multiedit-match-symbol-and-next` (or prev).
 
 ;; Restore the last group of multiedit regions.
 (define-key evil-visual-state-map (kbd "C-M-D") 'evil-multiedit-restore)
@@ -317,7 +634,9 @@
 (define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
 
 ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
-(evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match)
+(evil-ex-define-cmd
+ "ie[dit]"
+ 'evil-multiedit-ex-match)
 
 
 ;; LaTeX
@@ -325,75 +644,398 @@
 
 ;; Force splits to open on the right
 (defun prefer-horizontal-split ()
-  (set-variable 'split-height-threshold nil
-                t)
+  (set-variable 'split-height-threshold nil t)
   (set-variable 'split-width-threshold 40 t)) ; make this as low as needed
 (add-hook 'markdown-mode-hook 'prefer-horizontal-split)
 
 ;; Image previews in dired
-(global-set-key (kbd "C-x i")
-                'peep-dired)
-(evil-define-key 'normal
-  peep-dired-mode-map
-  (kbd "j")
-  'peep-dired-next-file
-  (kbd "k")
+(global-set-key (kbd "C-x i") 'peep-dired)
+(evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file (kbd "k")
   'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
-
 
 ;; Rustic flycheck
 (remove-hook 'rustic-mode-hook 'flycheck-mode)
 
 ;; TAB
-
 ;; Make Tab always indent
 (setq tab-always-indent 'complete)
 
-;; Tab code and path autocompletion
-(setq company-backends '((company-files company-capf company-dabbrev-code)))
-(after! evil
-  (map! :n "TAB"'company-indent-or-complete-common))
+(use-package company
+  :hook
+  (prog-mode . (lambda () (  (setq company-backends nil)
+                                   (setq company-backends '(company-files company-capf company-dabbrev-code)))))
+  :init
+  (setq company-backends '(company-files company-capf company-dabbrev-code))
+  :config
+  ;; (after! emacs-lisp
+  ;;   (set-company-backend! 'emacs-lisp-mode nil))
+  (global-company-mode 1)
+  )
 
-;; Racer
-(add-hook 'rust-mode-hook #'racer-mode)
-(add-hook 'racer-mode-hook #'eldoc-mode)
+  ;; (setq company-backends
+  ;;       '((company-files          ; files & directory
+  ;;          company-keywords       ; keywords
+  ;;          company-capf
+  ;;          company-yasnippet
+  ;;          )
+  ;;         (company-abbrev company-dabbrev)
+  ;;         ))
 
-(add-hook 'racer-mode-hook #'company-mode)
 
-(require 'rust-mode)
-(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-(setq company-tooltip-align-annotations t)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages '(pretty-symbols flymake-racket racket-mode
-                                              geiser chicken-scheme typescript-mode tern-auto-complete
-                                              speed-type rustic rust-auto-use reverse-im
-                                              peep-dired path-iterator org-super-agenda
-                                              org-plus-contrib org-fancy-priorities lsp-mode
-                                              key-chord js2-mode flymake-rust flycheck-rust
-                                              exec-path-from-shell evil-multiedit doom-modeline
-                                              clippy)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+  ;; Tab code and path autocompletion
+  (after! evil
+    ;; (map! :i "TAB" nil)
+    (map! :niv "TAB" 'company-indent-or-complete-common)
+    )
 
-;; So long mode
-(setq large-file-warning-threshold 100000000000000)
+;;; Auto-reverting changed files
+  (global-auto-revert-mode 1)
 
-;; When saving a file that start with '#!', make it executable
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+;;; Dired
+  (map! :leader
+        :prefix ("d" . "dired")
+        :desc "Open dired here" "h" 'dired-jump
+        :desc "Open downloads" "t" (lambda () (interactive) (dired "~/dwnlds"))
+        :desc "Open images" "i" (lambda () (interactive) (dired "~/pix"))
+        :desc "Open images" "d" (lambda () (interactive) (dired "~/dox"))
+        :desc "Open code" "c" (lambda () (interactive) (dired "~/code"))
+        :desc "Open music" "m" (lambda () (interactive) (dired "~/musx"))
+        :desc "Open progs" "p" (lambda () (interactive) (dired "~/progs"))
+        :desc "Open dotfiles" "D" (lambda () (interactive) (dired "~/.config"))
+        )
 
-;; Treat CamelCaseSubWords as separate words in every programming mode
-;; (add-hook 'prog-mode-hook 'subword-mode)
+  (map! :leader
+        :prefix ("f." . "dotfiles")
+        :desc "Newsboat" "n"  (lambda () (interactive) (find-file "~/.newsboat/urls"))
+        :desc "AwesomeWM" "a"  (lambda () (interactive) (find-file "~/.config/awesome/rc.lua"))
+        :desc "Vim" "v"  (lambda () (interactive) (find-file "~/.vimrc"))
+        :desc "Bash" "b"  (lambda () (interactive) (find-file "~/.bashrc"))
+        :desc "Zsh" "z"  (lambda () (interactive) (find-file "~/.zshrc")))
 
-(defun pdf-view-save-page ()
-  "Save the current page number for the document."
-  (interactive)
-  (message (number-to-string (pdf-view-current-page))))
+;;; Opeining Files Externally
+  ;; (use-package openwith
+  ;;   :config
+  ;;   (setq openwith-associations
+  ;;         (list
+  ;;          (list (openwith-make-extension-regexp
+  ;;                 '("mpg" "mpeg" "mp3" "mp4"
+  ;;                   "avi" "wmv" "wav" "mov" "flv"
+  ;;                   "ogm" "ogg" "mkv" "opus"))
+  ;;                "mpv"
+  ;;                '(file))
+  ;;          (list (openwith-make-extension-regexp
+  ;;                 '("xbm" "pbm" "pgm" "ppm" "pnm"
+  ;;                   "png" "gif" "bmp" "tif" "jpeg")) ;; Removed jpg because Telega was
+  ;;                ;; causing feh to be opened...
+  ;;                "feh"
+  ;;                '(file))
+  ;;          (list (openwith-make-extension-regexp
+  ;;                 '("pdf"))
+  ;;                "zathura"
+  ;;                '(file))))
+  ;;   (openwith-mode -1))
+
+  (use-package ranger
+    :config
+    (setq
+     ranger-cleanup-on-disable t
+     ranger-excluded-extensions '("mkv" "iso" "mp4" "opus")
+     ranger-dont-show-binary t
+     ranger-show-hidden t))
+
+  (add-hook 'ranger-mode-hook (lambda () (diff-hl-dired-mode -1)))
+  (add-hook 'ranger-mode-load-hook (lambda () (diff-hl-dired-mode -1)))
+  (add-hook 'dired-mode-hook (lambda () (diff-hl-dired-mode -1)))
+  (add-hook 'deer (lambda () (diff-hl-dired-mode -1)))
+
+  (add-hook 'ranger-mode-hook (lambda () (diff-hl-margin-mode -1)))
+  (add-hook 'ranger-mode-load-hook (lambda () (diff-hl-margin-mode -1)))
+  (add-hook 'dired-mode-hook (lambda () (diff-hl-margin-mode -1)))
+  (add-hook 'deer (lambda () (diff-hl-margin-mode -1)))
+
+
+  ;; Rainbow in programming mode
+  (use-package rainbow-mode
+    ;; :hook '(prog-mode help-mode)
+    :config
+    (rainbow-mode 1)
+    )
+
+;;; TRAMP
+  ;; Set default connection mode to SSH
+  (setq tramp-default-method "ssh")
+  ;; Emacs as an external editor
+  (defun mediocre/show-server-edit-buffer (buffer)
+    ;; TODO: Set a transient keymap to close with 'C-c C-c'
+    (split-window-vertically -15)
+    (other-window 1)
+    (set-buffer buffer))
+
+  (setq server-window #'mediocre/show-server-edit-buffer)
+
+;;; Debud Adapter
+  (use-package dap-mode
+    :custom
+    (lsp-enable-dap-auto-configure nil)
+    :config
+    (dap-ui-mode 1)
+    (dap-tooltip-mode 1)
+    (require 'dap-node)
+    (dap-node-setup))
+
+;;;; Aplications
+
+;;; Telega
+  (use-package telega
+    :commands telega
+    :config
+    (setq
+     ;; telega-user-use-avatars nil
+     telega-use-tracking-for '(any pin unread)
+     telega-chat-use-markdown-formatting t
+     telega-emoji-use-images t
+     telega-completing-read-function #'ivy-completing-read
+     telega-msg-rainbow-title nil
+     telega-chat-fill-column 135
+     telega-root-fill-column 145)
+    (set-evil-initial-state! '(telega-root-mode telega-chat-mode) 'emacs)
+    :hook (
+           (telega-load . (lambda ()
+                            (define-key global-map (kbd "C-c t") telega-prefix-map)
+                            (telega-notifications-mode)
+                            (telega-mode-line-mode))))
+    )
+
+  (map! :leader
+        "ot" nil
+        "oT" nil
+        :desc "Telegram" "ot" 'telega)
+
+  (map! :map telega-root-mode-map
+        "j" 'next-line
+        "k" 'previous-line)
+  (map! :map (telega-root-mode-map telega-chat-mode-map)
+        "C-j" 'next-line
+        "C-k" 'previous-line)
+  (map! :leader
+        :desc "Toggle vterm popup" "ov" '+vterm/toggle
+        :desc "Toggle vterm here" "oV" '+vterm/here)
+
+;;; ERC
+  (defun mediocre/on-erc-track-list-changed ()
+    (dolist (buffer erc-modified-channels-alist)
+      (tracking-add-buffer (car buffer))))
+
+  (use-package erc-hl-nicks
+    :after erc)
+
+  (use-package erc
+    :commands erc
+    :hook (erc-track-list-changed . mediocre/on-erc-track-list-changed)
+    :config
+    (setq
+     erc-nick "mediocrity"
+     erc-user-full-name "Druk Oleksandr"
+     erc-prompt-for-nickserv-password nil
+     erc-auto-query 'bury
+     erc-join-buffer 'bury
+     erc-interpret-mirc-color t
+     erc-rename-buffers t
+     erc-lurker-hide-list '("JOIN" "PART" "QUIT")
+     erc-track-exclude-types '("JOIN" "NICK" "QUIT" "MODE")
+     erc-track-enable-keybindings nil
+     erc-track-visibility nil ; Only use the selected frame for visibility
+     erc-fill-column 80
+     erc-fill-function 'erc-fill-static
+     erc-fill-static-center 20
+     erc-quit-reason (lambda (s) (or s "Fading out..."))
+     erc-modules
+     '(autoaway autojoin button completion fill irccontrols keep-place
+                list match menu move-to-prompt netsplit networks noncommands
+                readonly ring stamp track hl-nicks))
+
+    (add-hook 'erc-join-hook 'bitlbee-identify)
+    (defun bitlbee-identify ()
+      "If we're on the bitlbee server, send the identify command to the &bitlbee channel."
+      (when (and (string= "127.0.0.1" erc-session-server)
+                 (string= "&bitlbee" (buffer-name)))
+        (erc-message "PRIVMSG" (format "%s identify %s"
+                                       (erc-default-target)
+                                       (password-store-get "IRC/Bitlbee"))))))
+
+  (defun mediocre/connect-irc ()
+    (interactive)
+    ;; (erc-tls
+    ;;  :server "chat.freenode.net" :port 7000
+    ;;  :nick "daviwil" :password (password-store-get "IRC/Freenode")))
+    (erc
+     :server "127.0.0.1" :port 6667
+     :nick "mediocrity"))
+
+  (map! :leader :desc "ERC" "oe" 'erc)
+
+;;; Elfeed
+;;; TODO add my rss
+  (use-package elfeed
+    :commands elfeed
+    :config
+    (setq elfeed-feeds
+          '(
+            ;; Tech
+            ("https://nitter.net/ebanoe_it/rss" ebanoe it)
+            ("https://habr.com/ru/rss/all/all/?fl=ru" habr it)
+            ("https://os.phil-opp.com/rss.xml" rust)
+            ("https://this-week-in-rust.org/rss.xml" rust)
+            ("https://dou.ua/feed/" dou it)
+            ("https://protesilaos.com/codelog.xml" shprot emacs)
+            ("https://sachachua.com/blog/category/emacs/feed" emacs)
+            ("https://weekly.nixos.org/feeds/all.rss.xml" nix)
+            ("https://devpew.com/index.xml" johenews)
+            ;; Reddit
+            ("https://www.reddit.com/r/osdev/new.rss" osdev)
+            ("https://www.reddit.com/r/bash/new.rss" bash)
+            ("https://www.reddit.com/r/DoomEmacs/new.rss" emacs doom)
+            ("https://www.reddit.com/r/emacs/new.rss" emacs )
+            ("https://www.reddit.com/r/commandline/new.rss" cmd)
+            ("https://www.reddit.com/r/programming/new.rss" programming)
+            ("https://www.reddit.com/r/awesomewm/new.rss" awesomewm)
+            ;; Podcasts
+            ("https://rustacean-station.org/podcast.rss" rust podcast)
+            ("http://feeds.rucast.net/radio-t" radiot podcast)
+            ;; Youtubetech
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA" ytt luke)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" ytt dt)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC9MK8SybZcrHR3CUV4NMy2g" ytt didgitalize)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA" ytt mental-outlaw)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCsnGwSIHyoYN0kiINAGUKxg" ytt wolfgang)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA" ytt brodie)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCBNlINWfd08qgDkUTaUY4_w" ytt extremecode)
+            ;; Youtubefun
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCLKB9g1374gcxezJINOLtag" ytf raiz)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC8M5YVWQan_3Elm-URehz9w" ytf utopia)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC_gKMJFeCf1bKzZr_fICkig" ytf thedrzj)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC7nQ_p09KDD0fI6p34nsr4A" ytf voldemar)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC2Ru64PHqW4FxoP0xhQRvJg" ytf toples)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCfdgIq01iG92AXBt-NxgPkg" ytf later)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCD-S-2TMDY4fL-R5iDQn-6Q" ytf 2shell)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCr1Pf6rqk3h8b1APvAt42Bw" ytf slidan)
+            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCfn7uyPvr5IY5pux8oyIa4Q" ytf kel)))
+    :hook ((elfeed-search . (lambda () (elfeed-update)))))
+  (add-hook 'elfeed-search-mode-hook #'elfeed-update)
+  (map! :leader :desc "Elfeed" "on" 'elfeed)
+
+;;; EMMS
+  ;; TODO setup my own
+  (use-package emms
+    :commands emms
+    :config
+    (require 'emms-setup)
+    (emms-standard)
+    (emms-default-players)
+    (emms-mode-line-disable)
+    (setq emms-source-file-default-directory "~/musx/"))
+
+  ;; TODO change
+  (map! :leader
+        :prefix ("a" . "audio")
+        :desc "Play music" "m" 'emms
+        :desc "Play/pause music" "p" 'emms-pause
+        :desc "Describe song" "d" 'emms-show
+        :desc "Play file" "f" 'emms-play-file
+        :desc "Play next" "," 'emms-previous
+        :desc "Play next" "." 'emms-next
+        )
+
+;;; Network
+  (use-package net-utils
+    ;; :ensure nil
+    ;; :ensure-system-package traceroute
+    :bind
+    (:map mode-specific-map
+     :prefix-map net-utils-prefix-map
+     :prefix "n"
+     ("p" . ping)
+     ("i" . ifconfig)
+     ("w" . iwconfig)
+     ("n" . netstat)
+     ("p" . ping)
+     ("a" . arp)
+     ("r" . route)
+     ("h" . nslookup-host)
+     ("d" . dig)
+     ("s" . smbclient)
+     ("t" . traceroute)))
+
+;;; PDf Support
+
+;;; Prog Mode ligatures
+  ;; TODO review
+  ;; (use-package prog-mode
+  ;;   :ensure nil
+  ;; :hook ( (prog-mode . prettify-symbols-mode)
+  ;; (lisp-mode . prettify-symbols-lisp)
+  ;; (c-mode . prettify-symbols-c)
+  ;; (c++-mode . prettify-symbols-c++)
+  ;; ((js-mode js2-mode) . prettify-symbols-js)
+  ;; (prog-mode . (lambda ()
+  ;;                (setq-local scroll-margin 3))))
+  ;; :preface
+  ;; (defun prettify-symbols-prog ()
+  ;;   (push '("<=" . ?≤) prettify-symbols-alist)
+  ;;   (push '(">=" . ?≥) prettify-symbols-alist))
+  ;; (defun prettify-symbols-lisp ()
+  ;;   (push '("/=" . ?≠) prettify-symbols-alist)
+  ;;   (push '("sqrt" . ?√) prettify-symbols-alist)
+  ;;   (push '("not" . ?¬) prettify-symbols-alist)
+  ;;   (push '("and" . ?∧) prettify-symbols-alist)
+  ;;   (push '("or" . ?∨) prettify-symbols-alist))
+  ;; (defun prettify-symbols-c ()
+  ;;   (push '("<=" . ?≤) prettify-symbols-alist)
+  ;;   (push '("->" . ?→) prettify-symbols-alist)
+  ;;   (push '(">=" . ?≥) prettify-symbols-alist)
+  ;;   (push '("!=" . ?≠) prettify-symbols-alist)
+  ;;   (push '("&&" . ?∧) prettify-symbols-alist)
+  ;;   (push '("||" . ?∨) prettify-symbols-alist)
+  ;;   (push '(">>" . ?») prettify-symbols-alist)
+  ;;   (push '("<<" . ?«) prettify-symbols-alist))
+  ;; (defun prettify-symbols-c++ ()
+  ;;   (push '("<=" . ?≤) prettify-symbols-alist)
+  ;;   (push '(">=" . ?≥) prettify-symbols-alist)
+  ;;   (push '("!=" . ?≠) prettify-symbols-alist)
+  ;;   (push '("&&" . ?∧) prettify-symbols-alist)
+  ;;   (push '("||" . ?∨) prettify-symbols-alist)
+  ;;   (push '(">>" . ?») prettify-symbols-alist)
+  ;;   (push '("<<" . ?«) prettify-symbols-alist)
+  ;;   (push '("->" . ?→) prettify-symbols-alist))
+  ;; (defun prettify-symbols-js ()
+  ;;   (push '("function" . ?λ) prettify-symbols-alist)
+  ;;   (push '("=>" . ?⇒) prettify-symbols-alist)))
+
+  (defun x11-yank-image-at-point-as-image ()
+    "Yank the image at point to the X11 clipboard as image/png."
+    (interactive)
+    (let ((image (get-text-property (point) 'display)))
+      (if (eq (car image) 'image)
+          (let ((data (plist-get (cdr image) ':data))
+                (file (plist-get (cdr image) ':file)))
+            (cond (data
+                   (with-temp-buffer
+                     (insert data)
+                     (call-shell-region
+                      (point-min) (point-max)
+                      "xclip -i -selection clipboard -t image/png")))
+                  (file
+                   (if (file-exists-p file)
+                       (start-process
+                        "xclip-proc" nil "xclip"
+                        "-i" "-selection" "clipboard" "-t" "image/png"
+                        "-quiet" (file-truename file))))
+                  (t
+                   (message "The image seems to be malformed."))))
+        (message "Point is not at an image."))))
+
+  (map! :mode image-mode :map (image-mode-map) "zy" nil)
+  (map! :mode image-mode :map (image-mode-map) "zy" 'x11-yank-image-at-point-as-image)
+
+  (global-set-key [?\C-\S-v] 'evil-paste-after)

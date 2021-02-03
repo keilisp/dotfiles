@@ -152,8 +152,10 @@ export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
 # Env vars
-export EDITOR='nvim'
-export VISUAL='nvim'
+# export EDITOR='nvim'
+# export VISUAL='nvim'
+export EDITOR='emacs'
+export VISUAL='emacs'
 export FZF_DEFAULT_OPTS='--layout=reverse --height 40%'
 
 # OWN SCRIPTS
@@ -165,6 +167,10 @@ export FZF_DEFAULT_OPTS='--layout=reverse --height 40%'
 # export PATH=$PATH:$HOME/scripts/audiosplit
 # export PATH=$PATH:$HOME/scripts/studies
 export PATH=$PATH:$(du $HOME/scripts/ | grep -v 'node_modules\|.git\|.log' | cut -f2)
+export PATH=$PATH:$HOME/.local/bin
+
+# Bat theme
+export BAT_THEME="ansi-light"
 
 ##############
 
