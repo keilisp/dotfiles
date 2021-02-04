@@ -267,8 +267,8 @@
   :general
   ('normal
    ;; '(markdown-mode-map org-mode-map)
-   "z t" #'mediocre/google-translate-at-point
-   "z T" #'google-translate-smooth-translate)
+   "z t" #'google-translate-smooth-translate
+   "z T" #'mediocre/google-translate-at-point)
   :commands (google-translate-smooth-translate)
   :custom
   (google-translate-backend-method 'curl)
@@ -285,10 +285,10 @@
   (require 'google-translate-smooth-ui)
   (setq google-translate-show-phonetic t)
 
-  (setq google-translate-default-source-language "en"
-        google-translate-default-target-language "ru")
+  ;; (setq google-translate-default-source-language "en"
+  ;;       google-translate-default-target-language "ru")
 
-  (setq google-translate-translation-directions-alist '(("en" . "ru") ("ru" . "en")))
+  (setq google-translate-translation-directions-alist '(("en" . "ru") ("ru" . "en") ("en" . "uk") ("uk" . "en")))
   ;; auto-toggle input method
   (setq google-translate-input-method-auto-toggling t
         google-translate-preferable-input-methods-alist '((nil . ("en"))
@@ -556,6 +556,11 @@
   (add-to-list 'org-structure-template-alist '("json" . "src json")))
 
 (add-hook 'org-mode-hook (lambda () (set-face-attribute 'fixed-pitch nil :font "Hack-9")))
+
+(setq org-journal-date-prefix "#+TITLE: "
+      org-journal-time-prefix "*"
+      org-journal-date-format "%a, %Y-%m-%d"
+      org-journal-file-format "%Y-%m-%d.org")
 
 ;; Confirm kill proccess
 (use-package files
@@ -1039,3 +1044,4 @@
   (map! :mode image-mode :map (image-mode-map) "zy" 'x11-yank-image-at-point-as-image)
 
   (global-set-key [?\C-\S-v] 'evil-paste-after)
+
