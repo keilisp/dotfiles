@@ -51,6 +51,7 @@
 (package! ipretty)
 (package! calfw)
 (package! erc-hl-nicks)
+(package! alarm-clock)
 (package! google-translate)
 (package! peep-dired)
 ;; (package! erc-image)

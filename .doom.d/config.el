@@ -7,6 +7,15 @@
       doom-variable-pitch-font (font-spec :family "Hack" :size 12)
       doom-serif-font (font-spec :family "Hack" :weight 'light))
 
+;; (setq doom-font (font-spec :family "FiraCode" :size 12)
+;;       doom-big-font (font-spec :family "FiraCode")
+;;       doom-variable-pitch-font (font-spec :family "FiraCode" :size 12)
+;;       doom-serif-font (font-spec :family "FiraCode" :weight 'light))
+
+;; (setq doom-font (font-spec :family "Iosevka" :size 13)
+;;       doom-big-font (font-spec :family "Iosevka")
+;;       doom-variable-pitch-font (font-spec :family "Iosevka" :size 13)
+;;       doom-serif-font (font-spec :family "Iosevka" :weight 'light))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t doom-themes-enable-italic t))
@@ -15,28 +24,22 @@
 
 ;; Terminal mode
 (unless (display-graphic-p)
-  (setq doom-theme 'doom-gruvbox)
-  ;; (setq doom-theme 'doom-tomorrow-night))
+  (setq doom-theme 'modus-operandi)
   (use-package! evil-terminal-cursor-changer
     :hook (tty-setup . evil-terminal-cursor-changer-activate)))
 
 (setq calendar-location-name "Europe, Kiev")
 (setq calendar-latitude 50.43)
 (setq calendar-longitude 30.52)
-;; (require 'theme-changer)
 (use-package theme-changer)
-(change-theme 'modus-operandi 'modus-operandi)
-
+(change-theme 'modus-operandi 'modus-vivendi)
 ;; (change-theme 'modus-operandi 'modus-vivendi)
 ;; (change-theme 'doom-tomorrow-day 'doom-gruvbox)
 ;; (change-theme 'doom-solarized-light 'doom-solarized-light)
 
-;; Leader-key setup
-(map! "C-SPC" nil)
-(setq doom-leader-alt-key "C-SPC")
-(setq doom-localleader-alt-key "C-SPC m")
 ;; Setup fringes
 (set-fringe-mode 5)
+()
 
 ;; Which-key global-mode
 (which-key-mode)
@@ -44,12 +47,34 @@
 ;; Line number
 (setq display-line-numbers-type nil)
 
+;; disable o/O continue commented lines
+(setq +evil-want-o/O-to-continue-comments nil)
+
+;;; Keybindings
+;; Leader-key setup
+(map! "C-SPC" nil)
+(setq doom-leader-alt-key "C-SPC")
+(setq doom-localleader-alt-key "C-SPC m")
+
+;;; TODO rewrite with mediocre/leader-key-def what possible
+;; (define-key evil-motion-state-map " " nil)
+;; SPC k to save buffer
+(map! :leader :g :desc "save-buffer" "k" 'save-buffer)
+;; (define-key evil-motion-state-map (kbd "SPC k") 'save-buffer)
+
+;; TODO
+(global-hl-todo-mode)
+
+;; SPC ] to call ibuffer
+(map! :leader :g :desc "ibuffer" "]" 'ibuffer)
+
+;; Switch buffer with C-j
+(map! :leader :desc "switch-buffer" "C-j" 'counsel-switch-buffer)
+
 ;; jj --> esc
 (setq key-chord-two-keys-delay 0.9)
 (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
 (key-chord-mode 1)
-;; (setq evil-escape-key-sequence "jj")
-
 ;; oo --> esc
 (define-key evil-insert-state-map "о" #'mediocre/maybe-exit)
 
@@ -68,22 +93,6 @@
        (t (setq unread-command-events (append unread-command-events
                                               (list evt))))))))
 
-;; disable o/O continue commented lines
-(setq +evil-want-o/O-to-continue-comments nil)
-
-;;; Keybindings
-;;; TODO rewrite with mediocre/leader-key-def what possible
-(define-key evil-motion-state-map " " nil)
-;; SPC k to save buffer
-(map! :leader :g :desc "save-buffer" "k" 'save-buffer)
-;; (define-key evil-motion-state-map (kbd "SPC k") 'save-buffer)
-
-;; SPC ] to call ibuffer
-(map! :leader :g :desc "ibuffer" "]" 'ibuffer)
-
-;; Switch buffer with C-j
-(map! :leader :desc "switch-buffer" "C-j" 'counsel-switch-buffer)
-
 ;;; Rust
 (use-package rust-mode
   :mode "\\.rs\\'"
@@ -98,7 +107,10 @@
 (add-hook 'racer-mode-hook #'company-mode)
 (setq company-tooltip-align-annotations t)
 
+;; Rustic flycheck
+;; (remove-hook 'rustic-mode-hook 'flycheck-mode)
 
+;;; Miscellaneous
 ;; When saving a file that start with '#!', make it executable
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
@@ -188,7 +200,7 @@
       "c," 'rustdoc-search)
 
 
-;; Bindings for vhanging windows
+;; Bindings for changing windows
 (map! :leader :g :desc "window-left" "<left>" 'evil-window-left)
 (map! :leader :g :desc "window-down" "<down>" 'evil-window-down)
 (map! :leader :g :desc "window-up" "<up>" 'evil-window-up)
@@ -202,8 +214,10 @@
 
 
 ;; Projectile folders
-(projectile-mode +1)
-(setq projectile-project-search-path '("~/scripts/" "~/code/projects/" "~/code/"))
+(use-package projectile
+  :init (projectile-mode +1)
+  :config
+  (setq projectile-project-search-path '("~/scripts/" "~/code/projects/" "~/code/")))
 
 
 ;; Reverse mode
@@ -240,33 +254,32 @@
   (ispell-encoding8-command t)
   (ispell-silently-savep t))
 
-;; (use-package flyspell
-;;   :defer t
-;;   :custom
-;;   (flyspell-delay 1))
-
-(map! :i "C-i" #'flyspell-auto-correct-word)
+(use-package flyspell
+  :defer t
+  :config
+  (map! :i "C-i" nil)
+  (map! :i "C-i" #'flyspell-auto-correct-word)
+  :custom
+  (flyspell-delay 1)
+  )
 
 ;; Emacs Lisp
-(use-package lisp
-  :hook (after-save . check-parens))
+;; (use-package lisp
+;;   :hook (after-save . check-parens))
 
 (use-package highlight-quoted
-  :ensure t
   :hook (emacs-lisp-mode . highlight-quoted-mode))
 
-(use-package suggest :ensure t
+(use-package suggest
   :defer t)
 
 (use-package ipretty
   :defer t
-  :ensure t
   :config (ipretty-mode 1))
 
 (use-package google-translate
   :general
   ('normal
-   ;; '(markdown-mode-map org-mode-map)
    "z t" #'google-translate-smooth-translate
    "z T" #'mediocre/google-translate-at-point)
   :commands (google-translate-smooth-translate)
@@ -292,9 +305,7 @@
   ;; auto-toggle input method
   (setq google-translate-input-method-auto-toggling t
         google-translate-preferable-input-methods-alist '((nil . ("en"))
-                                                          (russian-computer . ("ru"))))
-  )
-
+                                                          (russian-computer . ("ru")))))
 (require 'google-translate)
 (defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130))
 (setq google-translate-backend-method 'curl)
@@ -311,8 +322,8 @@
                               (call-interactively #'format-all-buffer)))
 
 ;; Emmet setup
-(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-(add-hook 'css-mode-hook 'emmet-mode)  ;; enable Emmet's css abbreviation.
+(add-hook 'sgml-mode-hook #'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook #'emmet-mode)  ;; enable Emmet's css abbreviation.
 
 ;; Org setup
 (use-package org
@@ -368,8 +379,8 @@
   (add-to-list 'org-modules 'org-habit)
   (setq org-habit-graph-column 60)
 
-    ;; Priorities
-    (use-package! org-fancy-priorities
+  ;; Priorities
+  (use-package! org-fancy-priorities
     :hook (org-mode . org-fancy-priorities-mode):config
     (setq org-fancy-priorities-list '("🗲" ,"🡩", "🡫", "☕")))
 
@@ -379,7 +390,8 @@
   (setq org-refile-targets
         '(("archive.org" :maxlevel . 1)
           ("bookmarks.org" :maxlevel . 2)
-          ("learning.org" :maxlevel . 2)))
+          ("learning.org" :maxlevel . 2)
+          ("tasks.org" :maxlevel . 1)))
 
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
@@ -411,12 +423,22 @@
            ((tags-todo "book+practice/!+INPROGRESS|+NEXT"
                        ((org-agenda-overriding-header "Books with Practice")))))
 
-          ("e" tags-todo "task+Effort<6&+Effort>0"
-           ((org-agenda-overriding-header "Low Effort Tasks")
-            ;; (org-agenda-max-todos 20)
-            (org-agenda-files org-agenda-files)))
+          ("h" "Habits" tags-todo "STYLE=\"habit\""
+           ((org-agenda-overriding-header "Habits")
+            (org-agenda-sorting-strategy
+             '(todo-state-down effort-up category-keep))))
 
-          ("E" tags-todo "task+Effort>5"
+          ;; ("e" tags-todo "task+Effort<6&+Effort>0"
+          ;;  ((org-agenda-overriding-header "Low Effort Tasks")
+          ;;   ;; (org-agenda-max-todos 20)
+          ;;   (org-agenda-files org-agenda-files)))
+
+          ;; ("E" tags-todo "task+Effort>5"
+          ;;  ((org-agenda-overriding-header "Tasks")
+          ;;   ;; (org-agenda-max-todos 20)
+          ;;   (org-agenda-files org-agenda-files)))
+
+          ("E" tags-todo "task"
            ((org-agenda-overriding-header "Tasks")
             ;; (org-agenda-max-todos 20)
             (org-agenda-files org-agenda-files)))
@@ -498,10 +520,10 @@
            "* TODO %t %? :task:\n")
           ("tb" "Bookmark" entry
            (file+olp "~/org/bookmarks.org")
-           "* TODO [[%?][]] \n")
+           "* [[%?][]] \n")
           ("tl" "Learn" entry
            (file+olp "~/org/learning.org")
-           "\n* LEARN [[%/][]] \n")
+           "\n* LEARN [[%?][]] \n")
           ("tu" "University" entry
            (file+olp+datetree "~/org/university.org")
            "* TODO DEADLINE: %t %? :university:\n")
@@ -516,11 +538,6 @@
         ;; ("mw" "Weight" table-line (file+headline "~/Projects/Code/emacs-from-scratch/OrgFiles/Metrics.org" "Weight")
         ;;  "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
         )
-
-
-  ;; (define-key global-map (kbd "C-c j")
-  ;;   (lambda () (interactive) (org-capture nil "jj")))
-
 
   (defun mediocre/org-babel-tangle-dont-ask ()
     ;; Dynamic scoping to the rescue
@@ -542,11 +559,14 @@
   (map! :leader
         :prefix ("fo" . "org-files")
         :desc "Bookmarks" "b"  (lambda () (interactive) (find-file "~/org/bookmarks.org"))
+        :desc "Anime" "a"  (lambda () (interactive) (find-file "~/org/anime.org"))
         :desc "Books" "B"  (lambda () (interactive) (find-file "~/org/books.org"))
         :desc "Learning" "l"  (lambda () (interactive) (find-file "~/org/learning.org"))
         :desc "Tasks" "t"  (lambda () (interactive) (find-file "~/org/tasks.org"))
         :desc "Habits" "h"  (lambda () (interactive) (find-file "~/org/habits.org"))
         :desc "University" "u"  (lambda () (interactive) (find-file "~/org/university.org")))
+
+  (map! :leader :desc "org-copy" "mrk" #'org-copy )
 
   (add-to-list 'org-structure-template-alist '("sh" . "src sh"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
@@ -606,42 +626,42 @@
 ;; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
 ;; Multiedit
-(require 'evil-multiedit)
+;; (require 'evil-multiedit)
 
-;; Highlights all matches of the selection in the buffer.
-(define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
-;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
-;; incrementally add the next unmatched match.
-(define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
-;; Match selected region.
-(define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
-;; Insert marker at point
-(define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
+;; ;; Highlights all matches of the selection in the buffer.
+;; (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
+;; ;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
+;; ;; incrementally add the next unmatched match.
+;; (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+;; ;; Match selected region.
+;; (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+;; ;; Insert marker at point
+;; (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
 
-;; Same as M-d but in reverse.
-(define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
-(define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
-;; OPTIONAL: To grab symbols rather than words, use ;; `evil-multiedit-match-symbol-and-next` (or prev).
+;; ;; Same as M-d but in reverse.
+;; (define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
+;; (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
+;; ;; OPTIONAL: To grab symbols rather than words, use ;; `evil-multiedit-match-symbol-and-next` (or prev).
 
-;; Restore the last group of multiedit regions.
-(define-key evil-visual-state-map (kbd "C-M-D") 'evil-multiedit-restore)
+;; ;; Restore the last group of multiedit regions.
+;; (define-key evil-visual-state-map (kbd "C-M-D") 'evil-multiedit-restore)
 
-;; RET will toggle the region under the cursor
-(define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+;; ;; RET will toggle the region under the cursor
+;; (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
 
-;; ...and in visual mode, RET will disable all fields outside the selected region
-(define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+;; ;; ...and in visual mode, RET will disable all fields outside the selected region
+;; (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
 
-;; For moving between edit regions
-(define-key evil-multiedit-state-map (kbd "C-n") 'evil-multiedit-next)
-(define-key evil-multiedit-state-map (kbd "C-p") 'evil-multiedit-prev)
-(define-key evil-multiedit-insert-state-map (kbd "C-n") 'evil-multiedit-next)
-(define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
+;; ;; For moving between edit regions
+;; (define-key evil-multiedit-state-map (kbd "C-n") 'evil-multiedit-next)
+;; (define-key evil-multiedit-state-map (kbd "C-p") 'evil-multiedit-prev)
+;; (define-key evil-multiedit-insert-state-map (kbd "C-n") 'evil-multiedit-next)
+;; (define-key evil-multiedit-insert-state-map (kbd "C-p") 'evil-multiedit-prev)
 
-;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
-(evil-ex-define-cmd
- "ie[dit]"
- 'evil-multiedit-ex-match)
+;; ;; Ex command that allows you to invoke evil-multiedit with a regular expression, e.g.
+;; (evil-ex-define-cmd
+;;  "ie[dit]"
+;;  'evil-multiedit-ex-match)
 
 
 ;; LaTeX
@@ -653,51 +673,39 @@
   (set-variable 'split-width-threshold 40 t)) ; make this as low as needed
 (add-hook 'markdown-mode-hook 'prefer-horizontal-split)
 
-;; Image previews in dired
-(global-set-key (kbd "C-x i") 'peep-dired)
-(evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file (kbd "k")
-  'peep-dired-prev-file)
-(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
-
-;; Rustic flycheck
-(remove-hook 'rustic-mode-hook 'flycheck-mode)
-
 ;; TAB
 ;; Make Tab always indent
 (setq tab-always-indent 'complete)
 
 (use-package company
-  :hook
-  (prog-mode . (lambda () (  (setq company-backends nil)
-                                   (setq company-backends '(company-files company-capf company-dabbrev-code)))))
-  :init
-  (setq company-backends '(company-files company-capf company-dabbrev-code))
+  ;; :hook
+  ;; (prog-mode . (lambda () (
+  ;; (setq company-backends nil)
+  ;; (setq company-backends '(company-files company-capf company-dabbrev-code)))))
+  ;; (org-mode . (lambda () (
+  ;; (setq company-backends nil)
+  ;; (setq company-backends '(company-files company-capf company-dabbrev-code)))))
+  ;; :init
+  ;; (setq company-backends '(company-files company-capf company-dabbrev-code))
   :config
-  ;; (after! emacs-lisp
-  ;;   (set-company-backend! 'emacs-lisp-mode nil))
   (global-company-mode 1)
+  ;; (map! :niv "TAB" 'company-indent-or-complete-common)
   )
+(set-company-backend! 'prog-mode-hook '(company-files company-capf company-dabbrev-code))
+(set-company-backend! 'org-mode-hook '(company-files company-capf company-dabbrev-code))
 
-  ;; (setq company-backends
-  ;;       '((company-files          ; files & directory
-  ;;          company-keywords       ; keywords
-  ;;          company-capf
-  ;;          company-yasnippet
-  ;;          )
-  ;;         (company-abbrev company-dabbrev)
-  ;;         ))
-
-
-  ;; Tab code and path autocompletion
-  (after! evil
-    ;; (map! :i "TAB" nil)
-    (map! :niv "TAB" 'company-indent-or-complete-common)
-    )
+;; Tab code and path autocompletion
+;; (after! evil
+;;   ;; (map! :i "TAB" nil)
+;;   (map! :niv "TAB" 'company-indent-or-complete-common)
+;;   )
 
 ;;; Auto-reverting changed files
-  (global-auto-revert-mode 1)
+(global-auto-revert-mode 1)
 
 ;;; Dired
+(use-package dired
+  :config
   (map! :leader
         :prefix ("d" . "dired")
         :desc "Open dired here" "h" 'dired-jump
@@ -707,67 +715,68 @@
         :desc "Open code" "c" (lambda () (interactive) (dired "~/code"))
         :desc "Open music" "m" (lambda () (interactive) (dired "~/musx"))
         :desc "Open progs" "p" (lambda () (interactive) (dired "~/progs"))
-        :desc "Open dotfiles" "D" (lambda () (interactive) (dired "~/.config"))
-        )
+        :desc "Open dotfiles" "D" (lambda () (interactive) (dired "~/.config"))))
 
-  (map! :leader
-        :prefix ("f." . "dotfiles")
-        :desc "Newsboat" "n"  (lambda () (interactive) (find-file "~/.newsboat/urls"))
-        :desc "AwesomeWM" "a"  (lambda () (interactive) (find-file "~/.config/awesome/rc.lua"))
-        :desc "Vim" "v"  (lambda () (interactive) (find-file "~/.vimrc"))
-        :desc "Bash" "b"  (lambda () (interactive) (find-file "~/.bashrc"))
-        :desc "Zsh" "z"  (lambda () (interactive) (find-file "~/.zshrc")))
+(map! :leader
+      :prefix ("f." . "dotfiles")
+      :desc "Newsboat" "n"  (lambda () (interactive) (find-file "~/.newsboat/urls"))
+      :desc "AwesomeWM" "a"  (lambda () (interactive) (find-file "~/.config/awesome/rc.lua"))
+      :desc "Vim" "v"  (lambda () (interactive) (find-file "~/.vimrc"))
+      :desc "Bash" "b"  (lambda () (interactive) (find-file "~/.bashrc"))
+      :desc "Zsh" "z"  (lambda () (interactive) (find-file "~/.zshrc")))
 
 ;;; Opeining Files Externally
-  ;; (use-package openwith
-  ;;   :config
-  ;;   (setq openwith-associations
-  ;;         (list
-  ;;          (list (openwith-make-extension-regexp
-  ;;                 '("mpg" "mpeg" "mp3" "mp4"
-  ;;                   "avi" "wmv" "wav" "mov" "flv"
-  ;;                   "ogm" "ogg" "mkv" "opus"))
-  ;;                "mpv"
-  ;;                '(file))
-  ;;          (list (openwith-make-extension-regexp
-  ;;                 '("xbm" "pbm" "pgm" "ppm" "pnm"
-  ;;                   "png" "gif" "bmp" "tif" "jpeg")) ;; Removed jpg because Telega was
-  ;;                ;; causing feh to be opened...
-  ;;                "feh"
-  ;;                '(file))
-  ;;          (list (openwith-make-extension-regexp
-  ;;                 '("pdf"))
-  ;;                "zathura"
-  ;;                '(file))))
-  ;;   (openwith-mode -1))
+;; (use-package openwith
+;;   :config
+;;   (setq openwith-associations
+;;         (list
+;;          (list (openwith-make-extension-regexp
+;;                 '("mpg" "mpeg" "mp3" "mp4"
+;;                   "avi" "wmv" "wav" "mov" "flv"
+;;                   "ogm" "ogg" "mkv" "opus"))
+;;                "mpv"
+;;                '(file))
+;;          (list (openwith-make-extension-regexp
+;;                 '("xbm" "pbm" "pgm" "ppm" "pnm"
+;;                   "png" "gif" "bmp" "tif" "jpeg")) ;; Removed jpg because Telega was
+;;                ;; causing feh to be opened...
+;;                "feh"
+;;                '(file))
+;;          (list (openwith-make-extension-regexp
+;;                 '("pdf"))
+;;                "zathura"
+;;                '(file))))
+;;   (openwith-mode -1))
 
-  (use-package ranger
-    :config
-    (setq
-     ranger-cleanup-on-disable t
-     ranger-excluded-extensions '("mkv" "iso" "mp4" "opus")
-     ranger-dont-show-binary t
-     ranger-show-hidden t))
+(use-package ranger
+  :config
+  (setq
+   ranger-cleanup-on-disable t
+   ranger-excluded-extensions '("mkv" "iso" "mp4" "opus")
+   ranger-dont-show-binary t
+   ranger-show-hidden t))
 
-  (add-hook 'ranger-mode-hook (lambda () (diff-hl-dired-mode -1)))
-  (add-hook 'ranger-mode-load-hook (lambda () (diff-hl-dired-mode -1)))
-  (add-hook 'dired-mode-hook (lambda () (diff-hl-dired-mode -1)))
-  (add-hook 'deer (lambda () (diff-hl-dired-mode -1)))
+(add-hook 'ranger-mode-hook (lambda () (diff-hl-dired-mode -1)))
+(add-hook 'ranger-mode-load-hook (lambda () (diff-hl-dired-mode -1)))
+(add-hook 'dired-mode-hook (lambda () (diff-hl-dired-mode -1)))
+(add-hook 'deer (lambda () (diff-hl-dired-mode -1)))
 
-  (add-hook 'ranger-mode-hook (lambda () (diff-hl-margin-mode -1)))
-  (add-hook 'ranger-mode-load-hook (lambda () (diff-hl-margin-mode -1)))
-  (add-hook 'dired-mode-hook (lambda () (diff-hl-margin-mode -1)))
-  (add-hook 'deer (lambda () (diff-hl-margin-mode -1)))
+(add-hook 'ranger-mode-hook (lambda () (diff-hl-margin-mode -1)))
+(add-hook 'ranger-mode-load-hook (lambda () (diff-hl-margin-mode -1)))
+(add-hook 'dired-mode-hook (lambda () (diff-hl-margin-mode -1)))
+(add-hook 'deer (lambda () (diff-hl-margin-mode -1)))
 
 
-  ;; Rainbow in programming mode
-  (use-package rainbow-mode
-    ;; :hook '(prog-mode help-mode)
-    :config
-    (rainbow-mode 1)
-    )
+;; Rainbow in programming mode
+(use-package rainbow-mode
+  :hook '(prog-mode help-mode)
+  :config
+  (rainbow-mode 1)
+  )
 
 ;;; TRAMP
+(use-package tramp
+  :config
   ;; Set default connection mode to SSH
   (setq tramp-default-method "ssh")
   ;; Emacs as an external editor
@@ -776,272 +785,263 @@
     (split-window-vertically -15)
     (other-window 1)
     (set-buffer buffer))
+  (setq server-window #'mediocre/show-server-edit-buffer))
 
-  (setq server-window #'mediocre/show-server-edit-buffer)
 
 ;;; Debud Adapter
-  (use-package dap-mode
-    :custom
-    (lsp-enable-dap-auto-configure nil)
-    :config
-    (dap-ui-mode 1)
-    (dap-tooltip-mode 1)
-    (require 'dap-node)
-    (dap-node-setup))
+(use-package dap-mode
+  :custom
+  (lsp-enable-dap-auto-configure nil)
+  :config
+  (dap-ui-mode 1)
+  (dap-tooltip-mode 1)
+  (require 'dap-node)
+  (dap-node-setup))
 
 ;;;; Aplications
 
 ;;; Telega
-  (use-package telega
-    :commands telega
-    :config
-    (setq
-     ;; telega-user-use-avatars nil
-     telega-use-tracking-for '(any pin unread)
-     telega-chat-use-markdown-formatting t
-     telega-emoji-use-images t
-     telega-completing-read-function #'ivy-completing-read
-     telega-msg-rainbow-title nil
-     telega-chat-fill-column 135
-     telega-root-fill-column 145)
-    (set-evil-initial-state! '(telega-root-mode telega-chat-mode) 'emacs)
-    :hook (
-           (telega-load . (lambda ()
-                            (define-key global-map (kbd "C-c t") telega-prefix-map)
-                            (telega-notifications-mode)
-                            (telega-mode-line-mode))))
-    )
+(use-package telega
+  :commands telega
+  :config
+  (setq
+   ;; telega-user-use-avatars nil
+   telega-use-tracking-for '(any pin unread)
+   telega-chat-use-markdown-formatting t
+   telega-emoji-use-images t
+   telega-completing-read-function #'ivy-completing-read
+   telega-msg-rainbow-title nil
+   telega-chat-fill-column 135
+   telega-root-fill-column 145)
+  (set-evil-initial-state! '(telega-root-mode telega-chat-mode) 'emacs)
+  :hook (
+         (telega-load . (lambda ()
+                          (define-key global-map (kbd "C-c t") telega-prefix-map)
+                          (telega-notifications-mode)
+                          (telega-mode-line-mode)))))
 
-  (map! :leader
-        "ot" nil
-        "oT" nil
-        :desc "Telegram" "ot" 'telega)
+(map! :leader
+      "ot" nil
+      "oT" nil
+      :desc "Telegram" "ot" 'telega)
 
-  (map! :map telega-root-mode-map
-        "j" 'next-line
-        "k" 'previous-line)
-  (map! :map (telega-root-mode-map telega-chat-mode-map)
-        "C-j" 'next-line
-        "C-k" 'previous-line)
+(map! :map telega-root-mode-map
+      "j" 'next-line
+      "k" 'previous-line)
+(map! :map (telega-root-mode-map telega-chat-mode-map)
+      "C-j" 'next-line
+      "C-k" 'previous-line)
+
+(use-package vterm
+  :config
   (map! :leader
         :desc "Toggle vterm popup" "ov" '+vterm/toggle
         :desc "Toggle vterm here" "oV" '+vterm/here)
+  )
 
 ;;; ERC
-  (defun mediocre/on-erc-track-list-changed ()
-    (dolist (buffer erc-modified-channels-alist)
-      (tracking-add-buffer (car buffer))))
+(defun mediocre/on-erc-track-list-changed ()
+  (dolist (buffer erc-modified-channels-alist)
+    (tracking-add-buffer (car buffer))))
 
-  (use-package erc-hl-nicks
-    :after erc)
+(use-package erc-hl-nicks
+  :after erc)
 
-  (use-package erc
-    :commands erc
-    :hook (erc-track-list-changed . mediocre/on-erc-track-list-changed)
-    :config
-    (setq
-     erc-nick "mediocrity"
-     erc-user-full-name "Druk Oleksandr"
-     erc-prompt-for-nickserv-password nil
-     erc-auto-query 'bury
-     erc-join-buffer 'bury
-     erc-interpret-mirc-color t
-     erc-rename-buffers t
-     erc-lurker-hide-list '("JOIN" "PART" "QUIT")
-     erc-track-exclude-types '("JOIN" "NICK" "QUIT" "MODE")
-     erc-track-enable-keybindings nil
-     erc-track-visibility nil ; Only use the selected frame for visibility
-     erc-fill-column 80
-     erc-fill-function 'erc-fill-static
-     erc-fill-static-center 20
-     erc-quit-reason (lambda (s) (or s "Fading out..."))
-     erc-modules
-     '(autoaway autojoin button completion fill irccontrols keep-place
-                list match menu move-to-prompt netsplit networks noncommands
-                readonly ring stamp track hl-nicks))
+(use-package erc
+  :commands erc
+  :hook (erc-track-list-changed . mediocre/on-erc-track-list-changed)
+  :config
+  (setq
+   erc-nick "mediocrity"
+   erc-user-full-name "Druk Oleksandr"
+   erc-prompt-for-nickserv-password nil
+   erc-auto-query 'bury
+   erc-join-buffer 'bury
+   erc-interpret-mirc-color t
+   erc-rename-buffers t
+   erc-lurker-hide-list '("JOIN" "PART" "QUIT")
+   erc-track-exclude-types '("JOIN" "NICK" "QUIT" "MODE")
+   erc-track-enable-keybindings nil
+   erc-track-visibility nil ; Only use the selected frame for visibility
+   erc-fill-column 80
+   erc-fill-function 'erc-fill-static
+   erc-fill-static-center 20
+   erc-quit-reason (lambda (s) (or s "Fading out..."))
+   erc-modules
+   '(autoaway autojoin button completion fill irccontrols keep-place
+              list match menu move-to-prompt netsplit networks noncommands
+              readonly ring stamp track hl-nicks))
 
-    (add-hook 'erc-join-hook 'bitlbee-identify)
-    (defun bitlbee-identify ()
-      "If we're on the bitlbee server, send the identify command to the &bitlbee channel."
-      (when (and (string= "127.0.0.1" erc-session-server)
-                 (string= "&bitlbee" (buffer-name)))
-        (erc-message "PRIVMSG" (format "%s identify %s"
-                                       (erc-default-target)
-                                       (password-store-get "IRC/Bitlbee"))))))
+  (add-hook 'erc-join-hook 'bitlbee-identify)
+  (defun bitlbee-identify ()
+    "If we're on the bitlbee server, send the identify command to the &bitlbee channel."
+    (when (and (string= "127.0.0.1" erc-session-server)
+               (string= "&bitlbee" (buffer-name)))
+      (erc-message "PRIVMSG" (format "%s identify %s"
+                                     (erc-default-target)
+                                     (password-store-get "IRC/Bitlbee"))))))
 
-  (defun mediocre/connect-irc ()
-    (interactive)
-    ;; (erc-tls
-    ;;  :server "chat.freenode.net" :port 7000
-    ;;  :nick "daviwil" :password (password-store-get "IRC/Freenode")))
-    (erc
-     :server "127.0.0.1" :port 6667
-     :nick "mediocrity"))
+(defun mediocre/connect-irc ()
+  (interactive)
+  ;; (erc-tls
+  ;;  :server "chat.freenode.net" :port 7000
+  ;;  :nick "daviwil" :password (password-store-get "IRC/Freenode")))
+  (erc
+   :server "127.0.0.1" :port 6667
+   :nick "mediocrity"))
 
-  (map! :leader :desc "ERC" "oe" 'erc)
+(map! :leader :desc "ERC" "oe" 'erc)
 
 ;;; Elfeed
 ;;; TODO add my rss
-  (use-package elfeed
-    :commands elfeed
-    :config
-    (setq elfeed-feeds
-          '(
-            ;; Tech
-            ("https://nitter.net/ebanoe_it/rss" ebanoe it)
-            ("https://habr.com/ru/rss/all/all/?fl=ru" habr it)
-            ("https://os.phil-opp.com/rss.xml" rust)
-            ("https://this-week-in-rust.org/rss.xml" rust)
-            ("https://dou.ua/feed/" dou it)
-            ("https://protesilaos.com/codelog.xml" shprot emacs)
-            ("https://sachachua.com/blog/category/emacs/feed" emacs)
-            ("https://weekly.nixos.org/feeds/all.rss.xml" nix)
-            ("https://devpew.com/index.xml" johenews)
-            ;; Reddit
-            ("https://www.reddit.com/r/osdev/new.rss" osdev)
-            ("https://www.reddit.com/r/bash/new.rss" bash)
-            ("https://www.reddit.com/r/DoomEmacs/new.rss" emacs doom)
-            ("https://www.reddit.com/r/emacs/new.rss" emacs )
-            ("https://www.reddit.com/r/commandline/new.rss" cmd)
-            ("https://www.reddit.com/r/programming/new.rss" programming)
-            ("https://www.reddit.com/r/awesomewm/new.rss" awesomewm)
-            ;; Podcasts
-            ("https://rustacean-station.org/podcast.rss" rust podcast)
-            ("http://feeds.rucast.net/radio-t" radiot podcast)
-            ;; Youtubetech
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA" ytt luke)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" ytt dt)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC9MK8SybZcrHR3CUV4NMy2g" ytt didgitalize)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA" ytt mental-outlaw)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCsnGwSIHyoYN0kiINAGUKxg" ytt wolfgang)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA" ytt brodie)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCBNlINWfd08qgDkUTaUY4_w" ytt extremecode)
-            ;; Youtubefun
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCLKB9g1374gcxezJINOLtag" ytf raiz)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC8M5YVWQan_3Elm-URehz9w" ytf utopia)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC_gKMJFeCf1bKzZr_fICkig" ytf thedrzj)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC7nQ_p09KDD0fI6p34nsr4A" ytf voldemar)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UC2Ru64PHqW4FxoP0xhQRvJg" ytf toples)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCfdgIq01iG92AXBt-NxgPkg" ytf later)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCD-S-2TMDY4fL-R5iDQn-6Q" ytf 2shell)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCr1Pf6rqk3h8b1APvAt42Bw" ytf slidan)
-            ("https://www.youtube.com/feeds/videos.xml?channel_id=UCfn7uyPvr5IY5pux8oyIa4Q" ytf kel)))
-    :hook ((elfeed-search . (lambda () (elfeed-update)))))
-  (add-hook 'elfeed-search-mode-hook #'elfeed-update)
-  (map! :leader :desc "Elfeed" "on" 'elfeed)
+(use-package elfeed
+  :commands elfeed
+  :config
+  (setq elfeed-feeds
+        '(
+          ;; Tech
+          ("https://nitter.net/ebanoe_it/rss" ebanoe it)
+          ("https://habr.com/ru/rss/all/all/?fl=ru" habr it)
+          ("https://os.phil-opp.com/rss.xml" rust)
+          ("https://this-week-in-rust.org/rss.xml" rust)
+          ("https://dou.ua/feed/" dou it)
+          ("https://protesilaos.com/codelog.xml" shprot emacs)
+          ("https://sachachua.com/blog/category/emacs/feed" emacs)
+          ("https://weekly.nixos.org/feeds/all.rss.xml" nix)
+          ("https://devpew.com/index.xml" johenews)
+          ;; Reddit
+          ("https://www.reddit.com/r/osdev/new.rss" osdev)
+          ("https://www.reddit.com/r/bash/new.rss" bash)
+          ("https://www.reddit.com/r/DoomEmacs/new.rss" emacs doom)
+          ("https://www.reddit.com/r/emacs/new.rss" emacs )
+          ("https://www.reddit.com/r/commandline/new.rss" cmd)
+          ("https://www.reddit.com/r/programming/new.rss" programming)
+          ("https://www.reddit.com/r/awesomewm/new.rss" awesomewm)
+          ;; Podcasts
+          ("https://rustacean-station.org/podcast.rss" rust podcast)
+          ("http://feeds.rucast.net/radio-t" radiot podcast)
+          ;; Youtubetech
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA" ytt luke)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" ytt dt)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC9MK8SybZcrHR3CUV4NMy2g" ytt didgitalize)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA" ytt mental-outlaw)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCsnGwSIHyoYN0kiINAGUKxg" ytt wolfgang)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA" ytt brodie)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCBNlINWfd08qgDkUTaUY4_w" ytt extremecode)
+          ;; Youtubefun
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCLKB9g1374gcxezJINOLtag" ytf raiz)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC8M5YVWQan_3Elm-URehz9w" ytf utopia)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC_gKMJFeCf1bKzZr_fICkig" ytf thedrzj)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC7nQ_p09KDD0fI6p34nsr4A" ytf voldemar)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC2Ru64PHqW4FxoP0xhQRvJg" ytf toples)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCfdgIq01iG92AXBt-NxgPkg" ytf later)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCD-S-2TMDY4fL-R5iDQn-6Q" ytf 2shell)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCr1Pf6rqk3h8b1APvAt42Bw" ytf slidan)
+          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCfn7uyPvr5IY5pux8oyIa4Q" ytf kel)))
+  :hook ((elfeed-search . (lambda () (elfeed-update)))))
+(add-hook 'elfeed-search-mode-hook #'elfeed-update)
+(map! :leader :desc "Elfeed" "on" 'elfeed)
 
 ;;; EMMS
-  ;; TODO setup my own
-  (use-package emms
-    :commands emms
-    :config
-    (require 'emms-setup)
-    (emms-standard)
-    (emms-default-players)
-    (emms-mode-line-disable)
-    (setq emms-source-file-default-directory "~/musx/"))
+;; TODO setup my own
+(use-package emms
+  :commands emms
+  :config
+  (require 'emms-setup)
+  (emms-standard)
+  (emms-default-players)
+  (emms-mode-line-disable)
+  (setq emms-source-file-default-directory "~/musx/"))
 
-  ;; TODO change
-  (map! :leader
-        :prefix ("a" . "audio")
-        :desc "Play music" "m" 'emms
-        :desc "Play/pause music" "p" 'emms-pause
-        :desc "Describe song" "d" 'emms-show
-        :desc "Play file" "f" 'emms-play-file
-        :desc "Play next" "," 'emms-previous
-        :desc "Play next" "." 'emms-next
-        )
+;; TODO change
+(map! :leader
+      :prefix ("a" . "audio")
+      :desc "Play music" "m" 'emms
+      :desc "Play/pause music" "p" 'emms-pause
+      :desc "Describe song" "d" 'emms-show
+      :desc "Play file" "f" 'emms-play-file
+      :desc "Play next" "," 'emms-previous
+      :desc "Play next" "." 'emms-next)
 
 ;;; Network
-  (use-package net-utils
-    ;; :ensure nil
-    ;; :ensure-system-package traceroute
-    :bind
-    (:map mode-specific-map
-     :prefix-map net-utils-prefix-map
-     :prefix "n"
-     ("p" . ping)
-     ("i" . ifconfig)
-     ("w" . iwconfig)
-     ("n" . netstat)
-     ("p" . ping)
-     ("a" . arp)
-     ("r" . route)
-     ("h" . nslookup-host)
-     ("d" . dig)
-     ("s" . smbclient)
-     ("t" . traceroute)))
+(use-package net-utils
+  ;; :ensure-system-package traceroute
+  :bind
+  (:map mode-specific-map
+   :prefix-map net-utils-prefix-map
+   :prefix "n"
+   ("p" . ping)
+   ("i" . ifconfig)
+   ("w" . iwconfig)
+   ("n" . netstat)
+   ("p" . ping)
+   ("a" . arp)
+   ("r" . route)
+   ("h" . nslookup-host)
+   ("d" . dig)
+   ("s" . smbclient)
+   ("t" . traceroute)))
 
 ;;; PDf Support
 
 ;;; Prog Mode ligatures
-  ;; TODO review
-  ;; (use-package prog-mode
-  ;;   :ensure nil
-  ;; :hook ( (prog-mode . prettify-symbols-mode)
-  ;; (lisp-mode . prettify-symbols-lisp)
-  ;; (c-mode . prettify-symbols-c)
-  ;; (c++-mode . prettify-symbols-c++)
-  ;; ((js-mode js2-mode) . prettify-symbols-js)
-  ;; (prog-mode . (lambda ()
-  ;;                (setq-local scroll-margin 3))))
-  ;; :preface
-  ;; (defun prettify-symbols-prog ()
-  ;;   (push '("<=" . ?≤) prettify-symbols-alist)
-  ;;   (push '(">=" . ?≥) prettify-symbols-alist))
-  ;; (defun prettify-symbols-lisp ()
-  ;;   (push '("/=" . ?≠) prettify-symbols-alist)
-  ;;   (push '("sqrt" . ?√) prettify-symbols-alist)
-  ;;   (push '("not" . ?¬) prettify-symbols-alist)
-  ;;   (push '("and" . ?∧) prettify-symbols-alist)
-  ;;   (push '("or" . ?∨) prettify-symbols-alist))
-  ;; (defun prettify-symbols-c ()
-  ;;   (push '("<=" . ?≤) prettify-symbols-alist)
-  ;;   (push '("->" . ?→) prettify-symbols-alist)
-  ;;   (push '(">=" . ?≥) prettify-symbols-alist)
-  ;;   (push '("!=" . ?≠) prettify-symbols-alist)
-  ;;   (push '("&&" . ?∧) prettify-symbols-alist)
-  ;;   (push '("||" . ?∨) prettify-symbols-alist)
-  ;;   (push '(">>" . ?») prettify-symbols-alist)
-  ;;   (push '("<<" . ?«) prettify-symbols-alist))
-  ;; (defun prettify-symbols-c++ ()
-  ;;   (push '("<=" . ?≤) prettify-symbols-alist)
-  ;;   (push '(">=" . ?≥) prettify-symbols-alist)
-  ;;   (push '("!=" . ?≠) prettify-symbols-alist)
-  ;;   (push '("&&" . ?∧) prettify-symbols-alist)
-  ;;   (push '("||" . ?∨) prettify-symbols-alist)
-  ;;   (push '(">>" . ?») prettify-symbols-alist)
-  ;;   (push '("<<" . ?«) prettify-symbols-alist)
-  ;;   (push '("->" . ?→) prettify-symbols-alist))
-  ;; (defun prettify-symbols-js ()
-  ;;   (push '("function" . ?λ) prettify-symbols-alist)
-  ;;   (push '("=>" . ?⇒) prettify-symbols-alist)))
+;; TODO review
+(use-package prog-mode
+  :ensure nil
+  :hook ( (prog-mode . prettify-symbols-mode)
+          (lisp-mode . prettify-symbols-lisp)
+          (c-mode . prettify-symbols-c)
+          (c++-mode . prettify-symbols-c++)
+          ((js-mode js2-mode) . prettify-symbols-js)
+          (prog-mode . (lambda ()
+                         (setq-local scroll-margin 3))))
+  :preface
+  (defun prettify-symbols-prog ()
+    (push '("<=" . ?≤) prettify-symbols-alist)
+    (push '(">=" . ?≥) prettify-symbols-alist))
+  (defun prettify-symbols-lisp ()
+    (push '("/=" . ?≠) prettify-symbols-alist)
+    (push '("sqrt" . ?√) prettify-symbols-alist))
+  (defun prettify-symbols-c ()
+    (push '("<=" . ?≤) prettify-symbols-alist)
+    (push '("->" . ?🠆) prettify-symbols-alist)
+    (push '(">=" . ?≥) prettify-symbols-alist)
+    (push '("!=" . ?≠) prettify-symbols-alist)
+    (push '(">>" . ?») prettify-symbols-alist)
+    (push '("<<" . ?«) prettify-symbols-alist))
+  (defun prettify-symbols-c++ ()
+    (push '("<=" . ?≤) prettify-symbols-alist)
+    (push '(">=" . ?≥) prettify-symbols-alist)
+    (push '("!=" . ?≠) prettify-symbols-alist)
+    (push '(">>" . ?») prettify-symbols-alist)
+    (push '("<<" . ?«) prettify-symbols-alist)
+    (push '("->" . ?🠆) prettify-symbols-alist))
+  (defun prettify-symbols-js ()
+    (push '("function" . ?λ) prettify-symbols-alist)
+    (push '("=>" . ?⇒) prettify-symbols-alist)))
 
-  (defun x11-yank-image-at-point-as-image ()
-    "Yank the image at point to the X11 clipboard as image/png."
-    (interactive)
-    (let ((image (get-text-property (point) 'display)))
-      (if (eq (car image) 'image)
-          (let ((data (plist-get (cdr image) ':data))
-                (file (plist-get (cdr image) ':file)))
-            (cond (data
-                   (with-temp-buffer
-                     (insert data)
-                     (call-shell-region
-                      (point-min) (point-max)
-                      "xclip -i -selection clipboard -t image/png")))
-                  (file
-                   (if (file-exists-p file)
-                       (start-process
-                        "xclip-proc" nil "xclip"
-                        "-i" "-selection" "clipboard" "-t" "image/png"
-                        "-quiet" (file-truename file))))
-                  (t
-                   (message "The image seems to be malformed."))))
-        (message "Point is not at an image."))))
+(defun x11-yank-image-at-point-as-image ()
+  "Yank the image at point to the X11 clipboard as image/png."
+  (interactive)
+  (let ((image (get-text-property (point) 'display)))
+    (if (eq (car image) 'image)
+        (let ((data (plist-get (cdr image) ':data))
+              (file (plist-get (cdr image) ':file)))
+          (cond (data
+                 (with-temp-buffer
+                   (insert data)
+                   (call-shell-region
+                    (point-min) (point-max)
+                    "xclip -i -selection clipboard -t image/png")))
+                (file
+                 (if (file-exists-p file)
+                     (start-process
+                      "xclip-proc" nil "xclip"
+                      "-i" "-selection" "clipboard" "-t" "image/png"
+                      "-quiet" (file-truename file))))
+                (t
+                 (message "The image seems to be malformed."))))
+      (message "Point is not at an image."))))
 
-  (map! :mode image-mode :map (image-mode-map) "zy" nil)
-  (map! :mode image-mode :map (image-mode-map) "zy" 'x11-yank-image-at-point-as-image)
-
-  (global-set-key [?\C-\S-v] 'evil-paste-after)
-
+(map! :mode image-mode :map (image-mode-map) "zy" nil)
+(map! :mode image-mode :map (image-mode-map) "zy" 'x11-yank-image-at-point-as-image)

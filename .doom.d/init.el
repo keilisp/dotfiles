@@ -38,7 +38,7 @@
        neotree           ; a project drawer, like NERDTree for vim
        ophints                ; highlight the region an operation acts on
        (popup +defaults)      ; tame sudden yet inevitable temporary windows
-       ligatures              ; ligatures or substitute text with pretty symbols
+       (ligatures +iosevka)              ; ligatures or substitute text with pretty symbols
        ;;tabs              ; an tab bar for Emacs
        treemacs               ; a project drawer, like neotree but cooler
        unicode                ; extended unicode support for various languages
@@ -73,7 +73,7 @@
        vterm                         ; the best terminal emulation in Emacs
        :checkers syntax              ; tasing you for every semicolon you forget
        (spell +flyspell +hunspell)   ; tasing you for misspelling mispelling
-       ;; grammar           ; tasing grammar mistake every you make
+       grammar           ; tasing grammar mistake every you make
        :tools
        ;;ansible
        debugger          ; FIXME stepping through code, to help you add bugs
