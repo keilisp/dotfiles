@@ -19,8 +19,8 @@
        ;;japanese
        :completion
        (company
-        ;; +tng
-        )       ; the ultimate code completion backend
+	;; +tng
+	)       ; the ultimate code completion backend
        (ivy +icons)                     ; a search engine for love and life
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
@@ -60,8 +60,8 @@
        snippets                  ; my elves. They type so I don't have to
        word-wrap                 ; soft wrapping with language-aware indent
        :emacs (dired
-               +ranger
-               +icons)    ; making dired pretty [functional]
+	       +ranger
+	       +icons)    ; making dired pretty [functional]
        electric                         ; smarter, keyword-based electric-indent
        (ibuffer +icons)                 ; interactive buffer management
        (undo +tree)      ; persistent, smarter undo for your inevitable mistakes
@@ -133,8 +133,8 @@
        nix                              ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org +dragndrop +gnuplot +pomodoro +present +pretty +journal
-            ;; +roam
-            ) ; organize your plain life in plain text
+	    ;; +roam
+	    ) ; organize your plain life in plain text
        ;;perl              ; write code no one else can comprehend
        php              ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more

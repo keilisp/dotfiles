@@ -108,9 +108,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    # family: Mononoki Nerd Font
-    # family: Monaco
-    family: Hack
+    family: IBM Plex Mono
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -123,7 +121,7 @@ font:
     # value specified for the normal font.
     # family: Mononoki Nerd Font
     # family: Monaco
-    family: Hack
+    family: IBM Plex Mono
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -136,7 +134,7 @@ font:
     # value specified for the normal font.
     # family: Mononoki Nerd Font
     # family: Monaco
-    family: Hack
+    family: IBM Plex Mono
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -147,7 +145,7 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Mononoki Nerd Font
+    family: IBM Plex Mono
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
@@ -274,6 +272,39 @@ colors:
     magenta: '#8f0075'
     cyan:    '#30517f'
     white:   '#f0f0f0'  
+
+# Colors (PaperColor - Light)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0xeeeeee'
+#     foreground: '0x878787'
+
+#   cursor:
+#     text: '0xeeeeee'
+#     cursor: '0x878787'
+
+#   # Normal colors
+#   normal:
+#     black:   '0xeeeeee'
+#     red:     '0xaf0000'
+#     green:   '0x008700'
+#     yellow:  '0x5f8700'
+#     blue:    '0x0087af'
+#     magenta: '0x878787'
+#     cyan:    '0x005f87'
+#     white:   '0x444444'
+
+#   # Bright colors
+#   bright:
+#     black:   '0xbcbcbc'
+#     red:     '0xd70000'
+#     green:   '0xd70087'
+#     yellow:  '0x8700af'
+#     blue:    '0xd75f00'
+#     magenta: '0xd75f00'
+#     cyan:    '0x005faf'
+#     white:   '0x005f87'
 
     # # Colors (One Light)
 # colors:
@@ -641,10 +672,10 @@ background_opacity: 0.95
 # binding with the same triggers is defined. To unset a default binding, it can
 # be mapped to the `ReceiveChar` action. Alternatively, you can use `None` for
 # a no-op if you do not wish to receive input characters for that binding.
-#key_bindings:
+key_bindings:
 # (Windows, Linux, and BSD only)
-#- { key: V,        mods: Control|Shift, action: Paste            }
-#- { key: C,        mods: Control|Shift, action: Copy             }
+- { key: V,        mods: Alt,           action: Paste            }
+- { key: C,        mods: Alt,           action: Copy             }
 #- { key: Insert,   mods: Shift,         action: PasteSelection   }
 #- { key: Key0,     mods: Control,       action: ResetFontSize    }
 #- { key: Equals,   mods: Control,       action: IncreaseFontSize }

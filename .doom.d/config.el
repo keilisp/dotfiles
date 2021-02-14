@@ -2,10 +2,15 @@
 
 (setq user-full-name "Druk Alexander" user-mail-address "druksasha@ukr.net")
 
-(setq doom-font (font-spec :family "Hack" :size 12)
-      doom-big-font (font-spec :family "Hack")
-      doom-variable-pitch-font (font-spec :family "Hack" :size 12)
-      doom-serif-font (font-spec :family "Hack" :weight 'light))
+(setq doom-font (font-spec :family "IBM Plex Mono" :size 13)
+      doom-big-font (font-spec :family "IBM Plex Mono")
+      doom-variable-pitch-font (font-spec :family "IBM Plex Mono" :size 13)
+      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
+
+;; (setq doom-font (font-spec :family "Hack" :size 12)
+;;       doom-big-font (font-spec :family "Hack")
+;;       doom-variable-pitch-font (font-spec :family "Hack" :size 12)
+;;       doom-serif-font (font-spec :family "Hack" :weight 'light))
 
 ;; (setq doom-font (font-spec :family "FiraCode" :size 12)
 ;;       doom-big-font (font-spec :family "FiraCode")
@@ -28,18 +33,48 @@
   (use-package! evil-terminal-cursor-changer
     :hook (tty-setup . evil-terminal-cursor-changer-activate)))
 
+
+(setq doom-theme 'doom-acario-light)
+;; (setq doom-theme 'tango)
 (setq calendar-location-name "Europe, Kiev")
 (setq calendar-latitude 50.43)
 (setq calendar-longitude 30.52)
 (use-package theme-changer)
-(change-theme 'modus-operandi 'modus-vivendi)
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+	      (lambda (frame)
+		(select-frame frame)
+		(if (display-graphic-p)
+		    ;; (change-theme 'doom-acario-light 'doom-acario-light)
+		    ;; (change-theme 'tango 'tango)
+		    (setq doom-theme 'doom-acario-light)
+		  ))))
+
+;; (change-theme 'doom-acario-light 'doom-acario-light)
+;; (change-theme 'doom-acario-light 'doom-acario-dark)
+;; (change-theme 'modus-operandi 'modus-vivendi)
 ;; (change-theme 'modus-operandi 'modus-vivendi)
 ;; (change-theme 'doom-tomorrow-day 'doom-gruvbox)
 ;; (change-theme 'doom-solarized-light 'doom-solarized-light)
 
+;; Dashboard
+;; (use-package dashboard
+;;   :preface
+;;   (defun mediocre/dashboard-banner ()
+;;     "Set a dashboard banner including information on package initialization
+;; 			   time and garbage collections."""
+;;     (setq dashboard-banner-logo-title
+;; 	  (format "Emacs ready in %.2f seconds with %d garbage collections."
+;; 		  (float-time (time-subtract after-init-time before-init-time)) gcs-done)))
+;;   :config
+;;   (setq dashboard-startup-banner "~/pix/doom/stallman.png")
+;;   (setq dashboard-center-content t)
+;;   (dashboard-setup-startup-hook)
+;;   :hook ((after-init     . dashboard-refresh-buffer)
+;; 	 (dashboard-mode . mediocre/dashboard-banner)))
+
 ;; Setup fringes
 (set-fringe-mode 5)
-()
 
 ;; Which-key global-mode
 (which-key-mode)
@@ -87,11 +122,11 @@
       (cond
        ((null evt) (message ""))
        ((and (integerp evt) (char-equal evt ?о))
-        (delete-char -1)
-        (set-buffer-modified-p modified)
-        (push 'escape unread-command-events))
+	(delete-char -1)
+	(set-buffer-modified-p modified)
+	(push 'escape unread-command-events))
        (t (setq unread-command-events (append unread-command-events
-                                              (list evt))))))))
+					      (list evt))))))))
 
 ;;; Rust
 (use-package rust-mode
@@ -176,8 +211,8 @@
 (evil-define-operator evil-yank-and-comment (beg end type register yank-handler)
   (cond
    ((and (fboundp 'cua--global-mark-active)
-         (fboundp 'cua-copy-region-to-global-mark)
-         (cua--global-mark-active))
+	 (fboundp 'cua-copy-region-to-global-mark)
+	 (cua--global-mark-active))
     (cua-copy-region-to-global-mark beg end))
    ((eq type 'block)
     (progn (evil-yank-rectangle beg end) (comment-or-uncomment-region beg end)))
@@ -291,7 +326,7 @@
     "Translate word at point. If prefix is provided, do reverse translation"
     (interactive "P")
     (if arg
-        (google-translate-at-point-reverse)
+	(google-translate-at-point-reverse)
       (google-translate-at-point)))
 
   (require 'google-translate-default-ui)
@@ -304,8 +339,8 @@
   (setq google-translate-translation-directions-alist '(("en" . "ru") ("ru" . "en") ("en" . "uk") ("uk" . "en")))
   ;; auto-toggle input method
   (setq google-translate-input-method-auto-toggling t
-        google-translate-preferable-input-methods-alist '((nil . ("en"))
-                                                          (russian-computer . ("ru")))))
+	google-translate-preferable-input-methods-alist '((nil . ("en"))
+							  (russian-computer . ("ru")))))
 (require 'google-translate)
 (defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130))
 (setq google-translate-backend-method 'curl)
@@ -319,7 +354,7 @@
 
 ;; Format on save
 (add-hook 'before-save-hook (lambda ()
-                              (call-interactively #'format-all-buffer)))
+			      (call-interactively #'format-all-buffer)))
 
 ;; Emmet setup
 (add-hook 'sgml-mode-hook #'emmet-mode) ;; Auto-start on any markup modes
@@ -331,18 +366,18 @@
   (setq org-startup-folded t)
   (setq org-directory "~/org")
   (setq org-agenda-files
-        '("~/org/learning.org"
-          "~/org/food.org"
-          "~/org/university.org"
-          "~/org/tasks.org"
-          "~/org/people.org"
-          "~/org/birthdays.org"
-          "~/org/habits.org"
-          "~/org/books.org"
-          "~/org/bookmarks.org"
-          "~/org/ideas.org"
-          "~/org/life.org"
-          ))
+	'("~/org/learning.org"
+	  "~/org/food.org"
+	  "~/org/university.org"
+	  "~/org/tasks.org"
+	  "~/org/people.org"
+	  "~/org/birthdays.org"
+	  "~/org/habits.org"
+	  "~/org/books.org"
+	  "~/org/bookmarks.org"
+	  "~/org/ideas.org"
+	  "~/org/life.org"
+	  ))
 
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-into-drawer t)
@@ -350,30 +385,31 @@
   (setq org-hide-emphasis-markers t)
 
   (setq org-todo-keywords
-        '((sequence
-           "INPROGRESS(p)"
-           "TODO(t)"
-           "NEXT(n)"
-           "READY(r)"
-           "REVIEW(v)"
-           "WAIT(w@/!)"
-           "SOMEDAY(.)" "|" "DONE(x!)" "CANC(c)")
-          (sequence "LEARN(l)" "TRY" "STARTED(s)" "IMPL(i)" "|" "COMPLETE(x)")
-          (sequence "TOBUY(b)" "|" "DONE(x)"))
-        org-todo-keyword-faces '(("STARTED" :foreground "#0098dd" :weight normal :underline t)
-                                 ("TODO" :foreground "#7c7c75" :weight normal :underline t)
-                                 ("NEXT" :foreground "#ff5733" :weight normal :underline t)
-                                 ("REVIEW" :foreground "#e733ff" :weight normal :underline t)
-                                 ("SOMEDAY" :foreground "#3733ff" :weight normal :underline t)
-                                 ("READY" :foreground "#33ffd2" :weight normal :underline t)
-                                 ("INPGROGRESS" :foreground "#0098dd" :weight normal :underline t)
-                                 ("WAIT" :foreground "#9f7efe" :weight normal :underline t)
-                                 ("DONE" :foreground "#50a14f" :weight normal :underline t)
-                                 ("CANC" :foreground "#ff6480" :weight normal :underline t)
-                                 ("IMPL" :foreground "#ff3733" :weight normal :underline t)
-                                 ("TOBUY" :foreground "#ff3395" :weight normal :underline t)
-                                 )
-        )
+	'((sequence
+	   "INPROGRESS(p)"
+	   "TODO(t)"
+	   "NEXT(n)"
+	   "READY(r)"
+	   "REVIEW(v)"
+	   "WAIT(w@/!)"
+	   "SOMEDAY(.)" "|" "DONE(x!)" "CANC(c)")
+	  (sequence "LEARN(l)" "TRY" "STARTED(s)" "IMPL(i)" "|" "COMPLETE(x)")
+	  (sequence "TOBUY(b)" "|" "DONE(x)"))
+	org-todo-keyword-faces '(("STARTED" :foreground "#0098dd" :weight normal :underline t)
+				 ("TODO" :foreground "#7c7c75" :weight normal :underline t)
+				 ("NEXT" :foreground "#ff5733" :weight normal :underline t)
+				 ("REVIEW" :foreground "#e733ff" :weight normal :underline t)
+				 ("SOMEDAY" :foreground "#3733ff" :weight normal :underline t)
+				 ("READY" :foreground "#33ffd2" :weight normal :underline t)
+				 ("INPROGRESS" :foreground "#ff5733" :weight normal :underline t)
+				 ("WAIT" :foreground "#9f7efe" :weight normal :underline t)
+				 ("DONE" :foreground "#50a14f" :weight normal :underline t)
+				 ("COMPLETE" :foreground "#50a14f" :weight normal :underline t)
+				 ("CANC" :foreground "#ff6480" :weight normal :underline t)
+				 ("IMPL" :foreground "#ff3733" :weight normal :underline t)
+				 ("TOBUY" :foreground "#ff3395" :weight normal :underline t)
+				 )
+	)
 
   (require 'org-habit)
   (add-to-list 'org-modules 'org-habit)
@@ -381,163 +417,164 @@
 
   ;; Priorities
   (use-package! org-fancy-priorities
-    :hook (org-mode . org-fancy-priorities-mode):config
+    :hook (org-mode . org-fancy-priorities-mode)
+    :config
     (setq org-fancy-priorities-list '("🗲" ,"🡩", "🡫", "☕")))
 
   (use-package org-bullets
     :hook (org-mode . org-bullets-mode))
 
   (setq org-refile-targets
-        '(("archive.org" :maxlevel . 1)
-          ("bookmarks.org" :maxlevel . 2)
-          ("learning.org" :maxlevel . 2)
-          ("tasks.org" :maxlevel . 1)))
+	'(("archive.org" :maxlevel . 1)
+	  ("bookmarks.org" :maxlevel . 2)
+	  ("learning.org" :maxlevel . 2)
+	  ("tasks.org" :maxlevel . 1)))
 
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
   (setq org-tag-alist
-        '((:startgroup)
-          ;; Put mutually exclusive tags here
-          (:endgroup)
-          ("@home" . ?H)
-          ("@work" . ?W)
-          ("agenda" . ?a)
-          ("task" . ?a)
-          ("buy" . ?f)
-          ("watch" . ?w)
-          ("university" . ?w)
-          ("listen" . ?L)
-          ("practice" . ?p)
-          ("read" . ?r)
-          ("book" . ?b)
-          ("note" . ?n)
-          ("idea" . ?i)))
+	'((:startgroup)
+	  ;; Put mutually exclusive tags here
+	  (:endgroup)
+	  ("@home" . ?H)
+	  ("@work" . ?W)
+	  ("agenda" . ?a)
+	  ("task" . ?a)
+	  ("buy" . ?f)
+	  ("watch" . ?w)
+	  ("university" . ?w)
+	  ("listen" . ?L)
+	  ("practice" . ?p)
+	  ("read" . ?r)
+	  ("book" . ?b)
+	  ("note" . ?n)
+	  ("idea" . ?i)))
 
   ;; Configure custom agenda views
   (setq org-agenda-custom-commands
-        '(
-          ("b" "Low-effort books"
-           ((tags-todo "book-practice/!+INPROGRESS|+NEXT"
-                       ((org-agenda-overriding-header "Books without Practice")))))
-          ("B" "Books"
-           ((tags-todo "book+practice/!+INPROGRESS|+NEXT"
-                       ((org-agenda-overriding-header "Books with Practice")))))
+	'(
+	  ("b" "Low-effort books"
+	   ((tags-todo "book-practice/!+INPROGRESS|+NEXT"
+		       ((org-agenda-overriding-header "Books without Practice")))))
+	  ("B" "Books"
+	   ((tags-todo "book+practice/!+INPROGRESS|+NEXT"
+		       ((org-agenda-overriding-header "Books with Practice")))))
 
-          ("h" "Habits" tags-todo "STYLE=\"habit\""
-           ((org-agenda-overriding-header "Habits")
-            (org-agenda-sorting-strategy
-             '(todo-state-down effort-up category-keep))))
+	  ("h" "Habits" tags-todo "STYLE=\"habit\""
+	   ((org-agenda-overriding-header "Habits")
+	    (org-agenda-sorting-strategy
+	     '(todo-state-down effort-up category-keep))))
 
-          ;; ("e" tags-todo "task+Effort<6&+Effort>0"
-          ;;  ((org-agenda-overriding-header "Low Effort Tasks")
-          ;;   ;; (org-agenda-max-todos 20)
-          ;;   (org-agenda-files org-agenda-files)))
+	  ;; ("e" tags-todo "task+Effort<6&+Effort>0"
+	  ;;  ((org-agenda-overriding-header "Low Effort Tasks")
+	  ;;   ;; (org-agenda-max-todos 20)
+	  ;;   (org-agenda-files org-agenda-files)))
 
-          ;; ("E" tags-todo "task+Effort>5"
-          ;;  ((org-agenda-overriding-header "Tasks")
-          ;;   ;; (org-agenda-max-todos 20)
-          ;;   (org-agenda-files org-agenda-files)))
+	  ;; ("E" tags-todo "task+Effort>5"
+	  ;;  ((org-agenda-overriding-header "Tasks")
+	  ;;   ;; (org-agenda-max-todos 20)
+	  ;;   (org-agenda-files org-agenda-files)))
 
-          ("E" tags-todo "task"
-           ((org-agenda-overriding-header "Tasks")
-            ;; (org-agenda-max-todos 20)
-            (org-agenda-files org-agenda-files)))
+	  ("E" tags-todo "task"
+	   ((org-agenda-overriding-header "Tasks")
+	    ;; (org-agenda-max-todos 20)
+	    (org-agenda-files org-agenda-files)))
 
-          ("p" tags-todo "-practice/!+LEARN|+STARTED"
-           ((org-agenda-overriding-header "Things to learn without practice")
-            ;; (org-agenda-max-todos 20)
-            (org-agenda-files org-agenda-files)))
+	  ("p" tags-todo "-practice/!+LEARN|+STARTED"
+	   ((org-agenda-overriding-header "Things to learn without practice")
+	    ;; (org-agenda-max-todos 20)
+	    (org-agenda-files org-agenda-files)))
 
-          ("P" tags-todo "+practice/!+LEARN|STARTED"
-           ((org-agenda-overriding-header "Things to learn on practice")
-            ;; (org-agenda-max-todos 20)
-            (org-agenda-files org-agenda-files)))
+	  ("P" tags-todo "+practice/!+LEARN|STARTED"
+	   ((org-agenda-overriding-header "Things to learn on practice")
+	    ;; (org-agenda-max-todos 20)
+	    (org-agenda-files org-agenda-files)))
 
-          ("l" tags-todo "+LEARN+listen"
-           ((org-agenda-overriding-header "Things to listen")
-            ;; (org-agenda-max-todos 20)
-            (org-agenda-files org-agenda-files)))
+	  ("l" tags-todo "+LEARN+listen"
+	   ((org-agenda-overriding-header "Things to listen")
+	    ;; (org-agenda-max-todos 20)
+	    (org-agenda-files org-agenda-files)))
 
-          ("w" tags-todo "+watch-practice/!+LEARN|+STARTED"
-           ((org-agenda-overriding-header "Things to watch without practice")
-            ;; (org-agenda-max-todos 20)
-            (org-agenda-files org-agenda-files)))
+	  ("w" tags-todo "+watch-practice/!+LEARN|+STARTED"
+	   ((org-agenda-overriding-header "Things to watch without practice")
+	    ;; (org-agenda-max-todos 20)
+	    (org-agenda-files org-agenda-files)))
 
-          ("W" tags-todo "+watch+practice+watch/!+LEARN|STARTED"
-           ((org-agenda-overriding-header "Things to watch and practice")
-            ;; (org-agenda-max-todos 20)
-            (org-agenda-files org-agenda-files)))
+	  ("W" tags-todo "+watch+practice+watch/!+LEARN|STARTED"
+	   ((org-agenda-overriding-header "Things to watch and practice")
+	    ;; (org-agenda-max-todos 20)
+	    (org-agenda-files org-agenda-files)))
 
-          ("r" tags-todo "+read-practice/!+LEARN|+STARTED"
-           ((org-agenda-overriding-header "Things to read without practice")
-            ;; (org-agenda-max-todos 20)
-            (org-agenda-files org-agenda-files)))
+	  ("r" tags-todo "+read-practice/!+LEARN|+STARTED"
+	   ((org-agenda-overriding-header "Things to read without practice")
+	    ;; (org-agenda-max-todos 20)
+	    (org-agenda-files org-agenda-files)))
 
-          ("R" tags-todo "+read+practice/!+LEARN|STARTED"
-           ((org-agenda-overriding-header "Things to read and practice")
-            ;; (org-agenda-max-todos 20)
-            (org-agenda-files org-agenda-files)))
+	  ("R" tags-todo "+read+practice/!+LEARN|STARTED"
+	   ((org-agenda-overriding-header "Things to read and practice")
+	    ;; (org-agenda-max-todos 20)
+	    (org-agenda-files org-agenda-files)))
 
-          ("u" tags-todo "university"
-           ((org-agenda-overriding-header "Things for university")
-            ;; (org-agenda-max-todos 20)
-            (org-agenda-files org-agenda-files)))
+	  ("u" tags-todo "university"
+	   ((org-agenda-overriding-header "Things for university")
+	    ;; (org-agenda-max-todos 20)
+	    (org-agenda-files org-agenda-files)))
 
-          ("f" "To buy"
-           ((tags-todo "+buy"
-                       ((org-agenda-overriding-header "Things to buy")))))
+	  ("f" "To buy"
+	   ((tags-todo "+buy"
+		       ((org-agenda-overriding-header "Things to buy")))))
 
 
-          ;; ("w" "Workflow Status"
-          ;;  ((todo "WAIT"
-          ;;         ((org-agenda-overriding-header "Waiting on External")
-          ;;          (org-agenda-files org-agenda-files)))
-          ;;   (todo "REVIEW"
-          ;;         ((org-agenda-overriding-header "In Review")
-          ;;          (org-agenda-files org-agenda-files)))
-          ;;   (todo "SOMEDAY"
-          ;;         ((org-agenda-overriding-header "In Planning")
-          ;;          (org-agenda-todo-list-sublevels nil)
-          ;;          (org-agenda-files org-agenda-files)))
-          ;;   (todo "READY"
-          ;;         ((org-agenda-overriding-header "Ready for Work")
-          ;;          (org-agenda-files org-agenda-files)))
-          ;;   (todo "STARTED"
-          ;;         ((org-agenda-overriding-header "Active Projects")
-          ;;          (org-agenda-files org-agenda-files)))
-          ;;   (todo "COMPLETE"
-          ;;         ((org-agenda-overriding-header "Completed Projects")
-          ;;          (org-agenda-files org-agenda-files)))
-          ;;   (todo "CANC"
-          ;;         ((org-agenda-overriding-header "Cancelled Projects")
-          ;;          (org-agenda-files org-agenda-files)))))))
-          ))
+	  ;; ("w" "Workflow Status"
+	  ;;  ((todo "WAIT"
+	  ;;         ((org-agenda-overriding-header "Waiting on External")
+	  ;;          (org-agenda-files org-agenda-files)))
+	  ;;   (todo "REVIEW"
+	  ;;         ((org-agenda-overriding-header "In Review")
+	  ;;          (org-agenda-files org-agenda-files)))
+	  ;;   (todo "SOMEDAY"
+	  ;;         ((org-agenda-overriding-header "In Planning")
+	  ;;          (org-agenda-todo-list-sublevels nil)
+	  ;;          (org-agenda-files org-agenda-files)))
+	  ;;   (todo "READY"
+	  ;;         ((org-agenda-overriding-header "Ready for Work")
+	  ;;          (org-agenda-files org-agenda-files)))
+	  ;;   (todo "STARTED"
+	  ;;         ((org-agenda-overriding-header "Active Projects")
+	  ;;          (org-agenda-files org-agenda-files)))
+	  ;;   (todo "COMPLETE"
+	  ;;         ((org-agenda-overriding-header "Completed Projects")
+	  ;;          (org-agenda-files org-agenda-files)))
+	  ;;   (todo "CANC"
+	  ;;         ((org-agenda-overriding-header "Cancelled Projects")
+	  ;;          (org-agenda-files org-agenda-files)))))))
+	  ))
 
   (setq org-capture-templates
-        `(("t" "Tasks")
-          ("tt" "Task" entry
-           (file+olp "~/org/tasks.org")
-           "* TODO %t %? :task:\n")
-          ("tb" "Bookmark" entry
-           (file+olp "~/org/bookmarks.org")
-           "* [[%?][]] \n")
-          ("tl" "Learn" entry
-           (file+olp "~/org/learning.org")
-           "\n* LEARN [[%?][]] \n")
-          ("tu" "University" entry
-           (file+olp+datetree "~/org/university.org")
-           "* TODO DEADLINE: %t %? :university:\n")
-          ("ti" "Ideas" entry
-           (file+olp+datetree "~/org/ideas.org")
-           "* TODO %T %? :idea:\n")
-          ("tf" "Food" entry
-           (file+olp+datetree "~/org/food.org")
-           "* TODO %T %? :buy:\n"))
+	`(("t" "Tasks")
+	  ("tt" "Task" entry
+	   (file+olp "~/org/tasks.org")
+	   "* TODO %t %? :task:\n")
+	  ("tb" "Bookmark" entry
+	   (file+olp "~/org/bookmarks.org")
+	   "* [[%?][]] \n")
+	  ("tl" "Learn" entry
+	   (file+olp "~/org/learning.org")
+	   "\n* LEARN [[%?][]] \n")
+	  ("tu" "University" entry
+	   (file+olp+datetree "~/org/university.org")
+	   "* TODO DEADLINE: %t %? :university:\n")
+	  ("ti" "Ideas" entry
+	   (file+olp+datetree "~/org/ideas.org")
+	   "* %T %? :idea:\n")
+	  ("tf" "Food" entry
+	   (file+olp+datetree "~/org/food.org")
+	   "* TODO %T %? :buy:\n"))
 
-        ;; ("m" "Metrics Capture")
-        ;; ("mw" "Weight" table-line (file+headline "~/Projects/Code/emacs-from-scratch/OrgFiles/Metrics.org" "Weight")
-        ;;  "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
-        )
+	;; ("m" "Metrics Capture")
+	;; ("mw" "Weight" table-line (file+headline "~/Projects/Code/emacs-from-scratch/OrgFiles/Metrics.org" "Weight")
+	;;  "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
+	)
 
   (defun mediocre/org-babel-tangle-dont-ask ()
     ;; Dynamic scoping to the rescue
@@ -545,26 +582,33 @@
       (org-babel-tangle)))
 
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'mediocre/org-babel-tangle-dont-ask
-                                                'run-at-end 'only-in-org-mode))))
+						'run-at-end 'only-in-org-mode))))
 
 (after! org
   (map! :map org-mode-map
-        :n "M-j" 'org-metadown
-        :n "M-k" 'org-metaup
-        :n "C-j" 'org-next-visible-heading
-        :n "C-k" 'org-previous-visible-heading)
+	:n "M-j" 'org-metadown
+	:n "M-k" 'org-metaup
+	:n "C-j" 'org-next-visible-heading
+	:n "C-k" 'org-previous-visible-heading)
 
   (map! :leader :m :map org-mode-map "mS" 'org-insert-structure-template)
 
+
+  (defun doom/find-file-in-org ()
+    "Search for a file in `org'."
+    (interactive)
+    (doom-project-find-file "~/org"))
+
   (map! :leader
-        :prefix ("fo" . "org-files")
-        :desc "Bookmarks" "b"  (lambda () (interactive) (find-file "~/org/bookmarks.org"))
-        :desc "Anime" "a"  (lambda () (interactive) (find-file "~/org/anime.org"))
-        :desc "Books" "B"  (lambda () (interactive) (find-file "~/org/books.org"))
-        :desc "Learning" "l"  (lambda () (interactive) (find-file "~/org/learning.org"))
-        :desc "Tasks" "t"  (lambda () (interactive) (find-file "~/org/tasks.org"))
-        :desc "Habits" "h"  (lambda () (interactive) (find-file "~/org/habits.org"))
-        :desc "University" "u"  (lambda () (interactive) (find-file "~/org/university.org")))
+	:desc "Browse org files" "fo" #'doom/find-file-in-org)
+  ;; :desc "Bookmarks" "b"  (lambda () (interactive) (find-file "~/org/bookmarks.org"))
+  ;; :desc "Anime" "a"  (lambda () (interactive) (find-file "~/org/anime.org"))
+  ;; :desc "Books" "B"  (lambda () (interactive) (find-file "~/org/books.org"))
+  ;; :desc "Ideas" "i"  (lambda () (interactive) (find-file "~/org/ideas.org"))
+  ;; :desc "Learning" "l"  (lambda () (interactive) (find-file "~/org/learning.org"))
+  ;; :desc "Tasks" "t"  (lambda () (interactive) (find-file "~/org/tasks.org"))
+  ;; :desc "Habits" "h"  (lambda () (interactive) (find-file "~/org/habits.org"))
+  ;; :desc "University" "u"  (lambda () (interactive) (find-file "~/org/university.org")))
 
   (map! :leader :desc "org-copy" "mrk" #'org-copy )
 
@@ -575,7 +619,7 @@
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("json" . "src json")))
 
-(add-hook 'org-mode-hook (lambda () (set-face-attribute 'fixed-pitch nil :font "Hack-9")))
+;; (add-hook 'org-mode-hook (lambda () (set-face-attribute 'fixed-pitch nil :font "Hack-9")))
 
 (setq org-journal-date-prefix "#+TITLE: "
       org-journal-time-prefix "*"
@@ -589,9 +633,9 @@
 
 ;; Treat underscore and hyphen as part of the word
 (add-hook 'after-change-major-mode-hook (lambda ()
-                                          (modify-syntax-entry ?_ "w")))
+					  (modify-syntax-entry ?_ "w")))
 (add-hook 'after-change-major-mode-hook (lambda ()
-                                          (modify-syntax-entry ?- "w")))
+					  (modify-syntax-entry ?- "w")))
 
 ;; Paste menu
 (map! "M-v" #'counsel-yank-pop)
@@ -707,15 +751,15 @@
 (use-package dired
   :config
   (map! :leader
-        :prefix ("d" . "dired")
-        :desc "Open dired here" "h" 'dired-jump
-        :desc "Open downloads" "t" (lambda () (interactive) (dired "~/dwnlds"))
-        :desc "Open images" "i" (lambda () (interactive) (dired "~/pix"))
-        :desc "Open images" "d" (lambda () (interactive) (dired "~/dox"))
-        :desc "Open code" "c" (lambda () (interactive) (dired "~/code"))
-        :desc "Open music" "m" (lambda () (interactive) (dired "~/musx"))
-        :desc "Open progs" "p" (lambda () (interactive) (dired "~/progs"))
-        :desc "Open dotfiles" "D" (lambda () (interactive) (dired "~/.config"))))
+	:prefix ("d" . "dired")
+	:desc "Open dired here" "h" 'dired-jump
+	:desc "Open downloads" "t" (lambda () (interactive) (dired "~/dwnlds"))
+	:desc "Open images" "i" (lambda () (interactive) (dired "~/pix"))
+	:desc "Open images" "d" (lambda () (interactive) (dired "~/dox"))
+	:desc "Open code" "c" (lambda () (interactive) (dired "~/code"))
+	:desc "Open music" "m" (lambda () (interactive) (dired "~/musx"))
+	:desc "Open progs" "p" (lambda () (interactive) (dired "~/progs"))
+	:desc "Open dotfiles" "D" (lambda () (interactive) (dired "~/.config"))))
 
 (map! :leader
       :prefix ("f." . "dotfiles")
@@ -815,10 +859,10 @@
    telega-root-fill-column 145)
   (set-evil-initial-state! '(telega-root-mode telega-chat-mode) 'emacs)
   :hook (
-         (telega-load . (lambda ()
-                          (define-key global-map (kbd "C-c t") telega-prefix-map)
-                          (telega-notifications-mode)
-                          (telega-mode-line-mode)))))
+	 (telega-load . (lambda ()
+			  (define-key global-map (kbd "C-c t") telega-prefix-map)
+			  (telega-notifications-mode)
+			  (telega-mode-line-mode)))))
 
 (map! :leader
       "ot" nil
@@ -835,8 +879,8 @@
 (use-package vterm
   :config
   (map! :leader
-        :desc "Toggle vterm popup" "ov" '+vterm/toggle
-        :desc "Toggle vterm here" "oV" '+vterm/here)
+	:desc "Toggle vterm popup" "ov" '+vterm/toggle
+	:desc "Toggle vterm here" "oV" '+vterm/here)
   )
 
 ;;; ERC
@@ -869,17 +913,17 @@
    erc-quit-reason (lambda (s) (or s "Fading out..."))
    erc-modules
    '(autoaway autojoin button completion fill irccontrols keep-place
-              list match menu move-to-prompt netsplit networks noncommands
-              readonly ring stamp track hl-nicks))
+	      list match menu move-to-prompt netsplit networks noncommands
+	      readonly ring stamp track hl-nicks))
 
   (add-hook 'erc-join-hook 'bitlbee-identify)
   (defun bitlbee-identify ()
     "If we're on the bitlbee server, send the identify command to the &bitlbee channel."
     (when (and (string= "127.0.0.1" erc-session-server)
-               (string= "&bitlbee" (buffer-name)))
+	       (string= "&bitlbee" (buffer-name)))
       (erc-message "PRIVMSG" (format "%s identify %s"
-                                     (erc-default-target)
-                                     (password-store-get "IRC/Bitlbee"))))))
+				     (erc-default-target)
+				     (password-store-get "IRC/Bitlbee"))))))
 
 (defun mediocre/connect-irc ()
   (interactive)
@@ -898,46 +942,46 @@
   :commands elfeed
   :config
   (setq elfeed-feeds
-        '(
-          ;; Tech
-          ("https://nitter.net/ebanoe_it/rss" ebanoe it)
-          ("https://habr.com/ru/rss/all/all/?fl=ru" habr it)
-          ("https://os.phil-opp.com/rss.xml" rust)
-          ("https://this-week-in-rust.org/rss.xml" rust)
-          ("https://dou.ua/feed/" dou it)
-          ("https://protesilaos.com/codelog.xml" shprot emacs)
-          ("https://sachachua.com/blog/category/emacs/feed" emacs)
-          ("https://weekly.nixos.org/feeds/all.rss.xml" nix)
-          ("https://devpew.com/index.xml" johenews)
-          ;; Reddit
-          ("https://www.reddit.com/r/osdev/new.rss" osdev)
-          ("https://www.reddit.com/r/bash/new.rss" bash)
-          ("https://www.reddit.com/r/DoomEmacs/new.rss" emacs doom)
-          ("https://www.reddit.com/r/emacs/new.rss" emacs )
-          ("https://www.reddit.com/r/commandline/new.rss" cmd)
-          ("https://www.reddit.com/r/programming/new.rss" programming)
-          ("https://www.reddit.com/r/awesomewm/new.rss" awesomewm)
-          ;; Podcasts
-          ("https://rustacean-station.org/podcast.rss" rust podcast)
-          ("http://feeds.rucast.net/radio-t" radiot podcast)
-          ;; Youtubetech
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA" ytt luke)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" ytt dt)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC9MK8SybZcrHR3CUV4NMy2g" ytt didgitalize)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA" ytt mental-outlaw)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCsnGwSIHyoYN0kiINAGUKxg" ytt wolfgang)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA" ytt brodie)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCBNlINWfd08qgDkUTaUY4_w" ytt extremecode)
-          ;; Youtubefun
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCLKB9g1374gcxezJINOLtag" ytf raiz)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC8M5YVWQan_3Elm-URehz9w" ytf utopia)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC_gKMJFeCf1bKzZr_fICkig" ytf thedrzj)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC7nQ_p09KDD0fI6p34nsr4A" ytf voldemar)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UC2Ru64PHqW4FxoP0xhQRvJg" ytf toples)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCfdgIq01iG92AXBt-NxgPkg" ytf later)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCD-S-2TMDY4fL-R5iDQn-6Q" ytf 2shell)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCr1Pf6rqk3h8b1APvAt42Bw" ytf slidan)
-          ("https://www.youtube.com/feeds/videos.xml?channel_id=UCfn7uyPvr5IY5pux8oyIa4Q" ytf kel)))
+	'(
+	  ;; Tech
+	  ("https://nitter.net/ebanoe_it/rss" ebanoe it)
+	  ("https://habr.com/ru/rss/all/all/?fl=ru" habr it)
+	  ("https://os.phil-opp.com/rss.xml" rust)
+	  ("https://this-week-in-rust.org/rss.xml" rust)
+	  ("https://dou.ua/feed/" dou it)
+	  ("https://protesilaos.com/codelog.xml" shprot emacs)
+	  ("https://sachachua.com/blog/category/emacs/feed" emacs)
+	  ("https://weekly.nixos.org/feeds/all.rss.xml" nix)
+	  ("https://devpew.com/index.xml" johenews)
+	  ;; Reddit
+	  ("https://www.reddit.com/r/osdev/new.rss" osdev)
+	  ("https://www.reddit.com/r/bash/new.rss" bash)
+	  ("https://www.reddit.com/r/DoomEmacs/new.rss" emacs doom)
+	  ("https://www.reddit.com/r/emacs/new.rss" emacs )
+	  ("https://www.reddit.com/r/commandline/new.rss" cmd)
+	  ("https://www.reddit.com/r/programming/new.rss" programming)
+	  ("https://www.reddit.com/r/awesomewm/new.rss" awesomewm)
+	  ;; Podcasts
+	  ("https://rustacean-station.org/podcast.rss" rust podcast)
+	  ("http://feeds.rucast.net/radio-t" radiot podcast)
+	  ;; Youtubetech
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA" ytt luke)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" ytt dt)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UC9MK8SybZcrHR3CUV4NMy2g" ytt didgitalize)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA" ytt mental-outlaw)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCsnGwSIHyoYN0kiINAGUKxg" ytt wolfgang)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA" ytt brodie)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCBNlINWfd08qgDkUTaUY4_w" ytt extremecode)
+	  ;; Youtubefun
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCLKB9g1374gcxezJINOLtag" ytf raiz)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UC8M5YVWQan_3Elm-URehz9w" ytf utopia)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UC_gKMJFeCf1bKzZr_fICkig" ytf thedrzj)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UC7nQ_p09KDD0fI6p34nsr4A" ytf voldemar)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UC2Ru64PHqW4FxoP0xhQRvJg" ytf toples)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCfdgIq01iG92AXBt-NxgPkg" ytf later)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCD-S-2TMDY4fL-R5iDQn-6Q" ytf 2shell)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCr1Pf6rqk3h8b1APvAt42Bw" ytf slidan)
+	  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCfn7uyPvr5IY5pux8oyIa4Q" ytf kel)))
   :hook ((elfeed-search . (lambda () (elfeed-update)))))
 (add-hook 'elfeed-search-mode-hook #'elfeed-update)
 (map! :leader :desc "Elfeed" "on" 'elfeed)
@@ -989,12 +1033,12 @@
 (use-package prog-mode
   :ensure nil
   :hook ( (prog-mode . prettify-symbols-mode)
-          (lisp-mode . prettify-symbols-lisp)
-          (c-mode . prettify-symbols-c)
-          (c++-mode . prettify-symbols-c++)
-          ((js-mode js2-mode) . prettify-symbols-js)
-          (prog-mode . (lambda ()
-                         (setq-local scroll-margin 3))))
+	  (lisp-mode . prettify-symbols-lisp)
+	  (c-mode . prettify-symbols-c)
+	  (c++-mode . prettify-symbols-c++)
+	  ((js-mode js2-mode) . prettify-symbols-js)
+	  (prog-mode . (lambda ()
+			 (setq-local scroll-margin 3))))
   :preface
   (defun prettify-symbols-prog ()
     (push '("<=" . ?≤) prettify-symbols-alist)
@@ -1025,22 +1069,22 @@
   (interactive)
   (let ((image (get-text-property (point) 'display)))
     (if (eq (car image) 'image)
-        (let ((data (plist-get (cdr image) ':data))
-              (file (plist-get (cdr image) ':file)))
-          (cond (data
-                 (with-temp-buffer
-                   (insert data)
-                   (call-shell-region
-                    (point-min) (point-max)
-                    "xclip -i -selection clipboard -t image/png")))
-                (file
-                 (if (file-exists-p file)
-                     (start-process
-                      "xclip-proc" nil "xclip"
-                      "-i" "-selection" "clipboard" "-t" "image/png"
-                      "-quiet" (file-truename file))))
-                (t
-                 (message "The image seems to be malformed."))))
+	(let ((data (plist-get (cdr image) ':data))
+	      (file (plist-get (cdr image) ':file)))
+	  (cond (data
+		 (with-temp-buffer
+		   (insert data)
+		   (call-shell-region
+		    (point-min) (point-max)
+		    "xclip -i -selection clipboard -t image/png")))
+		(file
+		 (if (file-exists-p file)
+		     (start-process
+		      "xclip-proc" nil "xclip"
+		      "-i" "-selection" "clipboard" "-t" "image/png"
+		      "-quiet" (file-truename file))))
+		(t
+		 (message "The image seems to be malformed."))))
       (message "Point is not at an image."))))
 
 (map! :mode image-mode :map (image-mode-map) "zy" nil)
