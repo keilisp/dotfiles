@@ -22,20 +22,20 @@ theme.wallpaper = theme.dir .. "/wall.png"
 -- theme.taglist_font = "Mononoki Nerd Font 9.5"
 -- theme.font = "JetBrains Mono 8.5"
 -- theme.taglist_font = "JetBrains Mono 8.5"
-theme.font = "Hack 8.5"
-theme.taglist_font = "FontAwesome 10"
-theme.fg_normal = "#fbf1c7"
+theme.font = "Monaco 8"
+theme.taglist_font = "Iosevka 9"
+theme.fg_normal = "#3A2D2E"
 -- theme.fg_focus                                  = "#EA6F81"
-theme.fg_focus = "#b8bb26"
-theme.fg_urgent = "#fb4934"
-theme.bg_normal = "#282828"
-theme.bg_focus = "#665c54"
-theme.bg_urgent = "#fabd2f"
+theme.fg_focus = "#A9584C"
+theme.fg_urgent = "#A43F3C"
+theme.bg_normal = "#f8f7f5"
+theme.bg_focus = "#7f7972"
+theme.bg_urgent = "#C34448"
 theme.border_width = dpi(3)
-theme.border_normal = "#fabd2f"
-theme.border_focus = "#b8bb26"
-theme.border_marked = "#83a598"
-theme.tasklist_bg_focus = "#0c0d0b"
+theme.border_normal = "#C34448"
+theme.border_focus = "#A9584C"
+theme.border_marked = "#CC7056"
+theme.tasklist_bg_focus = "#221b1b"
 theme.titlebar_bg_focus = theme.bg_focus
 theme.titlebar_bg_normal = theme.bg_normal
 theme.titlebar_fg_focus = theme.fg_focus
@@ -275,6 +275,8 @@ end
 )
 )
 
+-- Github contributions
+local github_contributions_widget = require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
 
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_battery)
@@ -457,6 +459,8 @@ function theme.at_screen_connect(s)
 	{
 	  -- Right widgets
 	  layout = wibox.layout.fixed.horizontal,
+	  github_contributions_widget({username = 'mediocreeee'}),
+	  spr,
 	  wibox.widget.systray(),
 	  spr,
 	  arrl_ld,

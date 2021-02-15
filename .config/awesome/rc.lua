@@ -86,6 +86,8 @@ run_once({"unclutter -root"}) -- entries must be comma-separated
 
 local themes = {
   "powerarrow-dark", -- 1
+  "powerarrow-modus-operandi",
+  "powerarrow-solarized-light",
   "powerarrow-nord", -- 2
   "powerarrow-wal", -- 3
   "powerarrow-blue", -- 4
@@ -97,11 +99,11 @@ local themes = {
   "holo", -- 10
   "rainbow", -- 11
   "steamburn", -- 12
-  "vertex" -- 13
+  "vertex", -- 13
 }
 
 -- choose your theme here
-local chosen_theme = themes[1]
+local chosen_theme = themes[2]
 
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
@@ -120,7 +122,7 @@ local filemanager = "thunar"
 local mailclient = "geary"
 local mediaplayer = "mpv"
 local scrlocker = "betterlockscreen"
-local terminal = "st"
+local terminal = "alacritty"
 local virtualmachine = "virtualbox"
 
 -- awesome variables
@@ -211,7 +213,31 @@ my_tags = {
 		awful.layout.layouts[2],
 		awful.layout.layouts[1],
 	  }
-	}
+	},
+    {
+        names = {
+        "    Ⅰ    ",
+        "    Ⅱ    ",
+        "    Ⅲ    ",
+        "   Ⅳ   ",
+        "   Ⅴ   ",
+        "   Ⅵ   ",
+        "   Ⅶ   ",
+        "   Ⅷ  ",
+        "   IX   "
+        },
+        layout = {
+        awful.layout.layouts[1],
+        awful.layout.layouts[1],
+        awful.layout.layouts[1],
+        awful.layout.layouts[1],
+        awful.layout.layouts[1],
+        awful.layout.layouts[2],
+        awful.layout.layouts[2],
+        awful.layout.layouts[2],
+        awful.layout.layouts[1],
+        }
+    }
   }
 }
 
@@ -434,13 +460,13 @@ local utilsmap = {
 local appsmap = {
   { "separator", "Editors" },
   { "v", function() awful.util.spawn(terminal .. " -e nvim ") end,        "nvim" },
-  { "e", function() awful.util.spawn("termite -e 'emacs -nw'") end,        "emacs-tui" },
-  { "E", function() awful.util.spawn("emacs") end,        "emacs-gui" },
+  { "E", function() awful.util.spawn("emacs --with-profile mymacs") end,        "My Emacs" },
+  { "e", function() awful.util.spawn("emacs --with-profile doommacs") end,        "Doom Emacs" },
   { "separator", "Chats" },
-  { "D", function() awful.util.spawn("discord") end,        "discord-gui" },
-  { "d", function() awful.util.spawn(terminal .. " -e cordless") end,        "discord-tui" },
-  { "T", function() awful.util.spawn("telegram-desktop") end,        "telegram-gui" },
-  { "t", function() awful.util.spawn(terminal .. " -e tg") end,        "telegram-tui" },
+  { "d", function() awful.util.spawn("discord") end,        "discord-gui" },
+  { "D", function() awful.util.spawn(terminal .. " -e cordless") end,        "discord-tui" },
+  { "t", function() awful.util.spawn("telegram-desktop") end,        "telegram-gui" },
+  { "T", function() awful.util.spawn(terminal .. " -e tg") end,        "telegram-tui" },
   { "separator", "File Managers" },
   { "f", function() awful.util.spawn("thunar") end,        "thunar" },
   { "r", function() awful.util.spawn(terminal .. " -e ranger") end,        "ranger" },
@@ -482,7 +508,10 @@ awful.key(
 function()
   awful.spawn(
   string.format(
-  "dmenu_run -nb '#282828' -sf '#fabd2f' -sb '#504945' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'",
+  "dmenu_run -nb '#ffffff' -sf '#0030a6' -sb '#f8f8f8' -nf '#282828' -fn 'Hack:bold:pixelsize=13'",
+  -- "dmenu_run -nb '#ffffff' -sf '#0030a6' -sb '#f8f8f8' -nf '#282828' -fn 'Monego:bold:pixelsize=13'",
+  -- "dmenu_run -nb '#eee8d5' -sf '#268bd2' -sb '#fdf6e3' -nf '#a89984' -fn 'Monego:bold:pixelsize=13'",
+  -- "dmenu_run -nb '#282828' -sf '#fabd2f' -sb '#504945' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'",
   -- "dmenu_run -nb '#3b4252' -sf '#88c0d0' -sb '#4c566a' -nf '#a89984' -fn 'Mononoki Nerd Font:bold:pixelsize=13'",
   -- "dmenu-recent-aliases",
   beautiful.bg_normal,
@@ -1157,10 +1186,10 @@ awful.rules.rules = {
   --     rule = {class = "Opera"},
   --     properties = {screen = 1, tag = my_tags.tags[1].names[1]}
   -- },
-  {
-	rule = {class = editorgui},
-	properties = {screen = 1, tag = my_tags.tags[1].names[2]}
-  },
+  -- {
+  -- rule = {class = editorgui},
+  -- properties = {screen = 1, tag = my_tags.tags[1].names[2]}
+  -- },
   {
 	rule = {class = "TelegramDesktop"},
 	properties = {screen = 1, tag = my_tags.tags[1].names[3]}
@@ -1181,10 +1210,10 @@ awful.rules.rules = {
 	rule = {class = "Barrier"},
 	properties = {screen = 1, tag = my_tags.tags[1].names[10]}
   },
-  {
-	rule = {class = "Zathura"},
-	properties = {screen = 1, tag = my_tags.tags[1].names[6]}
-  },
+  -- {
+  -- rule = {class = "Zathura"},
+  -- properties = {screen = 1, tag = my_tags.tags[1].names[6]}
+  -- },
   {
 	rule = {class = mediaplayer},
 	properties = {screen = 1, tag = my_tags.tags[1].names[8]}

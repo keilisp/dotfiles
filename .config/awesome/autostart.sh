@@ -6,15 +6,18 @@ function run() {
 	fi
 }
 
+run "$HOME/.screenlayout/vgamonitor.sh"
 xset r rate 300 50
 # feh --bg-scale $HOME/pix/kek/1920x1080-px-emacs-Free-Software-GNU-Linux-Richard-Stallman-saint-1360085.jpg
 # feh --bg-scale $HOME/pix/wallpapers/Art/Other/Flower-4.jpg
-feh --bg-fill /home/gideon/pix/wallpapers/Anime/yamamoto.jpg
+# feh --bg-fill /home/gideon/pix/wallpapers/Art/Other/solarized-thinkpad.jpg
+feh --bg-fill /home/gideon/pix/wallpapers/Landscapes/modus.jpg
 # run "$HOME/scripts/wallplaylist"
 # run "discord"
 # run "telegram-desktop"
 # xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" -0.6
 run "nm-applet"
+run "syncthing --no-browser"
 run "devmon"
 run "blueberry-tray"
 run "cargo run --manifest-path=$HOME/code/rust/markust/Cargo.toml"
